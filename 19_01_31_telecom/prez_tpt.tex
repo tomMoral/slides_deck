@@ -1,0 +1,339 @@
+\documentclass{beamer}
+\usepackage{transparent}
+\usepackage[beamer]{shortcut}
+
+
+\usepackage{animate}
+\usepackage{bibentry}
+\usepackage{subcaption}
+\usepackage{appendixnumberbeamer}
+
+\graphicspath{{../thesis/figures/},{./images/}}
+\def\TikzLocation{./tikz/}
+\def\tkzscl{1}
+
+\def\twocols{}
+%\def\bimplies{}
+%\def\partintro{}
+
+
+\definecolor{primary}{RGB}{191,213,219}
+\definecolor{secondary}{RGB}{144,106,66}
+\setbeamercolor{block title}{fg=darkred}
+\newcommand{\btitle}[1]{{\usebeamerfont{block title}\usebeamercolor[fg]{block title} #1}}
+
+\AtBeginSection[]
+{
+}
+
+
+\makeatletter
+\def\beamer@newblock{%
+  \usebeamercolor[fg]{bibliography entry author}%
+  \usebeamerfont{bibliography entry author}%
+  \usebeamertemplate{bibliography entry author}%
+  \def\newblock{%
+    \usebeamercolor[fg]{bibliography entry title}%
+    \usebeamerfont{bibliography entry title}%
+    \usebeamertemplate{bibliography entry title}%
+    \def\newblock{%
+      \usebeamercolor[fg]{bibliography entry location}%
+      \usebeamerfont{bibliography entry location}%
+      \usebeamertemplate{bibliography entry location}%
+      \def\newblock{%
+        \usebeamercolor[fg]{bibliography entry note}%
+        \usebeamerfont{bibliography entry note}%
+        \usebeamertemplate{bibliography entry note}}}}%
+  \leavevmode\setbox\beamer@tempbox=\hbox{}\ht\beamer@tempbox=0em\box\beamer@tempbox}
+  \setbeamertemplate{bibliography entry title}{}{}
+
+\makeatother
+
+\usepackage[square, authoryear]{natbib}
+
+
+%-----------------------------------------------------------------------------
+%	CUSTOM COMANDS
+%-----------------------------------------------------------------------------
+
+\def\keypoint#1{\hspace{0pt plus 1 filll}\textcolor{gray}{#1}}
+\def\mycite#1{\keypoint{\citep{#1}}}
+\def\biblio{
+	\nobibliography{../../library}
+	\def\biblio{}
+}
+
+
+
+
+%\usepackage{lxfonts}
+
+\institute{INRIA Saclay -- parietal}
+\author{Thomas Moreau}
+\title{Using the Dictionary Structure\\for efficient\\Convolutional Dictionary Learning}
+
+
+\setbeamertemplate{title page}[frame]
+
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\biblio{}
+\end{frame}
+
+\def\biblio{}
+
+
+\subfile{motiv}
+
+
+%========================================================================
+\section{Adaptive Sparse Coding}
+%========================================================================
+\parttitleframe{Moreau2017}
+
+\subfile{lista}
+
+
+%========================================================================
+\section{Adapting CD to\\Convolutional Sparse Coding}
+%========================================================================
+
+\parttitleframe{Moreau2018}
+\subfile{dicod}
+
+
+%========================================================================
+\section{Rank-1 Constrained Convolutional Dictionary Learning}
+%========================================================================
+
+\parttitleframe{Dupre2018}
+\subfile{multicsc}
+
+
+%===========================================================================
+\section{Conclusion}
+%===========================================================================
+
+\begin{frame}[noframenumbering,plain,t]
+  \vskip8em
+  \begin{center}
+    \Huge
+    Thanks!    
+  \end{center}
+  \vskip8em
+  \vfill
+  \begin{itemize}
+			\item Co-authors: L. Oudre, N. Vayatis, J. Bruna.
+			\item Medical doctors: S. Buffat, D. Ricard, M. Robert, P-P. Vidal, C. de Waele, A. Yelnik, R. Barrois.
+		\end{itemize}
+\end{frame}
+
+%===========================================================================
+% AUXILIARY SLIDES
+%===========================================================================
+
+
+
+%===========================================================================
+\appendix
+\section{Auxiliary Slides}
+%===========================================================================
+
+
+%===========================================================================
+\subsection{Physiological Signals}
+%===========================================================================
+
+
+\begin{frame}{Experiment}
+		Create a dictionary with 25 Gaussian patterns ($W=90$)
+		\[
+			\pmb D^{(0)}_k \sim \mathcal N(0, I_{90})
+		\]
+		\vskip1em
+		Use the Convolutional Dictionary Learning with\\
+		DICOD to learn a dictionary $\pmb D$ on a set of $50$\\
+		recording of healthy subjects walking.
+		\vskip2em
+		\btitle{Challenges}
+		\vskip.5em
+		\begin{itemize}\itemsep.5em
+			\item Alignment of the patterns,
+			\item Detect steps of different amplitude,
+			\item Handle multivariate signals.
+		\end{itemize}
+
+\end{frame}
+\begin{frame}{Experiment}
+		\centering
+		\includegraphics[width=.8\textwidth]{csc_random_defense}
+
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Publications and preprints}
+		\tiny\vskip.5em
+%		\bibentry{Moreau2015a}\\[.5em]
+%		\bibentry{Oudre2015}\\[.5em]
+%		\bibentry{Moreau2015}\\[.5em]
+%		\bibentry{Moreau2016}\\[.5em]
+%		\bibentry{Moreau2017}\\[.5em]
+%		\bibentry{Moreau2018}\\[.5em]
+%		\bibentry{Barrois2015}\\[.5em]
+%		\bibentry{Barrois2016}\\[.5em]
+%		\bibentry{Robert2015}\\[.5em]
+    \end{block}
+\end{frame}
+
+
+
+\begin{frame}
+	\centering
+	\includegraphics[width=\textwidth]{csc_random_annex}	
+\end{frame}
+
+%===========================================================================
+\subsection{FacNet}
+%===========================================================================
+
+
+\begin{frame}{Related works}
+
+\begin{itemize}\itemsep2em
+	\item \cite{Giryes2016}: Propose the inexact projected gradient descent and conjecture that LISTA accelerate the LASSO resolution by learning the sparsity pattern of the input distribution.
+	\item \cite{xin2016maximal}: Study the Hard-thresholding Algorithm and its
+	capacity to recover the support of a sparse vector.\\
+	The paper relax the RIP conditions for the dictionary.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Generic Dictionaries}
+	\vskip2em
+	A dictionary $D \in \Rset^{p\times K}$ is a generic dictionary when its columns
+	$D_i$ are drawn uniformly over the $\ell_2$ unit sphere $\mathcal S^{p-1}$.
+
+
+\end{frame}
+\begin{frame}{Theorem (Generic Acceleration)}
+	\vskip1em
+	In \textbf{expectation over the generic dictionary} $D$, the factorization algorithm using a
+		diagonally dominant matrix $A\subset\mathcal E_\delta$, has better performance for
+		iteration $q+1$ than the normal ISTA iteration -- which uses the identity -- when
+		\[
+			\lambda\E[z]{\|z^{(q+1)}\|_1+\|z^*\|_1}
+				\le \sqrt{\frac{K(K-1)}{p}} \underbrace{\E[z]{\|z^{(q)}-z^*\|_2^2}
+				}_{\substack{\text{expected resolution}\\\text{at iteration $q$ }}}
+		\]
+
+	\vskip2em
+	FacNet can improve the performances compared to ISTA when this is verified.
+\end{frame}
+
+
+
+\begin{frame}{L-FISTA}
+	\centering
+	\vskip4em
+	\inputTikZ{.65}{lifsta_tikz}
+	\vskip2em
+	Network architecture for L-FISTA.
+    
+\end{frame}
+\begin{frame}
+	\centering
+	\includegraphics[width=\textwidth]{curve_sparse005_seaborn}
+    Evolution of the cost function $F(z^{(q)}) - F(z^*)$ with the number
+   	of layers/iterations $q$ with a denser model
+\end{frame}
+\begin{frame}
+
+	\twocols{
+		\centering
+		\includegraphics[width=\textwidth]{curve_sparse005_seaborn}\\
+		$\rho = {}^1/_{20}$.\\[1em]
+
+		Evolution of the cost function $F(z^{(q)}) - F(z^*)$ with the number
+	   	of layers/iterations $q$ with a denser model
+
+	}{
+		\centering
+		\includegraphics[width=\textwidth]{curve_sparse02_seaborn}\\
+		$\rho = {}^1/_{4}$.\\[1em]
+		Evolution of the cost function $F(z^{(q)}) - F(z^*)$ with the number
+	   	of layers/iterations $q$ with a denser model
+	}
+\end{frame}
+
+
+\begin{frame}{PASCAL 08}
+\twocols{
+	\btitle{PASCAL 08}
+	\vskip1em
+	Sparse coding for the PASCAL 08 datasets over the Haar wavelets family.\\[1em]
+	\emph{Patch size:} 8x8;~~~$K = 267$;~~~  \emph{train/test:} 500/100\\[1em]
+	\centering
+	\includegraphics[width=.6\textwidth, trim={5em 4em 4em 4em}, clip]{Wavelets}\\
+}{
+	\vskip5em
+    \centering
+    \includegraphics[width=\textwidth]{curve_images_seaborn}\\
+     Evolution of the cost function $F(z^{(q)})-F(z^*)$ with the number of layers
+     or the number of iteration $q$ for Pascal VOC 2008.
+}
+\end{frame}
+
+
+\begin{frame}{MNIST}
+\twocols{
+	\btitle{MNIST}
+	\vskip1em
+	Dictionary $D$ with $K=100$ atoms learned on 10 000 MNIST samples (17x17) with dictionary learning.
+	LISTA trained with MNIST training set and tested on MNIST test set.\\[1em]
+}{
+    \centering
+    \includegraphics[width=\textwidth]{curve_mnist_seaborn}\\
+     Evolution of the cost function $F(z^{(q)})-F(z^*)$ with the number
+     of layers or the number of iteration $q$ for MNIST.
+}{}
+\end{frame}
+
+
+%====================================================================
+\subsection{DICOD}
+%====================================================================
+
+\begin{frame}{}
+
+	\twocols{
+	\btitle{Finishing the process in a linear grid?}
+	Non trivial point: {\bf How to decide that the algorithm has converged?}\\[2em]
+	
+	\begin{itemize}\itemsep2em\itemindent1em
+		\item Neighbors paused is not enough!
+		\item Define a master 0 and send probes.\\
+			\hskip3em Wait for $M$ probes return.
+		\item Uses the notion of message queue and network flow.\\
+			\hskip3em Maybe we can have better way?
+	\end{itemize}
+	}{}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\twocols{
+		\centering
+		\includegraphics[width=\textwidth]{cost_seaborn_iter}\\
+		\large Cost as a function of the iterations
+	}{
+		\centering
+		\includegraphics[width=\textwidth]{cost_seaborn_time}\\
+		\large Cost as a function of the time
+	}
+\end{frame}
+
+\end{document}
