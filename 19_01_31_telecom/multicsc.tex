@@ -25,7 +25,7 @@ However, this model does not account for the physics of the problem.
 \end{frame}
 
 
-\begin{frame}{EM wave diffusion}
+\begin{frame}[t]{EM wave diffusion}
 \begin{itemize}
 \uncover<1->{\item Recording here with 8 sensors}
 \uncover<2->{\item EM activity in the brain}
@@ -34,7 +34,8 @@ However, this model does not account for the physics of the problem.
 \centering
 \only<1>{\includegraphics[width=.5\textwidth]{physic1}}%
 \only<2>{\includegraphics[width=.5\textwidth]{physic2}}%
-\only<3>{\includegraphics[width=.5\textwidth]{physic3}}
+\only<3>{\includegraphics[width=.5\textwidth]{physic3}}%
+\only<4>{\vskip1em\includegraphics[height=.45\textheight]{rank1}}
 \end{frame}
 
 \begin{frame}{Multivariate CSC with rank-1 constraint\\\citeconfright{Dupre2018}{NeurIPS}}
@@ -66,11 +67,11 @@ Comparison with multivariate methods on somato dataset with $T=134,700$, $K=8$, 
 \end{frame}
 
 
-\begin{frame}{Pattern recovery}
-Patterns recovered with $P = 1$ and $P=5$. The signals were generated with the two simulated temporal patterns and with  $\sigma = 10^{-3}$. \\[1em]
-{\centering
-\includegraphics[width=.8\textwidth]{1D_vs_multi_uv_hat_P5.png}\\}
-\end{frame}
+%\begin{frame}{Pattern recovery}
+%Patterns recovered with $P = 1$ and $P=5$. The signals were generated with the two simulated temporal patterns and with  $\sigma = 10^{-3}$. \\[1em]
+%{\centering
+%\includegraphics[width=.8\textwidth]{1D_vs_multi_uv_hat_P5.png}\\}
+%\end{frame}
 
 
 \begin{frame}{MNE somatosensory data}

@@ -55,7 +55,7 @@ Z^{[n],*} = \argmin_{Z^{[n]}}\| X^{[n]} - \sum_{k=1}^K\pmb D_k *  Z_k^{[n]}\|_2^
 		Z'_{k_0}[t_0] = \frac{1}{\|\pmb D_{k_0}\|_2^2}\textbf{ST}(\beta_{k_0}[t_0], \lambda),
 	$$
 	with {\small $\textbf{ST}(y, \lambda) = \text{sign}(y)(|y| - \lambda)_+$}.
-	\cite{Kavukcuoglu2013} showed this can be done efficiently, with $\mathcal O(KW)$ operations.
+	\cite{Kavukcuoglu2013} showed this can be done efficiently, with $\mathcal O(KL)$ operations.
 }
 \only<3>{
     \strongpoint{Converges to the optimal point for CSC problem in $\bO{\frac{1}{q}}$ iterations.}
@@ -230,7 +230,7 @@ DICOD converges to the solution of the CSC for 1D signals without having a contr
 \centering
 \includegraphics[width=\textwidth]{scaling_T150}
 \\
-\large Running time as a function fo the number of workers $W$.
+\large Running time as a function of the number of workers $W$.
 
 \end{frame}
 
