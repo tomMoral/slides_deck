@@ -1,3 +1,10 @@
-*.pdf
 *.swp
 
+# Tex compilation files
+*.aux
+*.log
+*.out
+*.nav
+*.snm
+*.toc
+*.synctex.gz

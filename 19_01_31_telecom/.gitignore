@@ -1,11 +1,3 @@
-*synctex.gz
 /*.pdf
 /tikz/*.pdf
 
-# Tex compilation files
-*.log
-*.aux
-*.nav
-*.snm
-*.out
-*.toc
