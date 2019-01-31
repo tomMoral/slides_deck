@@ -57,7 +57,12 @@
 %-----------------------------------------------------------------------------
 
 \def\keypoint#1{\hspace{0pt plus 1 filll}\textcolor{gray}{#1}}
-\def\mycite#1{\keypoint{\citep{#1}}}
+\def\mycite#1{\keypoint{\small\citep{#1}}}
+\def\citeconf#1#2{
+    {\textcolor{gray}[}%
+        {\color{linkcolor}\citealt{#1}, #2}%
+    {\textcolor{gray}]}}
+\def\citeconfright#1#2{\hspace{0pt plus 1 filll}{\small\citeconf{#1}{#2}}}
 \def\biblio{
 	\nobibliography{../../library}
 	\def\biblio{}
@@ -68,7 +73,7 @@
 
 %\usepackage{lxfonts}
 
-\institute{INRIA Saclay -- parietal}
+\institute{-- INRIA -- Université Paris Saclay}
 \author{Thomas Moreau}
 \title{Using the Dictionary Structure\\for efficient\\Convolutional Dictionary Learning}
 
@@ -91,6 +96,7 @@
 
 %========================================================================
 \section{Adaptive Sparse Coding}
+\label{sec:lista}
 %========================================================================
 \parttitleframe{Moreau2017}
 
@@ -98,15 +104,17 @@
 
 
 %========================================================================
-\section{Adapting CD to\\Convolutional Sparse Coding}
+\section{Scaling up Convolutional Sparse Coding with coordinate descent and distributed optimization}
+\label{sec:lgcd}
 %========================================================================
 
-\parttitleframe{Moreau2018}
+\parttitleframe{Moreau2018, Moreau2019}
 \subfile{dicod}
 
 
 %========================================================================
 \section{Rank-1 Constrained Convolutional Dictionary Learning}
+\label{sec:multicsc}
 %========================================================================
 
 \parttitleframe{Dupre2018}
@@ -117,20 +125,42 @@
 \section{Conclusion}
 %===========================================================================
 
-\begin{frame}[noframenumbering,plain,t]
-  \vskip8em
-  \begin{center}
-    \Huge
-    Thanks!    
-  \end{center}
-  \vskip8em
-  \vfill
-  \begin{itemize}
-			\item Co-authors: L. Oudre, N. Vayatis, J. Bruna.
-			\item Medical doctors: S. Buffat, D. Ricard, M. Robert, P-P. Vidal, C. de Waele, A. Yelnik, R. Barrois.
-		\end{itemize}
+\begin{frame}{Conclusion}
+    \textbf{Convolutional Dictionary Learning}
+    \begin{itemize}\itemsep.5em
+        \item Flexible pattern extraction technique,
+        \item Computationally tractable for more and more problems,
+        \item Some application are already beginning to emerge.
+    \end{itemize}
+    \vskip2em
+    \textbf{Challenges}
+    \begin{itemize}\itemsep.5em
+        \item Theoretical challenges remains (convergence, recoverability),
+        \item The evaluation (and thus the parameter choices) is still not clear,
+        \item Can give some insight for deep learning models?
+    \end{itemize}
 \end{frame}
 
+
+\begin{frame}{}
+\vskip2em
+{\centering
+    \usebeamercolor[fg]{title}
+    \usebeamerfont{title}
+    \Huge \bf Thanks!\\[2em]}
+
+Code available online:\\[1em]
+
+\includegraphics[height=.8em]{github}~\textbf{LISTA} : github.com/tommoral/AdaptiveOptim\\[1em]
+\includegraphics[height=.8em]{github}~\textbf{DICOD} (\& DiCoDiLe soon) : github.com/tommoral/dicod\\[1em]
+\includegraphics[height=.8em]{github}~\textbf{alphacsc} :  alphacsc.github.io\\[2em]
+
+Slides are on my web page:\\[1em]
+\hskip5em\includegraphics[height=.8em]{website} tommoral.github.io
+\hskip4em \includegraphics[height=.8em]{twitter} @tomamoral
+
+
+\end{frame}
 %===========================================================================
 % AUXILIARY SLIDES
 %===========================================================================
@@ -146,6 +176,24 @@
 %===========================================================================
 \subsection{Physiological Signals}
 %===========================================================================
+
+\begin{frame}{Signals from human walking}
+\centering
+\vskip1em
+\begin{tabular}{m{8em} m{20em}}
+    \includegraphics[width=.3\textwidth]{exo_marche}
+    \raisebox{-.5\height}{\includegraphics[width=.15\textwidth]{xsens}} $\substack{\text{Inertial}\\\text{captor}}$ &
+    \includegraphics[width=.6\textwidth]{accelero}
+\end{tabular}
+\vskip1em
+\begin{itemize}
+    \item Shift invariant patterns linked to steps,
+    \item Manual segmentation of the signal is expensive.
+\end{itemize}
+\strongpoint{Can we do better with data-driven approach?}
+
+\end{frame}
+
 
 
 \begin{frame}{Experiment}
@@ -173,26 +221,10 @@
 
 \end{frame}
 
-\begin{frame}
-	\begin{block}{Publications and preprints}
-		\tiny\vskip.5em
-%		\bibentry{Moreau2015a}\\[.5em]
-%		\bibentry{Oudre2015}\\[.5em]
-%		\bibentry{Moreau2015}\\[.5em]
-%		\bibentry{Moreau2016}\\[.5em]
-%		\bibentry{Moreau2017}\\[.5em]
-%		\bibentry{Moreau2018}\\[.5em]
-%		\bibentry{Barrois2015}\\[.5em]
-%		\bibentry{Barrois2016}\\[.5em]
-%		\bibentry{Robert2015}\\[.5em]
-    \end{block}
-\end{frame}
-
-
 
 \begin{frame}
 	\centering
-	\includegraphics[width=\textwidth]{csc_random_annex}	
+	\includegraphics[width=.8\textwidth]{csc_random_annex}	
 \end{frame}
 
 %===========================================================================
@@ -270,8 +302,7 @@
 
 
 \begin{frame}{PASCAL 08}
-\twocols{
-	\btitle{PASCAL 08}
+{
 	\vskip1em
 	Sparse coding for the PASCAL 08 datasets over the Haar wavelets family.\\[1em]
 	\emph{Patch size:} 8x8;~~~$K = 267$;~~~  \emph{train/test:} 500/100\\[1em]
@@ -288,28 +319,41 @@
 
 
 \begin{frame}{MNIST}
-\twocols{
-	\btitle{MNIST}
 	\vskip1em
 	Dictionary $D$ with $K=100$ atoms learned on 10 000 MNIST samples (17x17) with dictionary learning.
 	LISTA trained with MNIST training set and tested on MNIST test set.\\[1em]
-}{
+{
     \centering
     \includegraphics[width=\textwidth]{curve_mnist_seaborn}\\
      Evolution of the cost function $F(z^{(q)})-F(z^*)$ with the number
      of layers or the number of iteration $q$ for MNIST.
-}{}
+}
 \end{frame}
+
+\begin{frame}{Adversarial dictionary}
+\vskip2em
+The dictionary is constructed such that it eigen-vectors are sampled from the
+Fourier basis, with
+\[
+D_{k, j} = e^{-2i\pi k \zeta_j}
+\]
+for a random subset of frequencies
+\[
+\left \{ \zeta_i \right \}_{0\le i \le p} \sim \mathcal U \left\{\frac{m}{K}; 0 \le m \le \frac{K}{2}\right\}
+\]
+Diagonalizing $B$ implies large deformation of the $\ell_1$-norm. 
+
+\end{frame}
+
 
 
 %====================================================================
 \subsection{DICOD}
 %====================================================================
 
-\begin{frame}{}
+\begin{frame}{Finishing the process in a distributed environment}
 
-	\twocols{
-	\btitle{Finishing the process in a linear grid?}
+
 	Non trivial point: {\bf How to decide that the algorithm has converged?}\\[2em]
 	
 	\begin{itemize}\itemsep2em\itemindent1em
@@ -319,21 +363,161 @@
 		\item Uses the notion of message queue and network flow.\\
 			\hskip3em Maybe we can have better way?
 	\end{itemize}
-	}{}
 	
 	
 \end{frame}
 
+
 \begin{frame}
-	\twocols{
-		\centering
-		\includegraphics[width=\textwidth]{cost_seaborn_iter}\\
-		\large Cost as a function of the iterations
-	}{
+\frametitle{Numerical Experiments}
+
+
+\definecolor{fista}{RGB}{192,192,0}
+\definecolor{rcd}{RGB}{0,128,0}
+\definecolor{cd}{RGB}{255, 0, 0}
+\definecolor{dicod}{RGB}{0,0,255}
+
+Test on long signals generated with Bernoulli-Gaussian
+coding signal $Z$ and a Gaussian dictionary $\pmb D$.
+Fixed $K = 25$, $W = 200$ and $T = 600*W$,\\[1em]
+
+\textbf{Algorithms implemented for benchmark}
+\begin{itemize}
+    \item {\color{cd} Coordinate Descent} (CD) \\\mycite{Kavukcuoglu2013}
+    \item {\color{rcd} Randomized Coordinate Descent} (RCD) \\\mycite{Nesterov2010}
+    \item Fast Convolutional Sparse Coding (FCSC)\\\mycite{Bristow2013}
+    \item {\color{fista}Fast Ierative Soft-Thresholding Algorithm (FISTA)} \\\mycite{Chalasani2013, Wohlberg2016}
+    \item {\color{dicod} DICOD with $60$ cores}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Numerical convergence}
+
+\centering
+\alt<2>{
+\includegraphics[width=.8\textwidth]{cost_min_seaborn_time}\\
+\large Cost as a function of the runtime\\
+}{
+\includegraphics[width=.8\textwidth]{cost_min_seaborn_iter}\\
+\large Cost as a function of the iterations\\
+}
+\end{frame}
+
+
+
+\begin{frame}{DICOD: numerical convergence}
+	\alt<2>{
 		\centering
 		\includegraphics[width=\textwidth]{cost_seaborn_time}\\
 		\large Cost as a function of the time
-	}
+	}{
+        \centering
+        \includegraphics[width=\textwidth]{cost_seaborn_iter}\\
+        \large Cost as a function of the iterations
+    }
+\end{frame}
+
+
+\begin{frame}{Complexity Analysis}
+Two sources of acceleration:\\[1em]
+\begin{itemize}\itemsep1em
+    \item Perform $M$ updates in parallel,
+    \item Each update is computed on a segment of size $\frac{L}{M}$\\
+    Iteration complexity of $\bO{K\frac{L}{M}}$ instead of $\bO{KL}$ 
+\end{itemize}
+\vskip1em
+Limitations:
+\begin{itemize}
+    \item Interfering updates, with probability $\alpha^2 = \left(\frac{WM}{T}\right)^2$
+    \[
+    \mathbb E[Q_{dicod}] \smeq\underset{\alpha \to 0}{\gtrsim}
+    M(1-2\alpha^2M^2 + \mathcal O(\alpha^4M^4))~.
+    \]
+    \item Cost of the update of $\beta$ in $\bO{KW}$  
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[t]{Soft-Locks \mycite{Moreau2019}}
+\vskip2em
+{
+    \centering
+    \inputTikZ{.7}{soft_lock}\\
+}
+
+\begin{itemize}[<+->]
+    \item Keep track of the value of the optimal update in an extended zone of size $L-1$.
+    \item Select an update candidate with LGCD.
+    \item If it is in the interfering zone, compare the value of the update with the value potential updates in the other worker.
+    \item Only perform the udpate if it is larger than the other update.
+\end{itemize}
+
+\only<5>{\strongpoint{Give an update order asynchronously.}}
+
+\end{frame}
+
+\begin{frame}{Images from Hubble Space Telescope}
+
+{\centering
+    \alt<2>{
+        \includegraphics[width=.65\textwidth]{K25_L32_reg0,1_seed42_dicodile_Medium_dict}\\
+    }{
+        \includegraphics[width=.9\textwidth]{STScI-H-2016-39-a-Small}\\
+    }
+}
+\end{frame}
+
+\section{MultiCSC}
+
+
+
+\begin{frame}{Studying brain activity through electromagnetic signals}
+\begin{itemize}
+    \item Brain (electrical) activity produces an electromagnetic field.
+    \item This can be measured with EEG or MEG.
+\end{itemize}
+
+\begin{columns}[T]
+    \column{.5\textwidth}
+    \centering
+    \includegraphics[height=6em]{eeg}\hskip4em
+    \includegraphics[height=6em]{meg}\\
+    \includegraphics[height=8em]{scale_electro}
+    \column{.5\textwidth}
+    \vskip3em
+    \hskip2em
+    \includegraphics[height=8em]{multivariate_eeg}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Goal: Study Oscillation in Neural Data}
+
+\textbf{}Oscillations are believed to play an important role in cognitive functions.\\[3em]
+Many studies rely on Fourier or wavelet analyses:\\[.5em]
+\begin{itemize}\itemsep1em
+\item Easy interpretation,
+\item Standard analysis \eg{} canonical bands alpha, beta or theta.\\\mycite{buzsaki2006rhythms}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Goal: Study Oscillation in Neural Data}
+
+However, some brain rhythms are not sinusoidal, \eg{} mu-waves.\\\mycite{hari2006action}\\
+\hskip5em\includegraphics[width=.7\textwidth]{waveform}\\
+and filtering degrades waveforms\\
+\hskip8em\includegraphics[width=.5\textwidth]{filtering_brain}
+
+
+\strongpoint{Can we do better with data-driven approach?}
+\end{frame}
+
+
+\begin{frame}{Pattern recovery}
+Evolution of the recovery loss with $\sigma$ for different values of $P$. Using more channels improves the recovery of the original patterns.\\[1em]
+\includegraphics[width=\textwidth]{1D_vs_multi.png}
 \end{frame}
 
 \end{document}
