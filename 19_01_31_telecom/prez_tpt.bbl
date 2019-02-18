@@ -1,0 +1,198 @@
+\begin{thebibliography}{}
+
+\bibitem[Beck and Teboulle, 2009]{Beck2009}
+Beck, A. and Teboulle, M. (2009).
+\newblock {A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse
+  Problems}.
+\newblock {\em SIAM Journal on Imaging Sciences}, 2(1):183--202.
+
+\bibitem[Beckouche et~al., 2013]{Beckouche2013}
+Beckouche, S., Starck, J.-L., and Fadili, J.~M. (2013).
+\newblock {Astronomical Image Denoising Using Dictionary Learning}.
+\newblock {\em Astronomy \& Astrophysics}, 556(A132).
+
+\bibitem[Bristow et~al., 2013]{Bristow2013}
+Bristow, H., Eriksson, A., and Lucey, S. (2013).
+\newblock {Fast convolutional sparse coding}.
+\newblock In {\em IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, pages 391--398, Portland, OR, USA.
+
+\bibitem[Buzsaki, 2006]{buzsaki2006rhythms}
+Buzsaki, G. (2006).
+\newblock {\em {Rhythms of the Brain}}.
+\newblock Oxford University Press.
+
+\bibitem[Chalasani et~al., 2013]{Chalasani2013}
+Chalasani, R., Principe, J.~C., and Ramakrishnan, N. (2013).
+\newblock {A fast proximal method for convolutional sparse coding}.
+\newblock In {\em International Joint Conference on Neural Networks (IJCNN)},
+  pages 1--5, Dallas, TX, USA.
+
+\bibitem[Chen et~al., 2018]{Chen2018}
+Chen, X., Liu, J., Wang, Z., and Yin, W. (2018).
+\newblock {Theoretical Linear Convergence of Unfolded ISTA and its Practical
+  Weights and Thresholds}.
+\newblock In {\em Advances in Neural Information Processing Systems (NIPS)},
+  Montreal, Canada.
+
+\bibitem[Daubechies et~al., 2004]{Daubechies2004}
+Daubechies, I., Defrise, M., and {De Mol}, C. (2004).
+\newblock {An iterative thresholding algorithm for linear inverse problems with
+  a sparsity constraint}.
+\newblock {\em Communications on Pure and Applied Mathematics},
+  57(11):1413--1457.
+
+\bibitem[{Dupr{\'{e}} la Tour} et~al., 2018]{Dupre2018}
+{Dupr{\'{e}} la Tour}, T., Moreau, T., Jas, M., and Gramfort, A. (2018).
+\newblock {Multivariate Convolutional Sparse Coding for Electromagnetic Brain
+  Signals}.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)},
+  pages 3296--3306, Montreal, Canada.
+
+\bibitem[Engan et~al., 1999]{Engan1999}
+Engan, K., Aase, S.~O., and Hus{\o}y, J.~H. (1999).
+\newblock {Method of Optimal Directions for Frame Design}.
+\newblock In {\em IEEE International Conference on Acoustics, Speech and Signal
+  Processing (ICASSP)}, pages 2443----2446, Phoenix, AZ, USA.
+
+\bibitem[Friedman et~al., 2007]{Friedman2007}
+Friedman, J., Hastie, T., H{\"{o}}fling, H., and Tibshirani, R. (2007).
+\newblock {Pathwise coordinate optimization}.
+\newblock {\em The Annals of Applied Statistics}, 1(2):302--332.
+
+\bibitem[Gabay and Mercier, 1976]{Gabay1976}
+Gabay, D. and Mercier, B. (1976).
+\newblock {A dual algorithm for the solution of nonlinear variational problems
+  via finite element approximation}.
+\newblock {\em Computers \& Mathematics with Applications}, 2(1):17--40.
+
+\bibitem[Giryes et~al., 2018]{Giryes2016}
+Giryes, R., Eldar, Y.~C., Bronstein, A.~M., and Sapiro, G. (2018).
+\newblock {Tradeoffs between Convergence Speed and Reconstruction Accuracy in
+  Inverse Problems}.
+\newblock {\em IEEE Transaction on Signal Processing}, 66(7).
+
+\bibitem[Gregor and {Le Cun}, 2010]{Gregor10}
+Gregor, K. and {Le Cun}, Y. (2010).
+\newblock {Learning Fast Approximations of Sparse Coding}.
+\newblock In {\em International Conference on Machine Learning (ICML)}, pages
+  399--406.
+
+\bibitem[Grosse et~al., 2007]{Grosse2007}
+Grosse, R., Raina, R., Kwong, H., and Ng, A.~Y. (2007).
+\newblock {Shift-Invariant Sparse Coding for Audio Classification}.
+\newblock {\em Cortex}, 8:9.
+
+\bibitem[Hari, 2006]{hari2006action}
+Hari, R. (2006).
+\newblock {Action--perception connection and the cortical mu rhythm}.
+\newblock {\em Progress in brain research}, 159:253--260.
+
+\bibitem[Karimireddy et~al., 2019]{Karimireddy2018}
+Karimireddy, S.~P., Koloskova, A., Stich, S.~U., and Jaggi, M. (2019).
+\newblock {Efficient Greedy Coordinate Descent for Composite Problems}.
+\newblock In {\em Artificial Intelligence and Statistics (AISTAT)}.
+
+\bibitem[Kavukcuoglu et~al., 2010]{Kavukcuoglu2013}
+Kavukcuoglu, K., Sermanet, P., Boureau, Y.-l., Gregor, K., and Lecun, Y.
+  (2010).
+\newblock {Learning Convolutional Feature Hierarchies for Visual Recognition}.
+\newblock In {\em Advances in Neural Information Processing Systems (NIPS)},
+  pages 1090--1098, Vancouver, Canada.
+
+\bibitem[Mairal et~al., 2010]{Mairal2010}
+Mairal, J., Bach, F.~R., Ponce, J., and Sapiro, G. (2010).
+\newblock {Online Learning for Matrix Factorization and Sparse Coding}.
+\newblock {\em Journal of Machine Learning Research (JMLR)}, 11(1):19--60.
+
+\bibitem[Moreau and Bruna, 2017]{Moreau2017}
+Moreau, T. and Bruna, J. (2017).
+\newblock {Understanding Neural Sparse Coding with Matrix Factorization}.
+\newblock In {\em International Conference on Learning Representation (ICLR)}.
+
+\bibitem[Moreau and Gramfort, 2019]{Moreau2019}
+Moreau, T. and Gramfort, A. (2019).
+\newblock {Distributed Convolutional Dictionary Learning (DiCoDiLe): Pattern
+  Discovery in Large Images and Signals}.
+\newblock {\em preprint ArXiv}, 1901.09235.
+
+\bibitem[Moreau et~al., 2018]{Moreau2018}
+Moreau, T., Oudre, L., and Vayatis, N. (2018).
+\newblock {DICOD: Distributed Convolutional Sparse Coding}.
+\newblock In {\em International Conference on Machine Learning (ICML)}, pages
+  3626--3634, Stockohlm, Sweden. PMLR (80).
+
+\bibitem[Nesterov, 1983]{Nesterov1983}
+Nesterov, Y. (1983).
+\newblock {A method of solving a convex programming problem with convergence
+  rate O (1/k2)}.
+\newblock {\em Soviet Mathematics Doklady}, 27(2):372--376.
+
+\bibitem[Nesterov, 2010]{Nesterov2010}
+Nesterov, Y. (2010).
+\newblock {Efficiency of coordinate descent methods on huge-scale optimization
+  problems}.
+\newblock {\em SIAM Journal on Optimization}, 22(2):341--362.
+
+\bibitem[Nutini et~al., 2015]{Nutini}
+Nutini, J., Schmidt, M., Laradji, I.~H., Friedlander, M.~P., and Koepke, H.
+  (2015).
+\newblock {Coordinate Descent Converges Faster with the Gauss-Southwell Rule
+  Than Random Selection}.
+\newblock In {\em International Conference on Machine Learning (ICML)}, pages
+  1632--1641, Lille, France.
+
+\bibitem[Olshausen and Field, 1997]{Olshausen1997}
+Olshausen, B.~A. and Field, D.~J. (1997).
+\newblock {Sparse coding with an incomplete basis set: a strategy employed by
+  \protect{V1}}.
+
+\bibitem[Osher and Li, 2009]{Osher2009}
+Osher, S. and Li, Y. (2009).
+\newblock {Coordinate descent optimization for $\ell_1$ minimization with
+  application to compressed sensing; a greedy algorithm}.
+\newblock {\em Inverse Problems and Imaging}, 3(3):487--503.
+
+\bibitem[Oudre et~al., 2018]{Oudre2018}
+Oudre, L., Barrois-M{\"{u}}ller, R., Moreau, T., Truong, C., Vienne-Jumeau, A.,
+  Ricard, D., Vayatis, N., and Vidal, P.-P. (2018).
+\newblock {Template-Based Step Detection with Inertial Measurement Units}.
+\newblock {\em Sensors}, 18(11):4033.
+
+\bibitem[Robert et~al., 2016]{Robert2016}
+Robert, M.~P., Grill, J., Moreau, T., Grevent, D., Zambrowsky, O., Varlet, P.,
+  Contal, E., Martin, G., Br{\'{e}}mond-Gignac, D., Ingster-Moati, I., Dufour,
+  C., Brugi{\`{e}}res, L., Vayatis, N., Boddaert, N., Sainte-Rose, C.,
+  Blauwblomme, T., Puget, S., and Vidal, P.-P. (2016).
+\newblock {Optic pathway gliomas-associated nystagmus}.
+\newblock {\em submitted to Brain}.
+
+\bibitem[Rockafellar, 1976]{Rockafellar1976}
+Rockafellar, R.~T. (1976).
+\newblock {Monotone Operators and the Proximal Point Algorithm}.
+\newblock {\em SIAM Journal on Control and Optimization}, 14(5):877--898.
+
+\bibitem[Wohlberg, 2016]{Wohlberg2016}
+Wohlberg, B. (2016).
+\newblock {Efficient Algorithms for Convolutional Sparse Representations}.
+\newblock {\em IEEE Transactions on Image Processing}, 25(1).
+
+\bibitem[Wright and Nocedal, 1999]{Wright1999}
+Wright, S. and Nocedal, J. (1999).
+\newblock {\em {Numerical optimization}}.
+\newblock Science Springer.
+
+\bibitem[Xin et~al., 2016]{xin2016maximal}
+Xin, B., Wang, Y., Gao, W., and Wipf, D. (2016).
+\newblock {Maximal Sparsity with Deep Networks?}
+\newblock In {\em Advances in Neural Information Processing Systems (NIPS)},
+  pages 4340----4348.
+
+\bibitem[Yellin et~al., 2017]{Yellin2017}
+Yellin, F., Haeffele, B.~D., and Vidal, R. (2017).
+\newblock {Blood cell detection and counting in holographic lens-free imaging
+  by convolutional sparse dictionary learning and coding}.
+\newblock In {\em IEEE International Symposium on Biomedical Imaging (ISBI)},
+  Melbourne, Australia.
+
+\end{thebibliography}
