@@ -1,0 +1,51 @@
+\begin{thebibliography}{}
+
+\bibitem[Beck and Teboulle, 2009]{Beck2009}
+Beck, A. and Teboulle, M. (2009).
+\newblock {A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse
+  Problems}.
+\newblock {\em SIAM Journal on Imaging Sciences}, 2(1):183--202.
+
+\bibitem[Bristow et~al., 2013]{Bristow2013}
+Bristow, H., Eriksson, A., and Lucey, S. (2013).
+\newblock {Fast convolutional sparse coding}.
+\newblock In {\em IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, pages 391--398, Portland, OR, USA.
+
+\bibitem[Chalasani et~al., 2013]{Chalasani2013}
+Chalasani, R., Principe, J.~C., and Ramakrishnan, N. (2013).
+\newblock {A fast proximal method for convolutional sparse coding}.
+\newblock In {\em International Joint Conference on Neural Networks (IJCNN)},
+  pages 1--5, Dallas, TX, USA.
+
+\bibitem[Friedman et~al., 2007]{Friedman2007}
+Friedman, J., Hastie, T., H{\"{o}}fling, H., and Tibshirani, R. (2007).
+\newblock {Pathwise coordinate optimization}.
+\newblock {\em The Annals of Applied Statistics}, 1(2):302--332.
+
+\bibitem[Gabay and Mercier, 1976]{Gabay1976}
+Gabay, D. and Mercier, B. (1976).
+\newblock {A dual algorithm for the solution of nonlinear variational problems
+  via finite element approximation}.
+\newblock {\em Computers \& Mathematics with Applications}, 2(1):17--40.
+
+\bibitem[Kavukcuoglu et~al., 2010]{Kavukcuoglu2013}
+Kavukcuoglu, K., Sermanet, P., Boureau, Y.-l., Gregor, K., and Lecun, Y.
+  (2010).
+\newblock {Learning Convolutional Feature Hierarchies for Visual Recognition}.
+\newblock In {\em Advances in Neural Information Processing Systems (NIPS)},
+  pages 1090--1098, Vancouver, Canada.
+
+\bibitem[Nesterov, 2010]{Nesterov2010}
+Nesterov, Y. (2010).
+\newblock {Efficiency of coordinate descent methods on huge-scale optimization
+  problems}.
+\newblock {\em SIAM Journal on Optimization}, 22(2):341--362.
+
+\bibitem[Osher and Li, 2009]{Osher2009}
+Osher, S. and Li, Y. (2009).
+\newblock {Coordinate descent optimization for $\ell_1$ minimization with
+  application to compressed sensing; a greedy algorithm}.
+\newblock {\em Inverse Problems and Imaging}, 3(3):487--503.
+
+\end{thebibliography}
