@@ -2,6 +2,7 @@
 
 # Tex compilation files
 *.aux
+*.bbl
 *.log
 *.out
 *.nav
