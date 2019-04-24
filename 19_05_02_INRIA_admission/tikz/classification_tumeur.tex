@@ -19,7 +19,11 @@
 
 
 \node (origin) at (0, 0) {};
-\node[above=4em of origin.east] {\bf Training set};
+\node[above=4em of origin.east, align=center, text width=10em] {%
+    {\bf Données d'entrainement}\\[1em]
+    \only<-4>{\phantom{g}Scan IRM du cerveau\phantom{g}}%
+    \only<5->{Enregistrement MEG}%
+};
 \foreach \i in {0,...,2}{
     \node (n\i) at ($(origin) + (\i, -\i)$) {
         \only<-4>{\includegraphics[height=6em]{cerveau_\i}}
@@ -27,7 +31,7 @@
     };
 }
 
-\draw[->, thick] ($(n2.east) + (1em, 1.5)$) -- ++(15em, 0) node[midway] (midway) {} node[above] (result) {};
+\draw[->, thick] ($(n2.east) + (.3em, 1.5)$) -- ++(15em, 0) node[midway] (midway) {} node[above] (result) {};
 
 
 \uncover<-3>{
@@ -52,7 +56,7 @@
 }
 
 \foreach \i in {0,...,1}{
-\node[below] (r\i) at ($(result) + (6em, 7.5em - 8*\i em)$) {%
+\node[below] (r\i) at ($(result) + (5.5em, 7.1em - 8*\i em)$) {%
         \only<-2>{\includegraphics[height=6em]{tumeur_result_\i}}%
         \only<3-4>{\includegraphics[height=6em]{tumeur_result_bin_\i}}%
         \only<5->{\includegraphics[height=6em]{meg_result_\i}}
@@ -65,18 +69,17 @@
     \only<4->{\bf Quantification}
 };
 
-\node[below=-.5em of r0] {
+\node[below=-.5em of r0, align=center] {
     \only<-3>{Pas de tumeur}
     \only<4>{\Large $\neq$}
     \only<5>{\Large ?}
     \only<6>{{\Large $\neq$} Condition}
 };
-\node[below=-.5em of r1, text width=8em] {%
-    \only<-2>{Tumeur localisé}%s
-    \only<3>{Tumeur présente}
+\node[below=-.5em of r1, text width=8em, minimum height=2em, align=center] {%
+    \only<-2>{Tumeur segmentée}%
+    \only<3>{Tumeur présente}%
+    %\only<4>{\color{lightblue!70}Tumeur présente}
 };
-
-
 
 \end{tikzpicture}
 
