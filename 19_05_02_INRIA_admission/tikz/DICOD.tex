@@ -98,7 +98,7 @@
 %}
 
 
-\only<-2>{
+\only<2>{
     \node (southwest) at ($(origin) - (\width / 2, \height / 2)$) {};
     \node (northeast) at ($(origin) + (\width / 2, \height / 2)$) {};
     
@@ -116,14 +116,14 @@
                          rectangle (northeast.center)
                          node[midway, overlay] {\Large Activation $Z$};
     
-    \draw[draw=black, thick, <->] (northeast.north) -- ++(-\width, 0) node[midway, above] {T};
-    \draw[draw=black, thick, <->] (southwest.west) -- ++(0, \height) node[midway, left] {K};
+    \draw[draw=black, thick, <->] (southwest.south) -- ++(\width, 0) node[midway, below] {Temps};
+    \draw[draw=black, thick, <->] (southwest.west) -- ++(0, \height) node[midway, above, sloped] {Atomes};
 }
 
 \only<2->{
     
     \pgfmathsetmacro{\widthWorker}{\width/\W}
-    \coordinate (origin_worker) at ($(origin) - (0, 1.6*\height)$);
+    \coordinate (origin_worker) at ($(origin) + (0, 1.6*\height)$);
     \foreach \w in {1,...,\W}{
         
         \node (southwest\w) at ($(origin_worker) - (1.3*\width / 2 - 1.3*\w*\widthWorker + 1.15*\widthWorker, \height / 2)$) {};
@@ -149,13 +149,13 @@
         \draw[bold, dashed] ($(southwest.center) + (\w*\widthWorker, 0)$)
                 -- ++(0, \height);
               rectangle (northeast\w.center)
-       \draw[arrow, ->] ($(southwest.center) + (\w*\widthWorker - \widthWorker / 2, 0)$)
-                -- ($(northeast\w) - (\widthWorker/2, 0)$);
+       \draw[arrow, ->] ($(southwest.center) + (\w*\widthWorker - \widthWorker / 2, \height)$)
+                -- ($(southwest\w) + (\widthWorker/2, 0)$);
     
-        \draw[draw=black, thick, <->] (southwest1.south)
-            -- ++(\width/\W, 0) node[midway, below] {T / W};
+        \draw[draw=black, thick, <->] (northeast1.north)
+            -- ++(-\width/\W, 0) node[midway, above] {Temps / Noeuds};
         \draw[draw=black, thick, <->] (southwest1.west)
-            -- ++(0, \height) node[midway, left] {K};
+            -- ++(0, \height) node[midway, above, sloped] {Atomes};
     }
         
     }

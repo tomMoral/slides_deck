@@ -57,7 +57,7 @@
 %-----------------------------------------------------------------------------
 
 \def\keypoint#1{\hspace{0pt plus 1 filll}\textcolor{gray}{[{\color{linkcolor}#1}]}~}
-\def\mycite#1{\keypoint{\small\citep{#1}}}
+\def\mycite#1{\keypoint{\small\citealt{#1}}}
 \def\citeconf#1#2{
     {\textcolor{gray}[}%
         {\color{linkcolor}\citealt{#1}, #2}%
@@ -71,24 +71,36 @@
 \def\myitem{\hskip1ex{\color{linkcolor} $\blacktriangleright$}\hskip.3em}
 
 
+\def\extraLogo{\includegraphics[width=.2\linewidth]{brain_and_signals}}
 
-\newcommand{\overimg}[4]{
+
+\newcommand{\techterm}[1]{
+    \column{\widthof{\bf #1}}
+    \centering
+    \begin{beamercolorbox}[rounded=true, shadow=true]{title}
+        \bf #1
+    \end{beamercolorbox}
+}
+
+\newcommand{\overimg}[5][.8\linewidth]{
     \begin{tikzpicture}
-    \only<#1-#3>{%
-        \node {\includegraphics[height=.6\textheight]{#2}};
+    \only<#2-#4>{%
+        \node[inner sep=0em] (img) {\includegraphics[width=#1]{#3}};
     }%
-    \only<#3>{%
-        \node {\includegraphics[height=.5\textheight]{#4}};
+    \only<#4>{%
+        \path let
+          \p1=(img.north), \p2=(img.south)
+          in
+          node {\includegraphics[height=\y1-\y2]{#5}};
     }%
     \end{tikzpicture}
 }
 
 
-%\usepackage{lxfonts}
-
-\institute{-- Concours CRCN INRIA Saclay}
+\institute{-- Concours CRCN Inria Saclay}
 \author{Thomas Moreau}
-\title{Apprentissage non-supervisé pour les signaux multivariés en neurosciences}
+\title{Apprentissage non-supervisé pour les signaux multivariés
+       en neurosciences}
 
 
 \setbeamertemplate{title page}[frame]
@@ -147,7 +159,7 @@
     
         \end{columns}
         
-        \item 2018-2019: Post-doctorat -- INRIA (équipe Parietal)
+        \item 2018-2019: Post-doctorat -- Inria (équipe Parietal)
         \begin{beamercolorbox}[rounded=true, shadow=true]{title}
             Apprentissage de dictionnaire convolutif pour la MEG.\\
         \end{beamercolorbox}
@@ -157,71 +169,88 @@
 \end{frame}
 
 
-\begin{frame}[t]{Domaine d'application}
+\begin{frame}{Analyse de l'équilibre dynamique}
 
-{
+\begin{columns}[T]
+    \column{.6\textwidth}
     \centering
-    \vskip1em
-    \only<7-8>{
-        \begin{itemize}
-            \item Exploration des signaux neurologiques de l'ECG, la MEG ou l'IRMf.\\[1em]
-        \end{itemize}
-%        \includegraphics[height=.6\textheight]{multivariate_eeg}\\[1em]%
-            \overimg{7}{meg_1}{8}{meg_dict}
-        
-        \textcolor{gray}{[{\color{linkcolor} NeurIPS 2018; ICASSP 2019}; article en préparation]}\\
-        
-%        \begin{itemize}
-%            \item 1 article soumis en conférence,
-%            \item 2 articles de journaux en cours de rédaction,
-%            \item Un projet de partenariat en discussion avec B. Olshaussen (Berkeley).
-%        \end{itemize}
-    }
+        \begin{columns}[c]
+            \column{.4\linewidth}
+            \includegraphics[width=\linewidth]{xsens}
+            \column{.6\linewidth}
+            \includegraphics[width=\linewidth]{exo_marche}
+        \end{columns}
+        \vskip1em
+        \alt<-2>{
+            \includegraphics[width=\linewidth]{accelero}
+        }{
+            \includegraphics[width=\linewidth]{accelero_steps}
+        }
+        \uncover<4>{
+            \vskip-1em\hskip.5ex
+            \begin{beamercolorbox}[rounded=true, shadow=true, wd=.95\linewidth]{title}
+                \textbf{Brevet:~} Segmentation de pas\\
+                \textbf{Articles:} %
+                    \textcolor{linkcolor}{Sensors 2018; PLoS One 2016}\\
+            \end{beamercolorbox}
+        }
+    \column{.4\textwidth}
+        \alt<1>{
+            \vskip3em
+            \begin{block}{Objectifs}
+                \vskip.5em{\bf Quantifier l'équilibre}
+                \begin{itemize}\itemsep.5em
+                    \item Prédiction de chutes
+                    \item Suivi de neuropathie
+                    \item Suivi de rééducation
+                \end{itemize}
+               \vskip-.7em\textcolor{white}{.}
+            \end{block}
+        }{
+            \begin{block}{Challenges}
+                \vskip.5em
+                Annotations faibles\\[.5em]
+                Pas de comparaison canonique
+                \vskip-.7em\textcolor{white}{.}
+            \end{block}
+            \begin{block}{Comparaison des signaux}
+                \vskip.5em
+                Représentation adaptée\\[.5em]
+                $\Rightarrow$~Segmentation des pas.\\[.5em]
+                Utiliser la {\bf structure locale} du signal.
+                \vskip-.7em\textcolor{white}{.}
+            \end{block}
+        }
+    \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Domaines d'application}{}
+
+
     \only<1-2>{
-        \begin{itemize}
-            \item Analyse de signaux de marche pour l'évaluation de l'équilibre.\\[1em]
-        \end{itemize}
-%        \includegraphics[height=.6\textheight]{accelero}\\[1em]%
-        \overimg{1}{accelero}{2}{accelero_dict}
-        
-        {\color{gray}[{\color{linkcolor} PLoS ONE 2016; Sensors 2018}; Brevet 2015]}\\
-        
-%        \begin{itemize}
-%            \item Un brevet déposé et en cours d'exploitation,
-%            \item
-%            \item En cours avec le laboratoire Cognac-G
-%        \end{itemize}
+        {\large \bf Enregistrement inertiel}\\[1em]
+        \centering
+        \overimg{1}{accelero}{2}{accelero_dict}\\[1em]
+        \textcolor{gray}{[\textcolor{linkcolor}{PLoS ONE 2016; Sensors 2018}]}
     }
     \only<3-4>{
-        \begin{itemize}
-            \item Caractérisation de mouvements oculaires pathologiques.\\[1em]
-        \end{itemize}
-%        \includegraphics[height=.6\textheight]{oculo}\\[1em]%
-
-        \overimg{3}{oculo}{4}{oculo_dict}
-        \textcolor{gray}{[{\color{linkcolor} Plusieurs soumissions en cours}; stagiaire M2]}\\
+        {\large \bf Image du Télescope Hubble}\\[1em]
+        \centering
+        \overimg{3}{Hubble}{4}{Hubble_dict}\\[1em]
+        \textcolor{gray}{[\textcolor{linkcolor}{preprint 2019}]}
     }
-%    \only<4>{
-%        \begin{itemize}
-%            \item Comptage de cellules dans les images biologiques.\\[1em]
-%        \end{itemize}
-%        \includegraphics[height=.4\textheight]{fluospot}\\[1em]%
-%        
-%        [{\color{linkcolor}del Aguila Pla et al. 2018, IEEE TSP};
-%        \citealt{Yellin2017}{\color{linkcolor}, ISBI}]\\
-%    }
-    \only<5-6>{
-        \begin{itemize}
-            \item Comptage d'objet astronomiques dans des images de telescope.\\[1em]
-        \end{itemize}
-        \overimg{5}{Hubble}{6}{Hubble_dict}    
-        
-        {\centering\textcolor{gray}{[{\color{linkcolor}preprint 2019}]}\\}
+    \only<5->{
+        {\large \bf Magnétoencéphalographie (MEG)}\\[1em]
+        \begin{columns}
+            \column{.4\textwidth}
+                \includegraphics[height=.7\textheight]{meg_presentation}\\
+            \column{.6\textwidth}
+                \overimg[\linewidth]{5}{meg_signal}{6}{meg_dict}
+        \end{columns}
+
     }
-}
-
-
-
 \end{frame}
 
 \begin{frame}[t]{Structure locale des signaux}
@@ -308,36 +337,95 @@
 
 \end{frame}
 
-
-\begin{frame}[t]{DICOD: Optimisation distribuée pour le CDL%
+\begin{frame}[t]{DICOD: Codage parcimonieux convolutif distribué%
               \keypoint{ICML, 2018}}
-Résolution par descente de coordonnée gloutonne de\vskip-.5em
+          
+{\bf Obstacle computationnel:} Codage parcimonieux convolutif avec $\pmb D$ fixé:\vskip-.5em
 \[
-    \argmin_{Z} \|X - D*Z\|_2^2 + \lambda \|Z\|_1
+    \argmin_{Z_k} \| X - \sum_{k=1}^K Z_k * \pmb D_k\|_2^2 + \sum_{k=1}^K\|Z_k\|_1
 \]
+\only<1>{
+{\large \bf Algorithmes existants:}\\
+\begin{itemize}
+    \item Iterative Soft-Thresholding Algorithm (ISTA)\\\mycite{Chalasani2013}
+    \item Alternated Direction Method of Multiplier\\\mycite{Bristow2013}
+    \item Coordinate Descent (CD) \\\mycite{Kavukcuoglu2013}
+\end{itemize}
+}
+
+{
 \centering
-\inputTikZ{.7}{DICOD}
+\inputTikZ{.7}{DICOD}\\[1em]
+}
 
 \only<3->{
-    \vskip1em
-    \begin{block}{Propriété}
-        \vskip.2em
-        \myitem{} Algorithme asynchrone \hskip2em
-        \myitem{} Communications locales efficaces\\[.3em]
-        \myitem{} Converge vers le minimum global du problème\\[.3em]
-        \myitem{} Passe à l'échelle super-linéairement
-        \vskip.2em
-    \end{block}
+\begin{columns}[c]
+    \column{.5ex}
+    \techterm{Asynchrone}
+    \column{.5ex}
+    \techterm{Distribué avec MPI}
+    \column{.5ex}
+    \techterm{Super-linéaire}
+    \column{.5ex}
+\end{columns}
+\vskip-1em
+\begin{columns}[c]
+    \column{.5ex}
+    \techterm{Converge globalement}
+    \column{.5ex}
+    \techterm{Communications Locales}
+    \column{.5ex}
+\end{columns}
+    
+%    \begin{block}{Propriété}
+%        \vskip.2em
+%        \myitem{} Algorithme asynchrone \hskip2em
+%        \myitem{} Communications locales efficaces\\[.3em]
+%        \myitem{} Converge vers le minimum global du problème\\[.3em]
+%        \myitem{} Passe à l'échelle \textbf{super-linéairement}
+%        \vskip.2em
+%    \end{block}
 }
 %
 \only<4>{
-    \vskip-1em
-    \strongpoint{Extension pour signaux 2D}
-    \vskip1em
+    \centering \textcolor{linkcolor}{preprint 2019}: Extension pour signaux 2D\\
+    \vspace{0pt plus 1 filll}
     \includegraphics[height=.8em]{github}~\textbf{DiCoDiLe}
-    : \url{github.com/tommoral/dicodile}\\[1em]
+    : \url{github.com/tommoral/dicodile}\\
 }
+
 \end{frame}
+
+
+%\begin{frame}[t]{DICOD: un algorithme asynchrone distribuée%
+%              \keypoint{ICML, 2018}}
+%Résolution par descente de coordonnée gloutonne de\vskip-.5em
+%\[
+%    \argmin_{Z} \|X - D*Z\|_2^2 + \lambda \|Z\|_1
+%\]
+%\centering
+%\inputTikZ{.7}{DICOD}
+%
+%\only<3->{
+%    \vskip1em
+%    \begin{block}{Propriété}
+%        \vskip.2em
+%        \myitem{} Algorithme asynchrone \hskip2em
+%        \myitem{} Communications locales efficaces\\[.3em]
+%        \myitem{} Converge vers le minimum global du problème\\[.3em]
+%        \myitem{} Passe à l'échelle \textbf{super-linéairement}
+%        \vskip.2em
+%    \end{block}
+%}
+%%
+%\only<4>{
+%    \vskip-1em
+%    \strongpoint{Extension pour signaux 2D}
+%    \vspace{0pt plus 1 filll}
+%    \includegraphics[height=.8em]{github}~\textbf{DiCoDiLe}
+%    : \url{github.com/tommoral/dicodile}\\[1em]
+%}
+%\end{frame}
 
 
 
@@ -578,7 +666,7 @@ Résolution par descente de coordonnée gloutonne de\vskip-.5em
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}%
     {\large \bf \color{black} Parcours}\\
     2010-2014: X \hskip6em 2013-2014: Telecom ParisTech - MVA\\
-    2014-2017: ENS Cachan \hskip1.4em 2018-2019: INRIA -- Parietal
+    2014-2017: ENS Cachan \hskip1.4em 2018-2019: Inria -- Parietal
 \end{beamercolorbox}
 \end{columns}%
 %
