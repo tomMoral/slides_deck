@@ -86,7 +86,7 @@
 
 \pgfkeys{
     /highlight/.cd,
-    color/.initial={darkred},
+    c/.initial={darkred},
     wd/.initial={0}
 }
 
@@ -99,18 +99,18 @@
     }
     \raisebox{-.5em}{
         \begin{beamercolorbox}[rounded=true, shadow=true, wd=\bodywd]{title}
-            \centering\bf\phantom{g}\hskip-\skipg \textcolor{\pgfkeysvalueof{/highlight/color}}{#2}
+            \centering\bf\phantom{g}\hskip-\skipg \textcolor{\pgfkeysvalueof{/highlight/c}}{#2}
     \end{beamercolorbox}}
 }
 
 \newcommand{\overimg}[5][.8\linewidth]{
     \begin{tikzpicture}
     \only<#2-#4>{%
-        \node[inner sep=0em] (img) {\includegraphics[width=#1]{#3}};
+        \node[inner sep=0em, outer sep=0em] (img) {\includegraphics[width=#1]{#3}};
     }%
     \only<#4>{%
         \path let
-          \p1=(img.north), \p2=(img.south)
+          \p1=($(img.north) - (0, 1em)$), \p2=(img.south)
           in
           node {\includegraphics[height=\y1-\y2]{#5}};
     }%
@@ -118,7 +118,7 @@
 }
 
 
-\institute{-- Concours CRCN Inria Saclay}
+\institute{Concours CRCN Inria Saclay}
 \author{Thomas Moreau}
 \title{Apprentissage non-supervisé pour les signaux multivariés
        en neurosciences}
@@ -130,7 +130,35 @@
 \begin{document}
 
 \begin{frame}[plain]
-\titlepage
+
+\vskip.1\textheight
+\begin{beamercolorbox}[sep=2pt,center, wd=\textwidth]{separationline}
+    %Title box
+    \begin{beamercolorbox}[center, wd=\SizeTitleBox]{headline}
+        \begin{center}
+            \centering
+            \usebeamercolor{title}{\color{fg}\Large\textbf{{\inserttitle}}\hskip2em\\[1.5ex]}
+            \usebeamercolor{author}{\color{fg}\small{\insertauthor}} -- %
+            \usebeamercolor{institute}{\color{fg}\small{\insertinstitute}\\} 
+        \end{center}
+    \end{beamercolorbox}
+    \vskip-1em
+    \hskip0em
+    % Separation line
+    \begin{beamercolorbox}[center, wd=\SizeTitleBox]{separation line}\rule{0pt}{2pt}\end{beamercolorbox}\vfill
+\end{beamercolorbox}
+% LOGO and join work part of the title frame
+\vskip2em
+\begin{columns}[c]
+    \column{.5\textwidth}
+    \centering
+        \includegraphics[width=.7\linewidth]{brain_and_signals}
+    \column{.5\textwidth}
+        \includeLogo{logo_inria}\\[1em]
+        \includeLogo{logo_parietal}
+\end{columns}
+
+
 \biblio{}
 \end{frame}
 
@@ -183,6 +211,7 @@
         \item 2018-2019: Post-doctorat -- Inria (équipe Parietal)
         \begin{beamercolorbox}[rounded=true, shadow=true]{title}
             Apprentissage de dictionnaire convolutif pour la MEG.\\
+            \hskip3ex\color{black}$\Rightarrow$ Analyse de la structure locale des signaux
         \end{beamercolorbox}
     \end{list}
 \end{columns}
@@ -268,6 +297,7 @@
             \column{.4\textwidth}
                 \includegraphics[height=.7\textheight]{meg_presentation}\\
             \column{.6\textwidth}
+                \centering\highlight[c=linkcolor]{Structure locale invisible}\\
                 \overimg[\linewidth]{5}{meg_signal}{6}{meg_dict}
         \end{columns}
 
@@ -405,7 +435,7 @@
 \vskip-1em% {\bf Super linéaire:}
     \highlight{ Itérations \small\color{black} $\mathcal O(KT/W)$}
     \highlight{Convergence \small\color{black} $\mathcal O(KT/Wq)$}
-    \hskip1em{\small$\Rightarrow\mathcal O(K^2TL/W^2q)$}\\[.8em]
+    \hskip1em{\small$\Rightarrow\mathcal O(K^2T^2/\pmb {W^2}q)$}\\[.8em]
 }%
 %
 \uncover<4>{%
@@ -443,7 +473,7 @@
 \rotatebox{90}{\Large Axe 1}
 \column{.9\textwidth}
 \begin{block}{Modélisation pour les signaux en neurosciences}
-    Incorporer des connaissances du domaine dans le modèle\\[.3em]
+    Identifier la structure dans le signal.\\[.3em]
     \myitem{} Dépendance temporelle \hskip2em \myitem{} Couplage fréquentiel\\[.3em]
 \end{block}
 \end{columns}
@@ -454,9 +484,8 @@
     \rotatebox{90}{\Large Axe 2}
     \column{.9\textwidth}
     \begin{block}{Analyse statistique des modèles convolutifs non-supervisés}
-        \myitem Évaluation et reconstruction des atomes.\\[.3em]
-        \myitem Convergence globale algorithmique.\\[.3em]
-        \myitem Garantie de reconstruction des atomes.\\[.3em]
+        Évaluer les modèles non-supervisé\\[.3em]
+        \myitem{} Garantie de reconstruction \myitem Algorithme global.\\[.3em]
     \end{block}
 \end{columns}
 %
@@ -466,8 +495,8 @@
     \rotatebox{90}{\Large Axe 3}
     \column{.9\textwidth}
     \begin{block}{Apprentissage profond pour les problèmes inverses}
-        \myitem Lien entre modèle convolutif et apprentissage profond.\\[.5em]
-        \myitem Inversion rapide pour la localisation de source.\\[.5em]
+        Lien entre modèle convolutif et apprentissage profond.\\[.3em]
+        \myitem Résolution rapide \myitem{} Identifiabilité de l'apprentissage profond.\\[.5em]
     \end{block}
 \end{columns}
 
@@ -512,17 +541,17 @@
     \only<1>{
         \includegraphics[height=8em]{connectivity_independent}
         \includegraphics[width=\linewidth]{time_dependency}
-        \centering\highlight[color=linkcolor]{Activations indépendantes}
+        \centering\highlight[c=linkcolor]{Activations indépendantes}
     }%
     \only<2>{
         \includegraphics[height=8em]{connectivity_simultaneous}
         \includegraphics[width=\linewidth]{time_dependency_simultaneous}
-        \centering\highlight[color=linkcolor]{Activations simultanées}
+        \centering\highlight[c=linkcolor]{Activations simultanées}
     }%
     \only<3>{
         \includegraphics[height=8em]{connectivity_default_mode}
         \includegraphics[width=\linewidth]{time_dependency_arrow}
-        \centering\highlight[color=linkcolor]{Interaction temporelles}
+        \centering\highlight[c=linkcolor]{Interaction temporelles}
     }%
     \only<4-6>{
         \vskip1em
@@ -530,7 +559,7 @@
         }{\includegraphics[width=\linewidth]{time_contrastive_delta_t}
         }
         \vskip1em
-        \centering\highlight[color=linkcolor]{Non-stationnarité}
+        \centering\highlight[c=linkcolor]{Non-stationnarité}
     }\\
 \end{columns}
 
@@ -578,16 +607,16 @@
     \column{.5\textwidth}
     \only<2>{%
         \setlength{\bodywd}{\widthof{\bf Le modèle capture-t-il la}}
-        \centering\highlight[color=linkcolor, wd=\bodywd]{%
+        \centering\highlight[c=linkcolor, wd=\bodywd]{%
                 Le modèle capture-t-il la\\structure du signal?}\\[1em]
         Quantifier les structures identifiées par validation croisée.
     }%
     \only<3>{%
-        \centering\highlight[color=linkcolor]{Le modèle est-il identifiable?}\\[1em]
+        \centering\highlight[c=linkcolor]{Le modèle est-il identifiable?}\\[1em]
         Utilisation de la structure fréquentielle des atomes.
     }%
     \only<4>{%
-        \centering\highlight[color=linkcolor]{Le modèle peut-il être identifié?}\\[1em]
+        \centering\highlight[c=linkcolor]{Le modèle peut-il être identifié?}\\[1em]
         Garantie de convergence basé sur les résultats récents pour la factorisation de matrice.
         
     }%
@@ -628,60 +657,65 @@
 %\end{frame}
 
 
-
 \begin{frame}[t]{Apprentissage profond pour les problèmes inverses \keypoint{Axe 3}}
-\begin{columns}[T]
-    \column{2em}\vskip1em\rotatebox{90}{
-        \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-            \large \bf Inversion rapide
-        \end{beamercolorbox}
-    }
-    \column{.45\textwidth}
-    {\bf Apprentissage profond}
-        \includegraphics[width=\textwidth]{meg_inverse}
 
-    \begin{itemize}\itemsep.5em
-        \item Inversion du problème à partir de réseau de neuronne.
-    \end{itemize}
-    
-    
-    \column{2em}\vskip1em\rotatebox{90}{
-        \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-            \large \bf Lien modèle convolutif
-        \end{beamercolorbox}
+\definecolor{Z}{RGB}{45,162,65}
+\definecolor{F}{RGB}{180,35,35}
+\begin{tikzpicture}
+    \node (meg) {\includegraphics[width=9em]{meg_linear_propagation}};
+    \draw[->, thick] ($(meg.east) - (0, 1.5em)$) -- ++(5em, 0)
+        node[midway, align=center] (maxwell) {\small Équations\\ \small de Maxwell}
+        node[right] (topomap) {\includegraphics[width=4em]{topomap_somato}};
+    \draw[->, thick] (topomap.east) -- ++(5em, 0)
+        node[midway, align=center] {\small Problème\\ \small inverse}
+        node[right] (brain) {\includegraphics[width=4em]{brain_activity}};
+    \only<2->{
+        \node[draw, rounded corners, above=2.5em] at (topomap.center) {
+            \color{linkcolor} $\pmb X$};
+        \node[draw, rounded corners, above=2.5em] at (brain.center) {
+            \color{Z} $\pmb Z$};
+        \node[draw, rounded corners, above=2.5em] at (maxwell.center) {
+            \color{F} $\pmb F$};
     }
-    \column{.45\textwidth}
-    {\bf Algorithme d'optimsation appris}\\[1em]
-    \begin{itemize}\itemsep.5em
-        \item Extension du papier de ICLR 2017.
-        \item Mécanisme d'accélération basé sur la structure de la matrice Hessienne.
-        \item Lien avec l'analyse en composante principale parcimonieuse.
-    \end{itemize}
+\end{tikzpicture}
+
+\uncover<2->{
+    \centering
+    {\bf Problème inverse:} $\argmin_{\color{Z} \pmb Z} \|{\color{linkcolor} \pmb X}
+                         - {\color{F} \pmb F}{\color{Z} \pmb Z}\|_2^2
+                         + \mathcal R({\color{Z} \pmb Z})$\\[1em]
+}
+
+
+\begin{columns}[T]
+    \column{.4\textwidth}
+    \centering
+    \uncover<3->{
+        \highlight{\bf Optimisation apprise}\\[.5em]
+    }
+    \uncover<4->{
+        \setlength\bodywd{\widthof{\bf Résolution rapide de}}
+        \highlight[wd=\bodywd]{\bf Résolution rapide de problème inverse}\\[.5em]
+    }
+    \uncover<5>{
+        \highlight[wd=\bodywd]{\bf Apprentissage profond identifiable}\\[.5em]
+    }
+    \column{.6\textwidth}
+    \only<3>{
+        \keypoint{ICLR 2017}\\[.5em]
+        \centering
+        \inputTikZ{.8}{ista_tikz}
+        \setlength\bodywd{\widthof{\bf Dépend de la structure}}
+        \highlight[c=linkcolor, wd=\bodywd]{Dépend de la structure de la Hessienne $F^\top F$}\\[1em]
+    }
 \end{columns}
-\vspace{0pt plus 1 filll}
-%{\centering \textbf{Interpretabilité de l'apprentissage profond.}\\[1em]}
+
 \end{frame}
 
 
-%%===========================================================================
-%\section{Conclusion}
-%%===========================================================================
-%
-%\begin{frame}{Conclusion}
-%    \textbf{Convolutional Dictionary Learning}
-%    \begin{itemize}\itemsep.5em
-%        \item Flexible pattern extraction technique,
-%        \item Computationally tractable for more and more problems,
-%        \item Some application are already beginning to emerge.
-%    \end{itemize}
-%    \vskip2em
-%    \textbf{Challenges}
-%    \begin{itemize}\itemsep.5em
-%        \item Theoretical challenges remains (convergence, recoverability),
-%        \item The evaluation (and thus the parameter choices) is still not clear,
-%        \item Can give some insight for deep learning models?
-%    \end{itemize}
-%\end{frame}
+%===========================================================================
+\section{Conclusion}
+%===========================================================================
 
 
 \begin{frame}{Intégration dans l’équipe/collaborations}
@@ -733,48 +767,68 @@
 \setlength{\parskip}{0em}
 %
 \begin{columns}[c]
-    \column{1em}
+    \column{2em}
     %\rotatebox{90}{\bf \large Parcours}%
-    \column{.95\textwidth}%
+    \column{.9\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}%
     {\large \bf \color{black} Parcours}\\
-    2010-2014: X \hskip6em 2013-2014: Telecom ParisTech - MVA\\
-    2014-2017: ENS Cachan \hskip1.4em 2018-2019: Inria -- Parietal
+    2010-2014: X \hskip5.5em 2013-2014: Telecom ParisTech - MVA\\
+    2014-2017: ENS Cachan \hskip.9em 2018-2019: Inria -- Parietal
 \end{beamercolorbox}
 \end{columns}%
 %
 \vskip1em
 \begin{columns}[c]
-    \column{1em}
-    \rotatebox{90}{\large \bf Optim}
-    \column{.95\textwidth}%
+    \column{2em}
+    \rotatebox{90}{\parbox{4em}{\centering\large \bf Maths\\appli}}
+    \column{.9\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-        Optimisation distribuée \hskip2em Modélisation des signaux\\
+\begin{columns}[c]
+    \column{.85\textwidth}
+        Méthodes non-supervisées \hskip2em Modélisation des signaux\\
         Lien apprentissage profond et optimisation\\
-        \keypoint{4 actes de conférence}
+        Optimisation distribué\keypoint{4 actes de conférence}
+    \column{.15\textwidth}
+        \includegraphics[height=3em]{brain_and_signals}
+\end{columns}
 \end{beamercolorbox}
 \end{columns}
 \vskip1em
 \begin{columns}[c]
-    \column{1em}
-    \rotatebox{90}{\bf \large Données}
-    \column{.95\textwidth}%
+    \column{2em}
+    \rotatebox{90}{\parbox{4em}{\centering\bf \large Données\\Santé}}
+    \column{.9\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-        Analyse de la marche \keypoint{2 articles}\\
-        Analyse des mouvements oculaire \keypoint{3 articles soumis}\\
-        Neurosciences \keypoint{2 actes de conférence, 1 article en préparation}\\
-\end{beamercolorbox}
+    \begin{columns}[c]
+        \column{.62\textwidth}
+            Analyse de la marche \keypoint{2 articles; 1 brevet}\\
+            Mouvements oculaires \keypoint{3 articles soumis}\\
+            Neurosciences \keypoint{2 actes de conférence}\\
+        \column{.38\textwidth}
+            \centering
+            \includegraphics[height=3em]{logo_cognac}
+            \includegraphics[height=3em]{logo_neurospin}
+    \end{columns}
+    \end{beamercolorbox}
 \end{columns}
 \vskip.7em
 \begin{columns}[c]
-    \column{1em}
-    \rotatebox{90}{\bf \large Logiciel}
-    \column{.95\textwidth}%
+    \column{2em}
+    \rotatebox{90}{\parbox{4em}{\centering\bf \large Logiciel\\Libre}}
+    \column{.9\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-        Calcul parallèle en Python\\
-        Développeur pour 3 librairies \keypoint{joblib, loky, threadpoolctl}\\
-        Contributeur pour 2 projets \keypoint{CPython, scikit-learn}\\
-\end{beamercolorbox}
+        \begin{columns}[c]
+            \column{.5\textwidth}
+             Calcul parallèle en Python\\
+            Développeur pour 3 librairies\\
+            Contributeur pour 2 projets
+            \column{.5\textwidth}
+            \centering
+            \includegraphics[height=3em]{logo_python}
+            \includegraphics[height=3em]{logo_joblib}
+            \includegraphics[height=3em]{logo_sklearn}
+        \end{columns}
+    \end{beamercolorbox}
 \end{columns}
 
 \end{frame}

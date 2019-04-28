@@ -30,7 +30,10 @@ ds = np.c_[np.hanning(n_times_atom) * np.sin(t * 1.5 + np.cos(t * 1.5))].T
 X = construct_X(z, ds)
 
 ######################
-fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(9, 4))
+fig = plt.figure(figsize=(9, 4))
+axes = []
+for i in range(2):
+    axes.append(plt.subplot2grid((2, 7), (i, 0), colspan=7, fig=fig))
 
 
 def final():
