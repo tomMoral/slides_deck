@@ -6,15 +6,14 @@
 \usepackage[autoplay]{animate}
 \usepackage{bibentry}
 \usepackage{subcaption}
+\usepackage{stackengine}
 \usepackage{appendixnumberbeamer}
 
 \graphicspath{{./images/}}
 \def\TikzLocation{./tikz/}
 \def\tkzscl{1}
 
-\def\twocols{}
-%\def\bimplies{}
-%\def\partintro{}
+\def\stackalignment{l}
 
 
 \definecolor{primary}{RGB}{191,213,219}
@@ -74,12 +73,34 @@
 \def\extraLogo{\includegraphics[width=.2\linewidth]{brain_and_signals}}
 
 
+\newlength\bodywd
+\newlength\skipg
+\setlength\skipg{\widthof{\bf g}}
 \newcommand{\techterm}[1]{
     \column{\widthof{\bf #1}}
     \centering
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-        \bf #1
+        \bf \phantom{g}\hskip-\skipg #1
     \end{beamercolorbox}
+}
+
+\pgfkeys{
+    /highlight/.cd,
+    color/.initial={darkred},
+    wd/.initial={0}
+}
+
+\newcommand{\highlight}[2][]{%
+    \pgfkeys{/highlight/.cd,#1}%
+    \ifthenelse{\pgfkeysvalueof{/highlight/wd}=0}{
+        \setlength\bodywd{\widthof{\bf #2}}
+    }{
+        \setlength\bodywd{\pgfkeysvalueof{/highlight/wd}}
+    }
+    \raisebox{-.5em}{
+        \begin{beamercolorbox}[rounded=true, shadow=true, wd=\bodywd]{title}
+            \centering\bf\phantom{g}\hskip-\skipg \textcolor{\pgfkeysvalueof{/highlight/color}}{#2}
+    \end{beamercolorbox}}
 }
 
 \newcommand{\overimg}[5][.8\linewidth]{
@@ -254,20 +275,18 @@
 \end{frame}
 
 \begin{frame}[t]{Structure locale des signaux}
-    \vskip1.5em
-    \centering
+    \vskip1.5em%
+    \centering%
     \only<1>{\includegraphics[width=\textwidth]{intro_csc_0}}%
     \only<2>{\includegraphics[width=\textwidth]{intro_csc_1}}%
     \only<3>{\includegraphics[width=\textwidth]{intro_csc_2}}%
     \only<4>{\includegraphics[width=\textwidth]{intro_csc_3}}%
     \only<5>{\includegraphics[width=\textwidth]{intro_csc_4}}%
     \only<6->{\includegraphics[width=\textwidth]{intro_csc_5}}%
-    \vskip.2em
+    \vskip.2em%
     \only<7>{%
-        \includegraphics[width=.6\textwidth]{csc_explain_eq_color}
+        \includegraphics[width=.6\textwidth]{csc_explain_eq_color}%
     }
-    
- 
 \end{frame}
 
 \begin{frame}{Challenges de l'apprentissage non-supervisé pour les signaux}
@@ -344,18 +363,33 @@
 \[
     \argmin_{Z_k} \| X - \sum_{k=1}^K Z_k * \pmb D_k\|_2^2 + \sum_{k=1}^K\|Z_k\|_1
 \]
-\only<1>{
-{\large \bf Algorithmes existants:}\\
-\begin{itemize}
-    \item Iterative Soft-Thresholding Algorithm (ISTA)\\\mycite{Chalasani2013}
-    \item Alternated Direction Method of Multiplier\\\mycite{Bristow2013}
-    \item Coordinate Descent (CD) \\\mycite{Kavukcuoglu2013}
-\end{itemize}
-}
+\only<1>{%
+    \vskip1em
+    {\large \bf Algorithmes existants:}\\[1em]
+    \begin{itemize}\itemsep.5em
+        \item Descente par Coordonnée Gloutonne\mycite{Kavukcuoglu2013}\\
+            % {\small$\mathcal O(K^2T^2/q)$}
+            \highlight{Itérations \small\color{black} $\mathcal O(KT)$}
+            \highlight{Convergence \small\color{black} $\mathcal O(KT/q)$}
+            \hskip1ex{\small$\Rightarrow\mathcal O(K^2T^2/q)$}
+        \item Méthodes globales \mycite{Chalasani2013,Bristow2013}\\
+             % {\small$\mathcal O(K^2TL/q)$}
+             \highlight{Itérations \small\color{black} $\mathcal O(K^2TL)$}
+             \highlight{Convergence \small\color{black} $\mathcal O(1/q)$}
+             \hskip1ex{\small$\Rightarrow\mathcal O(K^2TL/q)$}
+    \end{itemize}
 
+    \vskip2em
+    {\small\centering
+    $T$:longueur du signal\hskip2ex
+    $K$:nombre d'atomes\hskip2ex
+    $L$:longueur des atomes\hskip2ex
+    $q$:itérations\\}
+}%
+\vskip-1em
 {
 \centering
-\inputTikZ{.7}{DICOD}\\[1em]
+\inputTikZ{.7}{DICOD}\\[.5em]
 }
 
 \only<3->{
@@ -363,70 +397,27 @@
     \column{.5ex}
     \techterm{Asynchrone}
     \column{.5ex}
-    \techterm{Distribué avec MPI}
+    \techterm{Communications Locales}
     \column{.5ex}
     \techterm{Super-linéaire}
     \column{.5ex}
 \end{columns}
-\vskip-1em
-\begin{columns}[c]
-    \column{.5ex}
-    \techterm{Converge globalement}
-    \column{.5ex}
-    \techterm{Communications Locales}
-    \column{.5ex}
-\end{columns}
-    
-%    \begin{block}{Propriété}
-%        \vskip.2em
-%        \myitem{} Algorithme asynchrone \hskip2em
-%        \myitem{} Communications locales efficaces\\[.3em]
-%        \myitem{} Converge vers le minimum global du problème\\[.3em]
-%        \myitem{} Passe à l'échelle \textbf{super-linéairement}
-%        \vskip.2em
-%    \end{block}
-}
+\vskip-1em% {\bf Super linéaire:}
+    \highlight{ Itérations \small\color{black} $\mathcal O(KT/W)$}
+    \highlight{Convergence \small\color{black} $\mathcal O(KT/Wq)$}
+    \hskip1em{\small$\Rightarrow\mathcal O(K^2TL/W^2q)$}\\[.8em]
+}%
 %
-\only<4>{
-    \centering \textcolor{linkcolor}{preprint 2019}: Extension pour signaux 2D\\
-    \vspace{0pt plus 1 filll}
-    \includegraphics[height=.8em]{github}~\textbf{DiCoDiLe}
-    : \url{github.com/tommoral/dicodile}\\
+\uncover<4>{%
+    {\bf DiCoDiLe:} $\big[$
+        \addstackgap[5pt]{\stackanchor[8pt]{Extension pour signaux 2D}
+                                           {Complexité des itérations $\mathcal O(KL)$}} \keypoint{preprint 2019}\\
+    \vskip.5em
+    {\centering \includegraphics[height=.8em]{github}~\url{github.com/tommoral/dicodile}:
+        Implémentation Python+MPI\\}
 }
 
 \end{frame}
-
-
-%\begin{frame}[t]{DICOD: un algorithme asynchrone distribuée%
-%              \keypoint{ICML, 2018}}
-%Résolution par descente de coordonnée gloutonne de\vskip-.5em
-%\[
-%    \argmin_{Z} \|X - D*Z\|_2^2 + \lambda \|Z\|_1
-%\]
-%\centering
-%\inputTikZ{.7}{DICOD}
-%
-%\only<3->{
-%    \vskip1em
-%    \begin{block}{Propriété}
-%        \vskip.2em
-%        \myitem{} Algorithme asynchrone \hskip2em
-%        \myitem{} Communications locales efficaces\\[.3em]
-%        \myitem{} Converge vers le minimum global du problème\\[.3em]
-%        \myitem{} Passe à l'échelle \textbf{super-linéairement}
-%        \vskip.2em
-%    \end{block}
-%}
-%%
-%\only<4>{
-%    \vskip-1em
-%    \strongpoint{Extension pour signaux 2D}
-%    \vspace{0pt plus 1 filll}
-%    \includegraphics[height=.8em]{github}~\textbf{DiCoDiLe}
-%    : \url{github.com/tommoral/dicodile}\\[1em]
-%}
-%\end{frame}
-
 
 
 \begin{frame}{Application aux Neurosciences \keypoint{NeurIPS, 2018}}
@@ -436,12 +427,12 @@
 \vskip1em
 \begin{itemize}\itemsep.5em
     \item Modèle adapté à la physique des signaux MEG,
-    \item Les atomes sont "explicables" (réponses évoquées, artefacts, \dots)
-    \item Les activations capturent la latence dans les signaux MEG de tâches.
+    \item Les atomes sont identifiables (réponses évoquées, artefacts, \dots)
+    \item Les activations sont liées à la latence dans les signaux MEG de tâches.
 \end{itemize}
 \vskip3em
 \centering
-\includegraphics[height=.8em]{github}~\textbf{alphacsc} : \url{alphacsc.github.io}\\[1em]
+\includegraphics[height=.8em]{github}~\url{alphacsc.github.io}: librairie Python\\[1em]
 \end{frame}
 
 \begin{frame}{Projet de recherche}
@@ -452,8 +443,8 @@
 \rotatebox{90}{\Large Axe 1}
 \column{.9\textwidth}
 \begin{block}{Modélisation pour les signaux en neurosciences}
-    \myitem Dépendance temporelle\hskip2em \myitem{}Modèle multi-échelles\\[.3em]
-    \myitem Modélisation de l'activité neuronale\\[.3em]
+    Incorporer des connaissances du domaine dans le modèle\\[.3em]
+    \myitem{} Dépendance temporelle \hskip2em \myitem{} Couplage fréquentiel\\[.3em]
 \end{block}
 \end{columns}
 %
@@ -483,76 +474,158 @@
 \end{frame}
 
 
-
 \begin{frame}[t]{Modélisation pour les signaux en neurosciences \keypoint{Axe 1}}
-    \begin{columns}[T]%
-        \column{2em}\vskip1em\rotatebox{90}{
-            \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-                \large \bf Modélisation de l'activité
-            \end{beamercolorbox}
-        }
-        \column{.45\textwidth}
-        {\bf Processus ponctuel}\\[1.7em]
-        {\centering
-            \includegraphics[width=.8\textwidth]{time_dependency}\\[1em]
-        }
-        
-
-        \begin{itemize}
-            \item Modéliser la dépendance entre les activations.
-        \end{itemize}
-
-    \column{2em}\vskip1em\rotatebox{90}{
-        \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-            \large \bf Non-stationnarité
-        \end{beamercolorbox}
-    }
-    \column{.45\textwidth}
-    {\bf Apprentissage auto-supervisé}\\[.3em]
-    {\centering
-    \includegraphics[width=.8\textwidth]{time_contrastive}\\[1em]
-    }
-    \begin{itemize}
-        \item Atomes adaptés aux segments temporels.
-    \end{itemize}
-    \end{columns}
-\vspace{0pt plus 1 filll}
-{\centering \textbf{Prise en compte des dépendances temporelles}\\[1em]}
-\end{frame}
-
-
-
-\begin{frame}[t]{Analyse des modèles non-supervisés \keypoint{Axe 2}}
 \begin{columns}[T]
-    \column{2em}\vskip1em\rotatebox{90}{
-        \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-            \large \bf Qualité des algorithmes
-        \end{beamercolorbox}
-    }
-    \column{.45\textwidth}
-    {\bf Garanties théoriques}\\[1em]
-\begin{itemize}\itemsep.5em
-    \item Il est possible de designer un algorithme avec une preuve de convergence globale si $K$ n'est pas fixé
-    \item Analyse des propriétés de reconstruction théorique des motifs.
-\end{itemize}
+    \column{.5\textwidth}
+    \centering
+    \textbf{Comment mettre à jour les dépendances temporelles?}
     
+    \vskip1em
+    \centering
+    \highlight{Modéliser les interactions}
     
-    \column{2em}\vskip1em\rotatebox{90}{
-        \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-            \large \bf Évaluation des modèles
-        \end{beamercolorbox}
+    \alt<-3>{
+        \raggedright\vskip1.5em
+         Pénalité $\ell_1$\\[.3em]
+            \hskip2ex$\Rightarrow$ activations indépendantes.\\[1em]
+        \uncover<2->{Pénalités groupées (\eg{} $\ell_{1, 2}$)\\[.3em]
+            \hskip2ex$\Rightarrow$ activations simultanées.\\[1em]}
+        \uncover<3->{Processus ponctuels (\eg{} Hawkes)\\[.3em]
+            \hskip2ex$\Rightarrow$ interactions temporelles.\\[1em]}
+     }{
+     \vskip.5em
+     \highlight{Apprentissage auto-supervisé}\\
+
+     \raggedright\vskip1.5em
+     
+     Prédiction de propriété \textit{ad hoc} \eg{}\\[.5em]
+     
+     \hskip1ex \raisebox{.1ex}{\small$\bullet$} à partir d'un segment, prédire T$_i$.\\[.5em]
+     \uncover<5->{\hskip1ex \raisebox{.1ex}{\small$\bullet$} prédire $\Delta t$ entre 2 segments.\\[1em]}
+
+     \uncover<6>{Dictionnaire adaptés à la tache\\[.3em]
+                 \hskip1ex$\Rightarrow$ capture des effets temporels.}
     }
-    \column{.45\textwidth}
-    {\bf Auto-évaluation}\\[1em]
-\begin{itemize}\itemsep.5em
-    \item Apprendre un dictionnaire sur données d'entrainement.
-    \item Encoder la moitié des canaux des données tests.
-    \item Évaluer la reconstruction des autres canaux.
-\end{itemize}
+    
+    \column{.5\textwidth}
+    \centering%
+    \only<1>{
+        \includegraphics[height=8em]{connectivity_independent}
+        \includegraphics[width=\linewidth]{time_dependency}
+        \centering\highlight[color=linkcolor]{Activations indépendantes}
+    }%
+    \only<2>{
+        \includegraphics[height=8em]{connectivity_simultaneous}
+        \includegraphics[width=\linewidth]{time_dependency_simultaneous}
+        \centering\highlight[color=linkcolor]{Activations simultanées}
+    }%
+    \only<3>{
+        \includegraphics[height=8em]{connectivity_default_mode}
+        \includegraphics[width=\linewidth]{time_dependency_arrow}
+        \centering\highlight[color=linkcolor]{Interaction temporelles}
+    }%
+    \only<4-6>{
+        \vskip1em
+        \alt<4>{\includegraphics[width=\linewidth]{time_contrastive}
+        }{\includegraphics[width=\linewidth]{time_contrastive_delta_t}
+        }
+        \vskip1em
+        \centering\highlight[color=linkcolor]{Non-stationnarité}
+    }\\
 \end{columns}
-\vspace{0pt plus 1 filll}
-{\centering \textbf{Évaluation des modèles non-supervisés est un défi.}\\[1em]}
+
 \end{frame}
+
+
+
+\begin{frame}[t]{Analyse statistique des modèles non-supervisés \keypoint{Axe 2}}
+
+{\centering \textbf{Comment évaluer les modèles non-supervisés?}\\[1em]}
+\begin{tikzpicture}
+    \coordinate (origin);
+    \foreach \i in {0,...,2}{
+        \node[inner sep=0em] (n\i) at (\i em, -\i em) {\includegraphics[width=4em]{meg_\i}};
+    }
+
+    \draw[densely dotted, <->, shorten >=1pt, shorten <=1pt] (n0.south west) -- (n2.south west);
+         %node[midway, left] {N$_{\text{train}}$};
+
+    \draw[->, black, thick, shorten >=3pt, shorten <=3pt] ($(n1.east) + (1em, 0)$) -- ++(5em, 0)
+        node[midway, above] {\small Inférence}
+        node[right] (atoms) {\includegraphics[width=5em]{meg_dict}};
+    \draw[->, black, thick, shorten >=3pt, shorten <=3pt, dashed] (atoms.east) -- ++(6em, 0)
+        node[midway, above] {\small Évaluation?}
+        node[right, align=left, text width=5em] {Reconstruction?\\Débruitage?\\Génération?};
+        
+    % Labels
+    \node[below=1em of n1, align=center] {\small Données\\\small d'entrainement};
+    \node[below=0em of atoms] {\small Atomes};
+\end{tikzpicture}
+\vskip1em
+
+
+\begin{columns}[c]
+    
+    \column{.5\textwidth}
+    \uncover<2->{\centering
+        \highlight{Stratégies d'évaluation}\\[1.5em]}
+\begin{itemize}[<+(1)->]\itemsep1em
+    \item Auto-évaluation
+    \item Garanties de reconstruction
+    \item Convergence globales
+\end{itemize}
+
+    \column{.5\textwidth}
+    \only<2>{%
+        \setlength{\bodywd}{\widthof{\bf Le modèle capture-t-il la}}
+        \centering\highlight[color=linkcolor, wd=\bodywd]{%
+                Le modèle capture-t-il la\\structure du signal?}\\[1em]
+        Quantifier les structures identifiées par validation croisée.
+    }%
+    \only<3>{%
+        \centering\highlight[color=linkcolor]{Le modèle est-il identifiable?}\\[1em]
+        Utilisation de la structure fréquentielle des atomes.
+    }%
+    \only<4>{%
+        \centering\highlight[color=linkcolor]{Le modèle peut-il être identifié?}\\[1em]
+        Garantie de convergence basé sur les résultats récents pour la factorisation de matrice.
+        
+    }%
+\end{columns}
+\end{frame}
+    
+    
+% \begin{frame}[t]{Analyse statistique des modèles non-supervisés \keypoint{Axe 2}}
+%    \begin{columns}[T]
+%        \column{2em}\vskip1em\rotatebox{90}{
+%            \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
+%                \large \bf Qualité des algorithmes
+%            \end{beamercolorbox}
+%        }
+%        \column{.45\textwidth}
+%        {\bf Garanties théoriques}\\[1em]
+%        \begin{itemize}\itemsep.5em
+%            \item Il est possible de designer un algorithme avec une preuve de convergence globale si $K$ n'est pas fixé
+%            \item Analyse des propriétés de reconstruction théorique des motifs.
+%        \end{itemize}
+%        
+%        
+%        \column{2em}\vskip1em\rotatebox{90}{
+%            \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
+%                \large \bf Évaluation des modèles
+%            \end{beamercolorbox}
+%        }
+%        \column{.45\textwidth}
+%        {\bf Auto-évaluation}\\[1em]
+%        \begin{itemize}\itemsep.5em
+%            \item Apprendre un dictionnaire sur données d'entrainement.
+%            \item Encoder la moitié des canaux des données tests.
+%            \item Évaluer la reconstruction des autres canaux.
+%        \end{itemize}
+%    \end{columns}
+%    \vspace{0pt plus 1 filll}
+%    {\centering \textbf{Évaluation des modèles non-supervisés est un défi.}\\[1em]}
+%\end{frame}
 
 
 
@@ -616,13 +689,13 @@
 \begin{columns}[c]
 %    \column{1em}
 %    \rotatebox{90}{}
-    \column{.9\textwidth}
+    \column{\linewidth}
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
         \vskip-.1em%
         {\color{black} \bf Parietal}\\[.3em]
-        \myitem{} Axe 1 : A. Gramfort, P. Ciuciu, D. Engemann\\[.3em]
-        \myitem{} Axe 2 : B. Thirion, G. Varoquaux\\[.3em]
-        \myitem{} Axe 3 : P. Ciuciu, A. Gramfort\\[.3em]
+        Modélisation neurophysiologique: \textcolor{linkcolor}{A. Gramfort; P. Ciuciu; D. Engemann}\\[.3em]
+        Évaluation non-supervisée: \textcolor{linkcolor}{B. Thirion; G. Varoquaux}\\[.3em]
+        Problèmes inverses rapides : \textcolor{linkcolor}{P. Ciuciu; A. Gramfort}\\[.3em]
     \end{beamercolorbox}
 \end{columns}
 
@@ -630,12 +703,12 @@
 \vskip.5em
 \begin{columns}[c]
 %\column{1em}
-\column{.9\textwidth}
+\column{\linewidth}
 \begin{beamercolorbox}[rounded=true, shadow=true]{title}
     \vskip-.1em%
     {\color{black}\bf National}\\[.3em]
-    \myitem{} ENS Paris-Saclay (N. Vayatis) \hskip2em \myitem{} UP13 (L. Oudre)\\[.3em]
-    \myitem{} Cognac-G (M. Robert, P.-P. Vidal).\\[.3em]
+    Charactérisation des nystagmus chez le nourrisson:\\
+        \hskip1em\textcolor{linkcolor}{M. Robert (CHU Necker); L. Oudre (UP13); 2 Étudiants (CMLA)}
 \end{beamercolorbox}
 \end{columns}
 
@@ -643,12 +716,12 @@
 \vskip.5em
 \begin{columns}[c]
 %\column{1em}
-\column{.9\textwidth}
+\column{\linewidth}
 \begin{beamercolorbox}[rounded=true, shadow=true]{title}
     \vskip-.1em%
     {\color{black} \bf International:}\\[.3em]
-    \myitem{} Berkeley (B. Olshausen)\\[.3em]
-    \myitem{} NYU (J. Bruna).\\[.3em]
+    Modélisation neurophysiologique: \textcolor{linkcolor}{B. Olshausen (Berkeley)}\\[.3em]
+    Lien apprentissage profond et problème inverse: \textcolor{linkcolor}{J. Bruna (NYU)}.\\[.3em]
 \end{beamercolorbox}
 \end{columns}
 
@@ -656,13 +729,13 @@
 \end{frame}
 
 
-\begin{frame}[t]{Synthèse personnelle}%
+\begin{frame}[t]{Apprentissage non-supervisé pour les données de santé}%
 \setlength{\parskip}{0em}
 %
 \begin{columns}[c]
     \column{1em}
     %\rotatebox{90}{\bf \large Parcours}%
-    \column{.9\textwidth}%
+    \column{.95\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}%
     {\large \bf \color{black} Parcours}\\
     2010-2014: X \hskip6em 2013-2014: Telecom ParisTech - MVA\\
@@ -674,20 +747,20 @@
 \begin{columns}[c]
     \column{1em}
     \rotatebox{90}{\large \bf Optim}
-    \column{.9\textwidth}%
+    \column{.95\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
         Optimisation distribuée \hskip2em Modélisation des signaux\\
         Lien apprentissage profond et optimisation\\
-        \keypoint{3 actes de conférence}
+        \keypoint{4 actes de conférence}
 \end{beamercolorbox}
 \end{columns}
 \vskip1em
 \begin{columns}[c]
     \column{1em}
     \rotatebox{90}{\bf \large Données}
-    \column{.9\textwidth}%
+    \column{.95\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-        Analyse de la marche \keypoint{2 articles de journaux}\\
+        Analyse de la marche \keypoint{2 articles}\\
         Analyse des mouvements oculaire \keypoint{3 articles soumis}\\
         Neurosciences \keypoint{2 actes de conférence, 1 article en préparation}\\
 \end{beamercolorbox}
@@ -696,7 +769,7 @@
 \begin{columns}[c]
     \column{1em}
     \rotatebox{90}{\bf \large Logiciel}
-    \column{.9\textwidth}%
+    \column{.95\textwidth}%
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
         Calcul parallèle en Python\\
         Développeur pour 3 librairies \keypoint{joblib, loky, threadpoolctl}\\
