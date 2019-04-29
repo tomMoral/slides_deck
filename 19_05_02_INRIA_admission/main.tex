@@ -175,11 +175,11 @@
     \rotatebox{90}{\Large Formation}
     \column{.9\textwidth}
 \begin{list}{}{\leftmargin=0em \itemsep=0em}
-    \item 2010-2014: Ecole Polytechnique - Math App/Info
+    \item 2010-2014: Ecole Polytechnique - Maths Appli/Info
     \item 2013-2014: Double diplome Telecom ParisTech - Master MVA
 \end{list}
     \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-       Apprentissage statistique, Traitement du signal et des images.
+       Apprentissage statistique, Traitement du signal et des images
     \end{beamercolorbox}
 \end{columns}
 
@@ -210,7 +210,7 @@
         
         \item 2018-2019: Post-doctorat -- Inria (équipe Parietal)
         \begin{beamercolorbox}[rounded=true, shadow=true]{title}
-            Apprentissage de dictionnaire convolutif pour la MEG.\\
+            Apprentissage de dictionnaire convolutif pour la MEG\\
             \hskip3ex\color{black}$\Rightarrow$ Analyse de la structure locale des signaux
         \end{beamercolorbox}
     \end{list}
@@ -219,7 +219,7 @@
 \end{frame}
 
 
-\begin{frame}{Analyse de l'équilibre dynamique}
+\begin{frame}{Analyse de l'équilibre dynamique (Travail Doctoral)}
 
 \begin{columns}[T]
     \column{.6\textwidth}
@@ -239,7 +239,7 @@
         \uncover<4>{
             \vskip-1em\hskip.5ex
             \begin{beamercolorbox}[rounded=true, shadow=true, wd=.95\linewidth]{title}
-                \textbf{Brevet:~} Segmentation de pas\\
+                \textbf{Brevet:~} \textcolor{black}{Segmentation de pas}\\
                 \textbf{Articles:} %
                     \textcolor{linkcolor}{Sensors 2018; PLoS One 2016}\\
             \end{beamercolorbox}
@@ -257,6 +257,7 @@
                \vskip-.7em\textcolor{white}{.}
             \end{block}
         }{
+            \vskip2em
             \begin{block}{Challenges}
                 \vskip.5em
                 Annotations faibles\\[.5em]
@@ -266,8 +267,8 @@
             \begin{block}{Comparaison des signaux}
                 \vskip.5em
                 Représentation adaptée\\[.5em]
-                $\Rightarrow$~Segmentation des pas.\\[.5em]
-                Utiliser la {\bf structure locale} du signal.
+                $\Rightarrow$~Segmentation des pas\\[.5em]
+                Utiliser la {\bf structure locale}
                 \vskip-.7em\textcolor{white}{.}
             \end{block}
         }
@@ -297,7 +298,7 @@
             \column{.4\textwidth}
                 \includegraphics[height=.7\textheight]{meg_presentation}\\
             \column{.6\textwidth}
-                \centering\highlight[c=linkcolor]{Structure locale invisible}\\
+                \centering\highlight[c=linkcolor]{Structure locale non-distinguable}\\
                 \overimg[\linewidth]{5}{meg_signal}{6}{meg_dict}
         \end{columns}
 
@@ -356,32 +357,39 @@
 %\end{columns}
 
 
-\begin{itemize}\itemsep1.5em
-    \item \textbf{Computationnel:} passage à l'échelle pour les longs signaux,
-    \begin{itemize}\itemsep.5em
-        \item[$\bullet$] Parallélisation.%
-                         \keypoint{ICML 2018; preprint 2019}
-        \item[$\bullet$] Utilisation de la structure du dictionnaire.%
-                         \keypoint{ICLR 2017}
-    \end{itemize}
-
-    \item \textbf{Modélisation:} incorporer de la connaissance de domaine,
-    \begin{itemize}\itemsep.5em
-        \item[$\bullet$] sur les activations.%
-                         \keypoint{ICASSP 2019}
-        \item[$\bullet$] sur les motifs.%
-                         \keypoint{NeurIPS 2018}
-    \end{itemize}
-
-    \item \textbf{Théorique:} qualité des motifs appris.
-    \begin{itemize}\itemsep.5em
-        \item[$\bullet$] Évaluation statistique des atomes.
-        \item[$\bullet$] Garantie algorithmique de convergence globale.
-        \item[$\bullet$] Garantie de reconstruction des motifs.
-        \item[$\bullet$] Lien avec l'apprentissage profond.%
-                         \keypoint{ICLR 2017}
-    \end{itemize}
-\end{itemize}
+    \highlight[wd=\linewidth, c=black]{\raggedright\textcolor{darkred}{\bf Computationnel:}
+        \normalfont passage à l'échelle pour les longs signaux,\\[-.2em]
+        \begin{itemize}\color{black}\itemsep0em
+            \item[$\bullet$] Parallélisation%
+                             \keypoint{ICML 2018; preprint 2019}
+            \item[$\bullet$] Utilisation de la structure du dictionnaire%
+                             \keypoint{ICLR 2017}
+        \end{itemize}%
+    }\vskip.5em
+    \highlight[wd=\linewidth, c=black]{\raggedright\textcolor{darkred}{\bf Modélisation:}
+        \normalfont incorporer de la connaissance de domaine,\\[-.2em]
+        \begin{itemize}\color{black}\itemsep0em
+            \item[$\bullet$] Activations structurées%
+            \keypoint{ICASSP 2019}
+            \item[$\bullet$] Motifs structurés%
+            \keypoint{NeurIPS 2018}
+        \end{itemize}%
+    }\vskip.5em
+    \highlight[wd=\linewidth, c=black]{\raggedright\textcolor{darkred}{\bf Évaluation:}
+        \normalfont analyse statistique des modèles non-supervisés,\\[-.2em]
+        \begin{itemize}\color{black}\itemsep0em
+            \item[$\bullet$] Critères de sélection de modèle%
+            \item[$\bullet$] Test de présence des motifs%
+        \end{itemize}%
+    }\vskip.5em
+    \highlight[wd=\linewidth, c=black]{\raggedright\textcolor{darkred}{\bf Théorique:}
+        \normalfont garantie de reconstruction des motifs,\\[-.2em]
+        \begin{itemize}\color{black}\itemsep0em
+            \item[$\bullet$] Lien avec l'apprentissage profond%
+            \keypoint{ICLR 2017}
+            \item[$\bullet$] Algorithme convergeant globalement%
+        \end{itemize}%
+    }
 
 
 \end{frame}
@@ -389,10 +397,11 @@
 \begin{frame}[t]{DICOD: Codage parcimonieux convolutif distribué%
               \keypoint{ICML, 2018}}
           
-{\bf Obstacle computationnel:} Codage parcimonieux convolutif avec $\pmb D$ fixé:\vskip-.5em
-\[
+{\bf Obstacle computationnel:} Codage parcimonieux convolutif avec $\pmb D$ fixé:\\
+    \vskip-.5em
+    \[
     \argmin_{Z_k} \| X - \sum_{k=1}^K Z_k * \pmb D_k\|_2^2 + \sum_{k=1}^K\|Z_k\|_1
-\]
+    \]
 \only<1>{%
     \vskip1em
     {\large \bf Algorithmes existants:}\\[1em]
@@ -408,13 +417,7 @@
              \highlight{Convergence \small\color{black} $\mathcal O(1/q)$}
              \hskip1ex{\small$\Rightarrow\mathcal O(K^2TL/q)$}
     \end{itemize}
-
-    \vskip2em
-    {\small\centering
-    $T$:longueur du signal\hskip2ex
-    $K$:nombre d'atomes\hskip2ex
-    $L$:longueur des atomes\hskip2ex
-    $q$:itérations\\}
+  
 }%
 \vskip-1em
 {
@@ -435,35 +438,90 @@
 \vskip-1em% {\bf Super linéaire:}
     \highlight{ Itérations \small\color{black} $\mathcal O(KT/W)$}
     \highlight{Convergence \small\color{black} $\mathcal O(KT/Wq)$}
-    \hskip1em{\small$\Rightarrow\mathcal O(K^2T^2/\pmb {W^2}q)$}\\[.8em]
+    \hskip1em{\small$\Rightarrow\mathcal O(K^2T^2/{\color{linkcolor}\pmb {W^2}}q)$}\\[.8em]
 }%
 %
-\uncover<4>{%
+\alt<4>{%
     {\bf DiCoDiLe:} $\big[$
         \addstackgap[5pt]{\stackanchor[8pt]{Extension pour signaux 2D}
                                            {Complexité des itérations $\mathcal O(KL)$}} \keypoint{preprint 2019}\\
     \vskip.5em
     {\centering \includegraphics[height=.8em]{github}~\url{github.com/tommoral/dicodile}:
         Implémentation Python+MPI\\}
+}{%
+\vspace{0pt plus 1 filll}{\small\centering
+    $T$: longueur du signal\hskip2ex
+    $K$: nombre d'atomes\hskip2ex
+    $L$: longueur des atomes\\
+    $W$: noeuds\hskip8ex
+    $q$: itérations\\}
 }
 
 \end{frame}
 
 
+%\begin{frame}{Application aux Neurosciences \keypoint{NeurIPS, 2018}}
+%
+%\includegraphics[width=\textwidth]{rank1}
+%
+%\vskip1em
+%\begin{itemize}\itemsep.5em
+%    \item Modèle adapté à la physique des signaux MEG,
+%    \item Les atomes sont identifiables (réponses évoquées, artefacts, \dots)
+%    \item Les activations sont liées à la latence dans les signaux MEG de tâches.
+%\end{itemize}
+%\vskip3em
+%\centering
+%\includegraphics[height=.8em]{github}~\url{alphacsc.github.io}: librairie Python\\[1em]
+%\end{frame}
+
+
 \begin{frame}{Application aux Neurosciences \keypoint{NeurIPS, 2018}}
 
-\includegraphics[width=\textwidth]{rank1}
+\begin{center}
+\begin{tikzpicture}
+    \node (meg) at (0, 0) {
+        \alt<1>{\includegraphics[width=6em]{meg_localised_source}}{%
+                \includegraphics[width=6em]{meg_linear_propagation}}
+    };
+    \node[right=2em of meg, inner sep=0] (signal) {
+        \includegraphics[width=6em]{meg_1}
+    };
+    \draw[<->, shorten >= 1pt, shorten <= 1pt] (signal.south west) -- (signal.north west)
+        node[midway, sloped, above] {\footnotesize Capteurs};
+    \uncover<-2>{\node[right=7em of signal] (dict) {%
+        \includegraphics[width=6em]{meg_2}
+    };}
+    \uncover<3->{\node[right=7em of signal] (dict) {
+        \includegraphics[width=6em]{meg_dict}
+    };}
+    \draw[->, thick, shorten >= 3pt, shorten <= 3pt] (signal.east) -- (dict.west)
+            node[midway, align=center] {
+                \footnotesize Dictionnaire\\
+                \alt<-2>{\footnotesize multivarié}{\footnotesize de rank 1}};
+     \only<4>{
+        \node[rounded corners=3pt, draw, above=0.4em of dict.center, fill=black!10] {\tiny Artefact};
+        \node[rounded corners=3pt, draw, below=0.4em of dict.center, fill=black!10] {\tiny Réponse évoquée}; 
+    }
+\end{tikzpicture}
+\end{center}
 
 \vskip1em
-\begin{itemize}\itemsep.5em
-    \item Modèle adapté à la physique des signaux MEG,
-    \item Les atomes sont identifiables (réponses évoquées, artefacts, \dots)
-    \item Les activations sont liées à la latence dans les signaux MEG de tâches.
+{\centering \highlight[c=linkcolor]{Le signal est résumé mais les atomes ne sont pas identifiables}\\[1em]}
+\begin{itemize}[<+(1)->]\itemsep.5em
+\item Les équations de Maxwell imposent une structure à l'activité localisée
+\item {\bf Atomes de rang 1:} Modèle adapté à la physique des signaux MEG
+\item[]\centering $\Rightarrow$ Les atomes sont liés à des activités localisées\\
+%\item Les activations sont liées à la latence dans les signaux MEG de tâches.
 \end{itemize}
-\vskip3em
 \centering
-\includegraphics[height=.8em]{github}~\url{alphacsc.github.io}: librairie Python\\[1em]
+\vskip1em
+\uncover<4->{\highlight{Atomes identifiables \color{black} \normalfont \eg{} réponses évoquées, artefacts}\\[2em]}
+\uncover<5>{\includegraphics[height=.8em]{github}~\url{alphacsc.github.io}: librairie Python\\[1em]}
 \end{frame}
+
+\section{\textbf{Programme de recherche:}\\\color{black}\inserttitle}
+\parttitleframe{}
 
 \begin{frame}{Projet de recherche}
 
@@ -474,7 +532,7 @@
 \column{.9\textwidth}
 \begin{block}{Modélisation pour les signaux en neurosciences}
     Identifier la structure dans le signal.\\[.3em]
-    \myitem{} Dépendance temporelle \hskip2em \myitem{} Couplage fréquentiel\\[.3em]
+    \myitem{} Dépendance temporelle \hskip3ex \myitem{} Couplage fréquentiel\\[.3em]
 \end{block}
 \end{columns}
 %
@@ -484,8 +542,8 @@
     \rotatebox{90}{\Large Axe 2}
     \column{.9\textwidth}
     \begin{block}{Analyse statistique des modèles convolutifs non-supervisés}
-        Évaluer les modèles non-supervisé\\[.3em]
-        \myitem{} Garantie de reconstruction \myitem Algorithme global.\\[.3em]
+        Évaluer les modèles non-supervisés\\[.3em]
+        \myitem Garantie de reconstruction \hskip2ex\myitem Algorithme global\\[.3em]
     \end{block}
 \end{columns}
 %
@@ -495,8 +553,8 @@
     \rotatebox{90}{\Large Axe 3}
     \column{.9\textwidth}
     \begin{block}{Apprentissage profond pour les problèmes inverses}
-        Lien entre modèle convolutif et apprentissage profond.\\[.3em]
-        \myitem Résolution rapide \myitem{} Identifiabilité de l'apprentissage profond.\\[.5em]
+        Lien entre modèle convolutif et apprentissage profond\\[.3em]
+        \myitem Résolution rapide \myitem{} Identifiabilité de l'apprentissage profond\\[.5em]
     \end{block}
 \end{columns}
 
@@ -511,56 +569,59 @@
     
     \vskip1em
     \centering
-    \highlight{Modéliser les interactions}
+    \setlength\bodywd{.9\linewidth}
+    \uncover<2->{\highlight[wd=\bodywd]{Modéliser les interactions entre atomes}
     
-    \alt<-3>{
+    \alt<2-4>{
         \raggedright\vskip1.5em
          Pénalité $\ell_1$\\[.3em]
-            \hskip2ex$\Rightarrow$ activations indépendantes.\\[1em]
-        \uncover<2->{Pénalités groupées (\eg{} $\ell_{1, 2}$)\\[.3em]
-            \hskip2ex$\Rightarrow$ activations simultanées.\\[1em]}
-        \uncover<3->{Processus ponctuels (\eg{} Hawkes)\\[.3em]
-            \hskip2ex$\Rightarrow$ interactions temporelles.\\[1em]}
+            \hskip2ex$\Rightarrow$ activations indépendantes\\[1em]
+        \uncover<3->{Pénalités groupées (\eg{} $\ell_{1, 2}$)\\[.3em]
+            \hskip2ex$\Rightarrow$ activations simultanées\\[1em]}
+        \uncover<4->{Processus ponctuels (\eg{} Hawkes)\\[.3em]
+            \hskip2ex$\Rightarrow$ interactions temporelles\\[1em]}
      }{
      \vskip.5em
-     \highlight{Apprentissage auto-supervisé}\\
+     \highlight[wd=\bodywd]{Apprentissage auto-supervisé}\\
 
      \raggedright\vskip1.5em
      
      Prédiction de propriété \textit{ad hoc} \eg{}\\[.5em]
      
-     \hskip1ex \raisebox{.1ex}{\small$\bullet$} à partir d'un segment, prédire T$_i$.\\[.5em]
-     \uncover<5->{\hskip1ex \raisebox{.1ex}{\small$\bullet$} prédire $\Delta t$ entre 2 segments.\\[1em]}
+     \hskip1ex \raisebox{.1ex}{\small$\bullet$} à partir d'un segment, prédire T$_i$\\[.5em]
+     \uncover<6->{\hskip1ex \raisebox{.1ex}{\small$\bullet$} prédire $\Delta t$ entre 2 segments\\[1em]}
 
-     \uncover<6>{Dictionnaire adaptés à la tache\\[.3em]
-                 \hskip1ex$\Rightarrow$ capture des effets temporels.}
-    }
+     \uncover<7>{{\bf Dictionnaire adapté à la tâche}\\[.3em]
+                 \hskip1ex$\Rightarrow$ capture des effets temporels}
+    }}
     
     \column{.5\textwidth}
     \centering%
-    \only<1>{
+    \setlength\bodywd{.8\linewidth}
+    \only<1-2>{
+        
+        \uncover<2>{\highlight[c=linkcolor, wd=\bodywd]{Activations indépendantes}\\[1em]}
         \includegraphics[height=8em]{connectivity_independent}
         \includegraphics[width=\linewidth]{time_dependency}
-        \centering\highlight[c=linkcolor]{Activations indépendantes}
-    }%
-    \only<2>{
-        \includegraphics[height=8em]{connectivity_simultaneous}
-        \includegraphics[width=\linewidth]{time_dependency_simultaneous}
-        \centering\highlight[c=linkcolor]{Activations simultanées}
     }%
     \only<3>{
+        \highlight[c=linkcolor, wd=\bodywd]{Activations simultanées}\\[1em]
+        \includegraphics[height=8em]{connectivity_simultaneous}
+        \includegraphics[width=\linewidth]{time_dependency_simultaneous}
+    }%
+    \only<4>{
+        \highlight[c=linkcolor, wd=\bodywd]{Interaction temporelles}\\[1em]
         \includegraphics[height=8em]{connectivity_default_mode}
         \includegraphics[width=\linewidth]{time_dependency_arrow}
-        \centering\highlight[c=linkcolor]{Interaction temporelles}
     }%
-    \only<4-6>{
-        \vskip1em
-        \alt<4>{\includegraphics[width=\linewidth]{time_contrastive}
-        }{\includegraphics[width=\linewidth]{time_contrastive_delta_t}
-        }
-        \vskip1em
-        \centering\highlight[c=linkcolor]{Non-stationnarité}
-    }\\
+    \only<5-7>{
+        \highlight[c=linkcolor, wd=\bodywd]{Atomes non-stationnaires}\\[1em]
+        \alt<5>{
+            \includegraphics[width=\linewidth]{time_contrastive}
+        }{
+            \includegraphics[width=\linewidth]{time_contrastive_delta_t}
+        }\\[1em]
+    }
 \end{columns}
 
 \end{frame}
@@ -580,14 +641,14 @@
          %node[midway, left] {N$_{\text{train}}$};
 
     \draw[->, black, thick, shorten >=3pt, shorten <=3pt] ($(n1.east) + (1em, 0)$) -- ++(5em, 0)
-        node[midway, above] {\small Inférence}
+        node[midway, align=center] {\small Inférence\\[.2em]\textcolor{gray}{[{\color{linkcolor}Axe 1}]}}
         node[right] (atoms) {\includegraphics[width=5em]{meg_dict}};
     \draw[->, black, thick, shorten >=3pt, shorten <=3pt, dashed] (atoms.east) -- ++(6em, 0)
         node[midway, above] {\small Évaluation?}
         node[right, align=left, text width=5em] {Reconstruction?\\Débruitage?\\Génération?};
         
     % Labels
-    \node[below=1em of n1, align=center] {\small Données\\\small d'entrainement};
+    \node[below=1em of n1, align=center] {\small Données\\\small d'entraînement};
     \node[below=0em of atoms] {\small Atomes};
 \end{tikzpicture}
 \vskip1em
@@ -597,64 +658,39 @@
     
     \column{.5\textwidth}
     \uncover<2->{\centering
-        \highlight{Stratégies d'évaluation}\\[1.5em]}
-\begin{itemize}[<+(1)->]\itemsep1em
-    \item Auto-évaluation
-    \item Garanties de reconstruction
-    \item Convergence globales
-\end{itemize}
+%        \highlight{Stratégies d'évaluation}\\[1.5em]}
+
+    \setlength\bodywd{.9\linewidth}
+    \uncover<2->{\highlight[wd=\bodywd]{Auto-évaluation}}\vskip.5em
+    \uncover<3->{\highlight[wd=\bodywd]{Garanties de reconstruction des atomes}}\vskip.5em
+    \uncover<4->{\highlight[wd=\bodywd]{Convergence globale de l'inférence}}
+%    \highlight{Stratégies d'évaluation}\\[1.5em]}
+%    \begin{itemize}[<+(1)->]\itemsep1em
+%        \item Auto-évaluation
+%        \item Garanties de reconstruction
+%        \item Convergence globale
+%    \end{itemize}
+    }
 
     \column{.5\textwidth}
+    \setlength{\bodywd}{.95\linewidth}
+    \centering
     \only<2>{%
-        \setlength{\bodywd}{\widthof{\bf Le modèle capture-t-il la}}
-        \centering\highlight[c=linkcolor, wd=\bodywd]{%
+        \highlight[c=linkcolor, wd=\bodywd]{%
                 Le modèle capture-t-il la\\structure du signal?}\\[1em]
-        Quantifier les structures identifiées par validation croisée.
+        Quantifier les structures identifiées par validation croisée
     }%
     \only<3>{%
-        \centering\highlight[c=linkcolor]{Le modèle est-il identifiable?}\\[1em]
-        Utilisation de la structure fréquentielle des atomes.
+        \highlight[c=linkcolor, wd=\bodywd]{Le modèle est-il identifiable?}\\[1em]
+        Utilisation de la structure fréquentielle des atomes
     }%
     \only<4>{%
-        \centering\highlight[c=linkcolor]{Le modèle peut-il être identifié?}\\[1em]
-        Garantie de convergence basé sur les résultats récents pour la factorisation de matrice.
+        \highlight[c=linkcolor, wd=\bodywd]{Le modèle peut-il être identifié?}\\[1em]
+        Garantie de convergence basé sur les résultats récents pour la factorisation de matrice
         
     }%
 \end{columns}
 \end{frame}
-    
-    
-% \begin{frame}[t]{Analyse statistique des modèles non-supervisés \keypoint{Axe 2}}
-%    \begin{columns}[T]
-%        \column{2em}\vskip1em\rotatebox{90}{
-%            \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-%                \large \bf Qualité des algorithmes
-%            \end{beamercolorbox}
-%        }
-%        \column{.45\textwidth}
-%        {\bf Garanties théoriques}\\[1em]
-%        \begin{itemize}\itemsep.5em
-%            \item Il est possible de designer un algorithme avec une preuve de convergence globale si $K$ n'est pas fixé
-%            \item Analyse des propriétés de reconstruction théorique des motifs.
-%        \end{itemize}
-%        
-%        
-%        \column{2em}\vskip1em\rotatebox{90}{
-%            \begin{beamercolorbox}[rounded=true, wd=13em, center]{title}
-%                \large \bf Évaluation des modèles
-%            \end{beamercolorbox}
-%        }
-%        \column{.45\textwidth}
-%        {\bf Auto-évaluation}\\[1em]
-%        \begin{itemize}\itemsep.5em
-%            \item Apprendre un dictionnaire sur données d'entrainement.
-%            \item Encoder la moitié des canaux des données tests.
-%            \item Évaluer la reconstruction des autres canaux.
-%        \end{itemize}
-%    \end{columns}
-%    \vspace{0pt plus 1 filll}
-%    {\centering \textbf{Évaluation des modèles non-supervisés est un défi.}\\[1em]}
-%\end{frame}
 
 
 \begin{frame}[t]{Apprentissage profond pour les problèmes inverses \keypoint{Axe 3}}
@@ -662,7 +698,7 @@
 \definecolor{Z}{RGB}{45,162,65}
 \definecolor{F}{RGB}{180,35,35}
 \begin{tikzpicture}
-    \node (meg) {\includegraphics[width=9em]{meg_linear_propagation}};
+    \node (meg) {\includegraphics[width=9em]{meg_localised_source}};
     \draw[->, thick] ($(meg.east) - (0, 1.5em)$) -- ++(5em, 0)
         node[midway, align=center] (maxwell) {\small Équations\\ \small de Maxwell}
         node[right] (topomap) {\includegraphics[width=4em]{topomap_somato}};
@@ -691,23 +727,89 @@
     \column{.4\textwidth}
     \centering
     \uncover<3->{
-        \highlight{\bf Optimisation apprise}\\[.5em]
-    }
-    \uncover<4->{
-        \setlength\bodywd{\widthof{\bf Résolution rapide de}}
+        \setlength\bodywd{.9\linewidth}
         \highlight[wd=\bodywd]{\bf Résolution rapide de problème inverse}\\[.5em]
     }
-    \uncover<5>{
+    \uncover<4->{
+        \highlight[wd=\bodywd]{\bf Optimisation apprise}\\[.5em]
+    }
+    \uncover<7>{
         \highlight[wd=\bodywd]{\bf Apprentissage profond identifiable}\\[.5em]
     }
     \column{.6\textwidth}
+    
+    \centering
     \only<3>{
-        \keypoint{ICLR 2017}\\[.5em]
-        \centering
-        \inputTikZ{.8}{ista_tikz}
-        \setlength\bodywd{\widthof{\bf Dépend de la structure}}
-        \highlight[c=linkcolor, wd=\bodywd]{Dépend de la structure de la Hessienne $F^\top F$}\\[1em]
+        \begin{tikzpicture}
+            \node (topomap) {\includegraphics[width=4em]{topomap_somato}};
+            \node[draw, rounded corners, above=2.5em] at (topomap.center) {
+                \color{linkcolor} $\pmb X$};
+            \draw[black, thick] ($(topomap.east) + (0, -3em)$) rectangle ++(1em, 6em)
+                node[midway] (input) {};
+                
+            \draw[black, thick] ($(input.east) + (1.5em, -2.5em)$) rectangle  ++(1em, 5em)
+                node[midway] (hidden) {};
+            \draw[black, thick] ($(hidden.east) + (1.5em, -3.5em)$) rectangle ++(1em, 7em)
+                node[midway] (output) {};
+    
+            \draw[dotted] ($(input.east) + (0, 3em)$) -- ($(hidden.west) + (0, 2.5em)$);
+            \draw[dotted] ($(input.east) - (0, 3em)$) -- ($(hidden.west) - (0, 2.5em)$);
+
+            \draw[dotted] ($(hidden.east) + (0, 2.5em)$) -- ($(output.west) + (0, 3.5em)$);
+            \draw[dotted] ($(hidden.east) - (0, 2.5em)$) -- ($(output.west) - (0, 3.5em)$);
+
+            \node[right=0.5em of output.east] (brain) {\includegraphics[width=4em]{brain_activity}};
+            \node[draw, rounded corners, above=2.5em] at (brain.center) {
+                \color{Z} $\pmb Z$};
+            
+            \node[rounded corners=3pt, fill=lightblue!70, draw=black, thick] at (hidden.center) {
+                $f_\theta({\color{linkcolor} \pmb X})$};
+        \end{tikzpicture}
+        \setlength\bodywd{.95\linewidth}
+        \highlight[c=linkcolor, wd=\bodywd]{%
+            Les poids $\theta$ sont appris pour inverser $\color{F} \pmb F$}\\[1em]
     }
+    \only<4-5>{%
+        {\raggedright
+        \alt<4>{%
+            {\bf ISTA:} Optimisation itérative%
+        }{%
+            {\bf LISTA:} {optimisation apprise}%
+        }%
+        \uncover<5>{\keypoint{ICLR 2017}}\\[.5em]}
+        \inputTikZ{.8}{ista_tikz}
+        \vskip.3em
+        \setlength\bodywd{\widthof{\bf Performances dépendent de la}}
+        \uncover<5>{
+            \highlight[c=linkcolor, wd=\bodywd]{Performances dépendent de la structure de la Hessienne $F^\top F$}\\[1em]
+        }
+    }
+    \only<6>{
+        
+        \setlength\bodywd{.9\linewidth}
+        \vskip3em
+        \highlight[c=linkcolor, wd=\bodywd]{Généralisation pour d'autres problèmes inverses\\[.3em]
+                                            \color{black}\normalfont$\Rightarrow$ Pénalité $\mathcal R$ différente de $\ell_1$}\\
+    }
+    \only<7>{
+        \begin{tikzpicture}
+            \tikzset{
+                boxe/.style={
+                    rounded corners=3pt, ultra thick,
+                    align=center, draw, text width=8em
+                }
+            }
+            \coordinate (origin);
+            \node[boxe, left=.5em of origin] (axe1) {\textbf{\color{linkcolor}Axes 1\&2}\\
+                Modèle non-supervisés {\bf identifiables}};
+            \node[boxe, right=.5em of origin] (axe3) {\textbf{\color{linkcolor} Axe 3}\\
+                Architecture pour les problèmes inverses};
+            \node[boxe, text width=12em, below=4em of origin] (deep) {\textbf{Auto-encodeurs\\profonds identifiables}};
+            \draw[->, thick, shorten >=3pt] (axe1.south) -- ($(deep.north) - (2em, 0)$);
+            \draw[->, thick, shorten >=3pt] (axe3.south) -- ($(deep.north) + (2em, 0)$);
+        \end{tikzpicture}
+    }
+    
 \end{columns}
 
 \end{frame}
@@ -740,7 +842,7 @@
 \column{\linewidth}
 \begin{beamercolorbox}[rounded=true, shadow=true]{title}
     \vskip-.1em%
-    {\color{black}\bf National}\\[.3em]
+    {\color{black}\bf Nationales}\\[.3em]
     Charactérisation des nystagmus chez le nourrisson:\\
         \hskip1em\textcolor{linkcolor}{M. Robert (CHU Necker); L. Oudre (UP13); 2 Étudiants (CMLA)}
 \end{beamercolorbox}
@@ -753,9 +855,9 @@
 \column{\linewidth}
 \begin{beamercolorbox}[rounded=true, shadow=true]{title}
     \vskip-.1em%
-    {\color{black} \bf International:}\\[.3em]
+    {\color{black} \bf Internationales}\\[.3em]
     Modélisation neurophysiologique: \textcolor{linkcolor}{B. Olshausen (Berkeley)}\\[.3em]
-    Lien apprentissage profond et problème inverse: \textcolor{linkcolor}{J. Bruna (NYU)}.\\[.3em]
+    Lien apprentissage profond et problème inverse: \textcolor{linkcolor}{J. Bruna (NYU)}\\[.3em]
 \end{beamercolorbox}
 \end{columns}
 
@@ -777,7 +879,7 @@
 \end{beamercolorbox}
 \end{columns}%
 %
-\vskip1em
+\vskip.7em
 \begin{columns}[c]
     \column{2em}
     \rotatebox{90}{\parbox{4em}{\centering\large \bf Maths\\appli}}
@@ -787,13 +889,13 @@
     \column{.85\textwidth}
         Méthodes non-supervisées \hskip2em Modélisation des signaux\\
         Lien apprentissage profond et optimisation\\
-        Optimisation distribué\keypoint{4 actes de conférence}
+        Optimisation distribuée\keypoint{4 actes de conférence}
     \column{.15\textwidth}
         \includegraphics[height=3em]{brain_and_signals}
 \end{columns}
 \end{beamercolorbox}
 \end{columns}
-\vskip1em
+\vskip.7em
 \begin{columns}[c]
     \column{2em}
     \rotatebox{90}{\parbox{4em}{\centering\bf \large Données\\Santé}}

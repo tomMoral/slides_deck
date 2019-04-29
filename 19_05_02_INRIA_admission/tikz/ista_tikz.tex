@@ -12,7 +12,7 @@
            fill=white,
            rounded corners,
            draw=black, very thick,
-           text width=2em,
+           text width=2.5em,
            minimum height=2em,
            text centered},
     %Define style for operators
@@ -41,7 +41,9 @@
 };
 
 %nodes
-\node[varstyle] (linear) {$F^\top$};
+\node[varstyle] (linear) {%
+    \only<4>{$F^\top\hskip-.7ex / L$}%
+    \only<5>{$W_x$}};
 \node[op, inner sep=4pt, right=1em of linear] (add) {};
 \node[left=1em of linear] (X) {$X$} edge[pil] (linear.west);
 \path (linear.east) edge[pil] (add.west);
@@ -60,16 +62,23 @@
 \node[right=1em of h.center] (right) {};
 \node[left=1em of h.center] (left) {};
 \draw (h.center) -- (up) -- (down) -- (h.center) -- (right) -- (left);
-\draw ($ (h.center) - (.2em,0em)  $) -- ($ (h.center) - (.8em,.7em)  $);
-\draw ($ (h.center) + (.2em,0em)  $) -- ($ (h.center) + (.8em,.7em)  $);
-\node[right=2.5em of h] (Z) {$Z^*$};
+\draw[linkcolor, thick] ($(h.center) - (.8em,.7em)$)
+    -- ($(h.center) - (.2em,0em)$)
+    -- ($(h.center) + (.2em,0em)$)
+    -- ($(h.center) + (.8em,.7em)$);
+\node[right=3.5em of h] (Z) {$Z^*$};
 \path (add.east)
 edge[pil] (h.west);
 \path (h.east)
 edge[pil] (Z);
-\node[inner sep=0,minimum size=0,right=1.5em of h] (branch) {};
-\node[varstyle,below=.5em of h, text width=3em,] (S) {\small $I - F^\top F$};
+\node[inner sep=0,minimum size=0,right=2.5em of h] (branch) {};
+\node[varstyle,below=.5em of h, text width=5em,] (S) {%
+    \only<4>{$I - F^\top F / L$}%
+    \only<5>{$W_z$}
+};
 \draw[pil] (branch) |- (S.east);
 \draw[pil] (S.west) -| (add);
+
+\node[below=1em of X] {$\mathcal R(Z) = \|Z\|_1$};
 \end{tikzpicture}
 \end{document}
