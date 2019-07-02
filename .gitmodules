@@ -1,6 +1,6 @@
 [submodule "17_12_19_PhD_defense"]
 	path = 17_12_19_PhD_defense
-	url = git@reine:t.moreau/defense
+	url = git@reine.cmla.ens-cachan.fr:t.moreau/defense
 [submodule "multicsc"]
 	path = multicsc
 	url = git@github.com:tomMoral/presentation_multicsc.git

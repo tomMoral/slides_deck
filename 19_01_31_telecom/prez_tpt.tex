@@ -59,9 +59,9 @@
 \def\keypoint#1{\hspace{0pt plus 1 filll}\textcolor{gray}{#1}}
 \def\mycite#1{\keypoint{\small\citep{#1}}}
 \def\citeconf#1#2{
-    {\textcolor{gray}[}%
+    {\textcolor{gray}[%
         {\color{linkcolor}\citealt{#1}, #2}%
-    {\textcolor{gray}]}}
+     ]}}
 \def\citeconfright#1#2{\hspace{0pt plus 1 filll}{\small\citeconf{#1}{#2}}}
 \def\biblio{
 	\nobibliography{../../library}
