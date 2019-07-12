@@ -1,0 +1,232 @@
+\documentclass{beamer}
+\usepackage{transparent}
+\usepackage[beamer]{shortcut}
+
+
+\usepackage[autoplay]{animate}
+\usepackage{bibentry}
+\usepackage{subcaption}
+\usepackage{appendixnumberbeamer}
+
+\graphicspath{{./images/}}
+\def\TikzLocation{./tikz/}
+\def\tkzscl{1}
+
+
+%\setbeamercolor{block title}{fg=darkred}
+%\newcommand{\btitle}[1]{{\usebeamerfont{block title}\usebeamercolor[fg]{block title} #1}}
+
+\AtBeginSection[]
+{
+}
+
+
+\makeatletter
+\def\beamer@newblock{%
+  \usebeamercolor[fg]{bibliography entry author}%
+  \usebeamerfont{bibliography entry author}%
+  \usebeamertemplate{bibliography entry author}%
+  \def\newblock{%
+    \usebeamercolor[fg]{bibliography entry title}%
+    \usebeamerfont{bibliography entry title}%
+    \usebeamertemplate{bibliography entry title}%
+    \def\newblock{%
+      \usebeamercolor[fg]{bibliography entry location}%
+      \usebeamerfont{bibliography entry location}%
+      \usebeamertemplate{bibliography entry location}%
+      \def\newblock{%
+        \usebeamercolor[fg]{bibliography entry note}%
+        \usebeamerfont{bibliography entry note}%
+        \usebeamertemplate{bibliography entry note}}}}%
+  \leavevmode\setbox\beamer@tempbox=\hbox{}\ht\beamer@tempbox=0em\box\beamer@tempbox}
+  \setbeamertemplate{bibliography entry title}{}{}
+
+\makeatother
+
+\usepackage[square, authoryear]{natbib}
+
+
+%-----------------------------------------------------------------------------
+%	CUSTOM COMANDS
+%-----------------------------------------------------------------------------
+
+\def\keypoint#1{\hspace{0pt plus 1 filll}\textcolor{gray}{[{\color{linkcolor}#1}]}~}
+\def\mycite#1{\keypoint{\small\citep{#1}}}
+\def\citeconf#1#2{
+    {\textcolor{gray}[}%
+        {\color{linkcolor}\citealt{#1}, #2}%
+    {\textcolor{gray}]}}
+\def\citeconfright#1#2{\hspace{0pt plus 1 filll}{\small\citeconf{#1}{#2}~}}
+\def\biblio{
+	\nobibliography{../../library}
+	\def\biblio{}
+}
+
+\def\myitem{\hskip1ex{\color{linkcolor} $\blacktriangleright$}\hskip.3em}
+
+
+
+\newcommand{\overimg}[4]{
+    \begin{tikzpicture}
+    \only<#1-#3>{%
+        \node {\includegraphics[height=.6\textheight]{#2}};
+    }%
+    \only<#3>{%
+        \node {\includegraphics[height=.5\textheight]{#4}};
+    }%
+    \end{tikzpicture}
+}
+
+
+%\usepackage{lxfonts}
+
+\institute{-- ~~INRIA Saclay}
+\author{Thomas Moreau}
+\title{Slide Deck}
+
+
+\setbeamertemplate{title page}[frame]
+
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\biblio{}
+\end{frame}
+
+\def\biblio{}
+
+%===========================================================================
+\section{Me}
+%===========================================================================
+
+
+\begin{frame}[t]{Apprentissage statistique sur des signaux}
+
+{
+\centering
+\inputTikZ{.8}{classification_tumeur}\\
+}
+
+\begin{block}{Apprentissage}
+    \vskip.5em
+    \begin{columns}[T]
+        \column{.23\textwidth}
+        \visible<1->{\myitem Supervisé}
+        \column{.35\textwidth}
+        \visible<3->{\myitem Faiblement Supervisé}
+        \column{.35\textwidth}
+        \visible<4->{\myitem Non-supervisé}
+    \end{columns}
+    \vskip.3em
+\end{block}
+\end{frame}
+
+
+\begin{frame}[t]{Apprentissage statistique sur des signaux}
+
+{
+    \centering
+    \inputTikZ{.8}{machine_learning_for_signals}\\
+}
+
+\begin{block}{Apprentissage}
+    \vskip.5em
+    \begin{columns}[T]
+        \column{.23\textwidth}
+        \visible<1->{\myitem Supervisé}
+        \column{.35\textwidth}
+        \visible<3->{\myitem Faiblement Supervisé}
+        \column{.35\textwidth}
+        \visible<4->{\myitem Non-supervisé}
+    \end{columns}
+    \vskip.3em
+\end{block}
+\end{frame}
+
+
+\begin{frame}[c]{Domaines d'application}
+
+\centering
+\only<1-2>{
+    \begin{itemize}
+        \item Quantification de l'équilibre dynamique.\\[1em]
+    \end{itemize}
+    \overimg{1}{applications/accelero}{2}{applications/accelero_dict}
+
+    \textcolor{gray}{[{\color{linkcolor} PLoS ONE 2016; Sensors 2018}; Brevet]}\\
+}
+\only<3-4>{
+    \begin{itemize}
+        \item Caractérisation de mouvements oculaires pathologiques.\\[1em]
+    \end{itemize}
+    \overimg{3}{applications/oculo}{4}{applications/oculo_dict}
+
+    \textcolor{gray}{[{\color{linkcolor} Plusieurs soumissions en cours}; stagiaire M2]}\\
+}
+\only<5-6>{
+    \begin{itemize}
+        \item Comptage d'objet astronomiques dans des images de telescope.\\[1em]
+    \end{itemize}
+    \overimg{5}{applications/Hubble}{6}{applications/Hubble_dict}    
+    
+    {\centering\textcolor{gray}{[{\color{linkcolor}preprint 2019}]}\\}
+}
+\only<7-8>{
+    \begin{itemize}
+        \item Exploration des signaux neurologiques de l'ECG, la MEG ou l'IRMf.\\[1em]
+    \end{itemize}
+    \overimg{7}{applications/meg_1}{8}{applications/meg_dict}
+    
+    \textcolor{gray}{[{\color{linkcolor} NeurIPS 2018; ICASSP 2019}; 1 article en préparation]}\\
+}
+
+
+
+\end{frame}
+
+
+%===========================================================================
+% AUXILIARY SLIDES
+%===========================================================================
+
+
+
+%===========================================================================
+\appendix
+\section{Auxiliary Slides}
+%===========================================================================
+
+
+%===========================================================================
+\subsection{Aux1}
+%===========================================================================
+%
+\begin{frame}{Auxillary slide 1}
+
+\end{frame}
+%
+%
+%\begin{frame}{}
+%\vskip2em
+%{\centering
+%    \usebeamercolor[fg]{title}
+%    \usebeamerfont{title}
+%    \Huge \bf Merci!\\[2em]}
+%
+%Code available online:\\[1em]
+%
+%%\includegraphics[height=.8em]{github}~\textbf{LISTA} : github.com/tommoral/AdaptiveOptim\\[1em]
+%
+%\includegraphics[height=.8em]{github}~\textbf{alphacsc} :  \url{alphacsc.github.io}\\[2em]
+%
+%Slides are on my web page:\\[1em]
+%\hskip5em\includegraphics[height=.8em]{website} \url{tommoral.github.io}
+%\hskip4em \includegraphics[height=.8em]{twitter} \href{https://twitter.com/tomamoral}{@tomamoral}
+%
+%
+%\end{frame}
+%
+
+\end{document}
