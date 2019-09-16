@@ -1,0 +1,176 @@
+\documentclass[moreau_lt.tex]{subfiles}
+%\usetikzlibrary{...}
+
+
+%\usepackage{beamerarticle}
+\begin{document}
+
+\begin{tikzpicture}
+
+\tikzset{
+    %Define standard arrow tip
+   >=stealth',
+    %Define style for boxes
+    bold/.style={
+           draw=black,
+           ultra thick,
+          % shorten <=2pt,
+           %shorten >=2pt,}
+    },
+    arrow/.style={
+        draw=black,
+        thick,
+        <->,
+        shorten <=1pt,
+        shorten >=1pt,
+    },
+    overlay/.style={
+        draw=black!50,
+        thick,
+        fill=lightblue!70,
+        rounded corners=5pt
+    },
+}
+
+\pgfmathsetmacro{\width}{8}
+\pgfmathsetmacro{\height}{5}
+\pgfmathsetmacro{\wspace}{1}
+\pgfmathsetmacro{\K}{34}
+\pgfmathsetmacro{\L}{7}
+\pgfmathsetmacro{\Ww}{3}
+\pgfmathsetmacro{\Wh}{2}
+\pgfmathtruncatemacro{\k}{\K-1}
+\pgfmathsetmacro{\Lm}{51}
+
+\coordinate (origin);
+\pgfmathsetmacro{\widthWorker}{\width/\Ww}
+\pgfmathsetmacro{\heightWorker}{\height/\Wh}
+
+\visible<1-2>{
+    \node (southwest) at ($(origin) - (\width / 2, \height / 2)$) {};
+    \node (northeast) at ($(origin) + (\width / 2, \height / 2)$) {};
+
+    \draw[fill=orange] ($(southwest.center) + (8*\width / \Lm, 21*\height / \K)$) rectangle ++(7*\width / \Lm, 7*\height / \K);
+    \draw[fill=red] ($(southwest.center) + (11*\width / \Lm, 24*\height / \K)$) rectangle ++(\width / \Lm, \height / \K);
+
+    \foreach \i in {1,...,\k}{
+        \draw[black!50, thick] ($(southwest.center) + (0, \i*\height /\K)$)
+        -- ++(\width, 0);
+    }
+
+
+    \foreach \i in {1,...,\Lm}{
+        \draw[black!50, thick] ($ (southwest.center) + (\i*\width / \Lm, 0)$)
+        -- ++(0, \height);
+    }
+
+    \only<2>{
+        \foreach \ww in {1,...,\Ww-1}{
+            \draw[draw=black, ultra thick]
+                ($(southwest.center) + (\ww * \widthWorker, 0)$)
+                -- ++ (0, \height);
+        }
+        \foreach \wh in {1,...,\Wh}{
+            \draw[draw=black, ultra thick]
+                ($(southwest.center) + (0, \wh * \heightWorker)$)
+                -- ++ (\width, 0);
+
+        }
+    }
+    \draw[bold] (southwest.center)
+        rectangle (northeast.center)
+        node[midway, overlay] {\Large \alt<1>{Activation $z_k$}{Scatter on workers}};
+
+    \draw[draw=black, thick, <->, dashed] (southwest.south) -- ++(\width, 0)
+        node[midway, below] {Width $T_1$};
+    \draw[draw=black, thick, <->, dashed] (northeast.east) -- ++(0, -\height)
+        node[midway, above, sloped] {Height $T_2$};
+    \draw[] (southwest.south) -- ++(0, \height)
+        node[midway, left] {K $\bigodot$};
+
+}
+
+\visible<3->{
+    \coordinate (origin_worker)
+            at ($(origin) + (-\width / 2 - .1 * \Ww*\widthWorker,
+                            \height / 2 + .1 * \Wh*\heightWorker)$);
+    \foreach \ww in {1,...,\Ww}{
+        \foreach \wh in {1,...,\Wh}{
+            \pgfmathtruncatemacro{\wi}{\ww + \wh * \Ww - \Ww}
+
+            \node (southwest\wi)
+            at ($(origin_worker) + (1.2*\ww*\widthWorker - 1.1*\widthWorker,
+                    .1*\heightWorker - 1.2*\wh * \heightWorker)$) {};
+            \node (northeast\wi)
+            at ($(southwest\wi.center) + (\widthWorker, \heightWorker)$) {};
+
+            \foreach \i in {1,...,\k / \Wh}{
+                \draw[black!50, thick]
+                    ($(southwest\wi.center) + (0, \i*\height / \k)$)
+                    -- ++(\widthWorker, 0);
+            }
+            \foreach \i in {1,...,\Lm / \Ww}{
+                \draw[black!50, thick]
+                    ($ (southwest\wi.center) + (\i*\width / \Lm, 0)$)
+                    -- ++(0, \heightWorker);
+            }
+            \draw[bold] (southwest\wi.center)
+                rectangle (northeast\wi.center)
+                node[midway, overlay] {$\mathcal W_\wi$};
+        }
+    }
+}
+
+\visible<4->{
+    \foreach \ww in {1,...,\Ww}{
+        \draw[arrow] ($(southwest\ww.center) + (\widthWorker / 2, 0)$)
+            -- ++(0, -.2*\heightWorker);
+    }
+    \foreach \ww in {1,...,\Ww-1}{
+        \draw[arrow] ($(southwest\ww.center) + (\widthWorker, 0)$)
+            -- ++(.2*\widthWorker, -.2*\heightWorker);
+        \draw[arrow] ($(southwest\ww.center) + (\widthWorker, -.2*\heightWorker)$)
+            -- ++(.2*\widthWorker, .2*\heightWorker);
+        \visible<5>{
+            \draw[] ($(southwest\ww.center) +
+                      (\widthWorker, -.2*\heightWorker)$)
+                -- ++(.2*\widthWorker, .2*\heightWorker)
+                node[midway] {\includegraphics[width=4em]{lock}};
+        }
+        \foreach \wh in {1,...,\Wh}{
+            \pgfmathtruncatemacro{\wi}{\ww + \wh * \Ww - \Ww}
+            \draw[arrow] ($(northeast\wi.center) - (0, \heightWorker / 2)$)
+                -- ++(.2*\widthWorker, 0);;
+        }
+    }
+}
+
+
+
+%     % Draw the splitting of the signal
+%     \only<1>{
+%         \draw[bold, dashed] ($(southwest.center) + (\w*\widthWorker, 0)$)
+%                 -- ++(0, \height);
+%               rectangle (northeast\w.center)
+%        \draw[arrow, ->] ($(southwest.center) + (\w*\widthWorker - \widthWorker / 2, \height)$)
+%                 -- ($(southwest\w) + (\widthWorker/2, 0)$);
+%     }
+% \uncover<1>{
+%     \draw[draw=black, thick, <->, dashed] (northeast3.north)
+%     -- ++(-\width/\W, 0) node[midway, above, fill=lightblue!70] {Time $T/W$};
+%     \draw[draw=black, thick, <->, dashed] (northeast3.east)
+%     -- ++(0, -\height) node[midway, above, sloped] {Atoms $K$};
+% }
+
+% \only<2->{
+%     \foreach \w in {1,...,\W-1}{
+%         \coordinate (eastw) at
+%             ($(origin_worker) - (1.3*\width / 2 - 1.3*\w*\widthWorker + .15*\widthWorker, 0)$);
+%         \draw[<->, shorten >= 5pt, shorten <=5pt, thick] (eastw.center) -- ++(.3*\width / \W, 0);
+%     }
+% }
+
+\end{tikzpicture}
+
+
+\end{document}
