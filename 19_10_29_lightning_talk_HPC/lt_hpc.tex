@@ -1,0 +1,104 @@
+\documentclass{beamer}
+
+\usepackage{beamer_tom}
+\graphicspath{{./images/}}
+
+\institute{INRIA Saclay}
+\author{Thomas Moreau}
+\title{
+    Sharing Computational Resources\\
+    Some good practices
+}
+
+\date{
+    May 29, 2018
+}
+
+\setbeamertemplate{title page}[frame]
+\def\extraLogo{}
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+    %	\biblio{}
+    \end{frame}
+
+    \frame{
+        \frametitle{Parietal Computational Resources}
+        {\large \bf Single Machines:\\[.5em]}
+            \myitem{} drago 1/2/4 (\emph{CPU})\\
+            \myitem{} para digm/dox/metric/bolic (\emph{CPU})\\
+            \myitem{} drago3/5 (\emph{GPU})\\[1em]
+        {\large \bf Clusters:\\[.5em]}
+            \myitem{} margaret (\emph{SLURM}; 1200 cores)\\
+            \myitem{} tompouce (\emph{SGE}; old; 288 cores)\\[1em]
+        {\large \bf Storage:\\[.5em]}
+            \myitem{dragostore} (\emph{130TB}; \code{/storage/store} on \code{drago*} servers)\\[1em]
+        {\large \bf Virtual Machines:\\[.5em]}
+            \myitem{} minidrago (\emph{windows}; connection RDP)
+
+    }
+
+    \frame{
+        \frametitle{Computation Priority}
+
+        Internally, different processes are managed by the system scheduler:\\[.5em]
+        {\centering \large $\Rightarrow$ Who run when?\\[1em]}
+
+        Decision are influenced by priority \code{[0, 40]} or niceness \code{[-20, 20]}:\\[.5em]
+        \myitem{} System process: (P < 20, Ni<0 : \code{\color{red} Red} in \code{htop})\\
+        \myitem{} Base user process: (P = 20, Ni = 0 : \code{\color{green} Green} in \code{htop})\\
+        \myitem{} Nice user process: (P > 20, Ni > 0 : \code{\color{blue} Blue} in \code{htop})\\[2em]
+
+        {\bf Rational:} Heavy computation should not block the basic operation!\\[1em]
+
+        {\bf Convention:} Use \code{P=25 / Ni=5} for computions on Parietal machines.
+    }
+    \frame{
+        \frametitle{Setting niceness}
+
+        Use the \code{nice} command to set the niceness of your process:\\[.5em]
+        {\centering \code{nice -5 python myscript.py} \\[1em]}
+
+        If you forgot, you can always renice your script:\\[.5em]
+        {\centering
+            For one script with pid \code{\$PID}:
+                \code{renice -n 5 -p \$PID} \\
+            For a parallel script with group id \code{\$PGRP}:
+                \code{renice -n 5 -g \$PGRP} \\[2em]}
+
+        More info: \code{man nice}\\[2em]
+
+        {\bf Tips:}\\[.5em]
+        \myitem \parbox[t]{.9\textwidth}{
+            Set an alias for computation heavy commands\\
+            \code{alias cmd="nice -n 5 cmd"}}\\[.5em]
+    }
+
+    \begin{frame}{Auto-Multithreading}
+        Some libraries use all CPUs by defaults\\
+        \hskip3em \textbf{Native:}{
+            \tt OpenMP; MKL; OpenBLAS; \dots}\\
+        \hskip3em \textbf{Python:}{
+            \tt numpy; scikit-learn; \dots}\\[1em]
+
+        This can causes two main issues:\\[.5em]
+        \myitem{} Use all resources on the cluster:\\
+        \myitem{} \parbox[t]{.9\textwidth}{
+                    Create massive oversubscription for parallel scripts\\
+                    All child process try to use all CPUs -> CPU$^2$ threads}\\[1em]
+
+        You can alleviate this issue by setting environment variables to limit the number of threads:\\[.5em]
+         \code{OMP\_NUM\_THREADS}, \code{MKL\_NUM\_THREADS}, \code{OPENBLAS\_NUM\_THREADS}, \dots\\[1em]
+
+         {\bf Tips:}\\[.5em]
+         \myitem \parbox[t]{.9\textwidth}{
+            \code{joblib0.14+} does this automatically in child processes.
+         }\\
+         \myitem \parbox[t]{.9\textwidth}{
+            Finer control possible with \code{threadpoolctl}, but not super stable.}
+
+    \end{frame}
+
+\end{document}
