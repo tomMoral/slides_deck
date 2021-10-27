@@ -1,0 +1,87 @@
+\documentclass{beamer}
+
+\usepackage{beamer_tom}
+\graphicspath{{./images/}}
+
+\def\biblio{
+    \nobibliography{../../library}
+    \def\biblio{}
+}
+
+\institute{INRIA Saclay}
+\author{Thomas Moreau}
+\title{
+    Matrix Sketching:\\
+    the Johnson-Linderstrauss Lemma.
+}
+
+\setbeamertemplate{title page}[frame]
+\def\extraLogo{}
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+    %	\biblio{}
+    \end{frame}
+
+
+    \begin{frame}{Approximate solution of least square}
+
+        We want to solve approximately the linear system
+        \[
+            y = X\beta + \epsilon
+        \]
+        where $y\in\mathbb R^n$, $X\in \mathbb R^{n\times p}$
+        with $1 \ll p \ll n$\\[2em]
+
+        \textbf{Ordinary Least Square:} $ \beta_{OLS} = \arg\min_{\beta}\|y - X\beta\|_2^2$\\[1em]
+
+        \textbf{Sketching:}
+        Choose $S\in\mathbb R^{m\times n}$  with $m \ll n$ and solve
+        \[
+            \beta_S = \arg\min_{\beta}\|Sy - SX\beta\|_2^2
+        \]
+
+        \textbf{Question:} How to ensure efficient solution with good precision?\\[1em]
+        {\centering Small $m$ with
+        $\|y - X\beta_S\|_2^2 \le (1 + \epsilon)\|y - X\beta_{OLS}\|_2^2$}
+
+    \end{frame}
+
+    \begin{frame}{Johnson-Linderstrauss Lemma}
+        \begin{block}{Theorem - \textcolor{linkcolor}{Johnson \& Linderstrauss (1984)}}
+            Given $0 < \epsilon < 1$ and
+            for $n$ points $\{x_1, \dots, x_n\}$, there is a linear embedding $f: \mathbb R^p \to \mathbb R^m$ with $m = \mathcal O(\frac{\log(n)}{\epsilon^2})$ \emph{s.t.}
+            \[
+                (1-\epsilon)\|x_i - x_j\|_2
+                    \le \|f(x_i) - f(x_j)\|_2
+                    \le (1+\epsilon)\|x_i - x_j\|_2
+            \]
+        \end{block}
+
+        \textbf{Summary:}
+        \begin{itemize}
+            \item One can map $n$ vectors to $\mathcal O(\log(n))$ dim while preserving Euclidean geometry.
+            \item The scaling $m$ is optimal.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{How to make scketching fast}
+        \textbf{Issue:} naive linear mapping is dense $\to$ hard to store/compute.\\[.5em]
+
+        \textbf{Fondamental issue:} For a sparse vector, unless you get all coordinates, you have a high probability to map it to 0.\\[.5em]
+
+        \textbf{Solution:} Find structured projection such that you can have fast transforms with well spread information.\\[1em]
+
+        \textbf{References:}
+        \begin{itemize}
+            \item Blog post: \href{https://afonsobandeira.wordpress.com/2013/09/13/the-johnson-lindenstrauss-lemma/}{the Johnson-Linderstrauss Lemma} by Afonso Bandeira.
+            \item Monograph: \emph{Randomized algorithms for matrices and data} by Michael Mahoney.
+            \item NeurIPS 2020 tutorial: \emph{Sketching and Streaming Algorithms} by Jelani Nelson
+        \end{itemize}
+
+    \end{frame}
+
+
+\end{document}
