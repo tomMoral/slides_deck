@@ -1,0 +1,87 @@
+\documentclass[main_tikz.tex]{subfiles}
+
+\begin{document}
+\begin{tikzpicture}[scale=\tkzscl]
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    varstyle/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           fill=white,
+           text width=2em,
+           minimum height=2em,
+           text centered},
+    %Define style for operators
+    op/.style={
+           circle,
+           draw=black, very thick,
+           fill=white,
+           text width=.5em,
+           minimum height=.3em,
+           text centered},
+    %Define style for st
+    st/.style={
+           draw,
+           thick,
+           rectangle, 
+           fill=white,
+           text width=1.5em, 
+           minimum height=2em,},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+          % shorten <=2pt,
+           %shorten >=2pt,}
+    }
+};
+
+
+\def\nlayer{3}
+
+%nodes
+\node (X) {$X$};
+\node[right=1em of X] (linear) {};
+\node[inner sep=0,minimum size=0,below=3.7em of linear] (p) {};
+\node[varstyle, above=1.45em of p] (B) {$W_e^{(0)}$};
+%% 3rd node
+\foreach \i in {1,...,\nlayer}{
+    % Declare the 1st node and link it to the previous one
+    \node[st, right=.8em of p] (sta\i) {};
+    \path (p.east) edge[pil] (sta\i.west);
+
+    % Declare the 2 other nodes
+    \node[varstyle, right=1em of sta\i] (S) {$W_g^{(\i)}$};
+    \node[op, right=.8em of S] (p) {$+$};
+	"\ifthenelse{\i>1}{\draw[pil] (S2.east) -| (p.south);}{}"
+    "\ifthenelse{\i<\nlayer}{\node[varstyle, below=(2*(\i-1)+1)*.2em of S] (S2) {$W_m^{(\i)}$};}{}";
+    \node[inner sep=0, minimum size=0, right=.6em of sta\i] (branch) {};
+    \node[varstyle, above=.7em of p] (B\i) {$W_e^{(\i)}$};
+    
+    %Draw
+    \draw ($ (sta\i.center) - (0,.9em)  $) -- ($ (sta\i.center) + (0,.9em)  $);
+    \draw ($ (sta\i.center) - (.35,0em)  $) -- ($ (sta\i.center) + (.35,0em)  $);
+    \draw ($ (sta\i.center) - (.1,0em)  $) -- ($ (sta\i.center) - (.3,.7em)  $);
+    \draw ($ (sta\i.center) + (.1,0em)  $) -- ($ (sta\i.center) + (.3,.7em)  $);
+    \draw[pil] (sta\i.east) -- (S) -- (p.west);
+    \draw[pil] (X) -| (B\i) -- (p.north);
+	"\ifthenelse{\i<\nlayer}{\draw[thick] (branch) |- (S2.west);}{}"
+}
+\draw[pil] (linear.center) -- (B) |- (sta1.west);
+
+\node[st, right=1em of p] (sta) {};
+    \draw ($ (sta.center) - (0,.9em)  $) -- ($ (sta.center) + (0,.9em)  $);
+    \draw ($ (sta.center) - (.35,0em)  $) -- ($ (sta.center) + (.35,0em)  $);
+    \draw ($ (sta.center) - (.1,0em)  $) -- ($ (sta.center) - (.3,.7em)  $);
+    \draw ($ (sta.center) + (.1,0em)  $) -- ($ (sta.center) + (.3,.7em)  $);
+\node[right=1em of sta] (Z) {$Z$};
+\path (p.east) edge[pil] (sta.west);
+\path (sta.east) edge[pil] (Z.west);
+
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+
+\usepackage{geometry}
+\usepackage{url}
+\usepackage{wasysym}
+
+%Gummi|065|=)
+\title{\textbf{Setup Git}}
+\author{Thomas Moreau \& Argyris Kalogeratos \\
+CMLA -- ENS Cachan}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+\section{About}
+This document provides the basic steps for installing a Git client in a Windows or 
+Linux environment and connecting to the local GitLab server at CMLA.
+\\
+\\
+\noindent\bell\ \textbf{Security note:} \emph{This document contains sensitive 
+information for CMLA's computer systems. Do not send or share this file, 
+or its contents, through third-party services such as email, cloud storage etc}. 
+
+\section{Install Git client}
+
+\subsection{Windows}
+\label{sub:win}
+%\begin{enumerate}
+	%\item 
+\hspace{1em} Install gitbash from \texttt{http://www.git­scm.com/download/win}.\\
+You may use the default settings.
+%\end{enumerate}
+% subsection win (end) Windows
+%\vspace{-.8cm}
+\subsection{Linux}
+\label{sub:linux}
+ %\begin{enumerate}
+	%\item 
+	\hspace{1em} Give in the terminal \texttt{\$sudo apt-get install git}.\\
+	\hspace{1em} You may use the default settings.
+%\end{enumerate}
+% subsection linux (end)
+
+\section{Setup the connection to the server}
+\label{sec:conn}
+
+\noindent Launch the bash terminal and type all the lines starting with `\texttt{\$}':
+\begin{enumerate}
+	\item \texttt{\$ssh-keygen -t rsa}\\
+	This is to create an SSH key for secure connection. 
+	With the default parameters it will save you SSH in the 
+	file \url{~}\texttt{/.ssh/id\_rsa.pub}.
+	(Don't forget to put a passphrase when asked for, 
+	it's the only way to protect it,
+	if someone steal your private key, \url{~}\texttt{/.ssh/id\_rsa})
+	%
+	\item Copy the contents of the \url{~}\texttt{/.ssh/id\_rsa.pub}\\
+	You can give \url{cat} \url{~}\texttt{/.ssh/id\_rsa.pub} 
+	in the terminal to see the contents. You need to paste 
+	this in the GitLab server in order to have access without 
+	being requested every time for your password. 
+	In Windows, the way to copy the text from the terminal window 
+	is the following: right click on the title of the 
+	window $\rightarrow$ Properties $\rightarrow$  
+	Options $\rightarrow$ Edit Options $\rightarrow$ 
+	QuickEdit Mode (put a tick). Then mark with your 
+	mouse the text and press \texttt{Enter} button to copy it.
+	%
+	\item Go to the GitLab server at \url{https://reine.cmla.ens-cachan.fr}\\
+	and then to the Profile setting $\rightarrow$ SSH Keys $\rightarrow$ 
+	Add SSH Key (its a button) and paste your public key.  
+	Make sure when you paste it that you don't include any 
+	control characters, e.g. \url{\}\texttt{n} or \url{\}\texttt{r}.
+\end{enumerate}
+
+\noindent To be able to access the GitLab server from outside the CMLA, 
+you need to have setup your Git client to contact reine using the port 2333:
+\begin{enumerate}
+	\item Go in your home directory, open the \texttt{.ssh} folder\\
+	It might be hidden, you can reveal it with \texttt{Ctrl+H}.
+ %	
+	\item Create/Edit a file called \texttt{config} and add the following lines:\\
+	\texttt{Host reine}\\
+	    \texttt{Port 2333}\\
+	    \texttt{User git}\\
+	    \texttt{Hostname reine.cmla.ens-cachan.fr}
+\end{enumerate}
+% section conn (end)
+
+\section{Setup the connection to the server}
+\label{sec:clone}
+In order to clone a repository and have a local copy of its files, 
+go on the main page of that repository at the web interface of GitLab.
+At the top of the page you can find the an ssh field. Use this in the 
+bash \texttt{git clone put\_here\_ssh\_field}, or in any other interface.
+
+\section{TortoiseGit}
+\label{sec:tortoise}
+Although for advanced use it is always better to have control on your 
+repositories through terminal, it is sometimes useful to have a nice 
+and easy way to do your commits and pulls. For Windows you may consider 
+using TortoiseGit which is an interface to Git with context menu integration, etc. 
+Find more at \texttt{http://code.google.com/p/tortoisegit}.
+
+\end{document}

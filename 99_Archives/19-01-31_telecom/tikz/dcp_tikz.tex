@@ -1,0 +1,57 @@
+\documentclass[main_tikz.tex]{subfiles}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\pgfmathsetmacro{\iO}{-1.9}
+\pgfmathsetmacro{\ione}{3.6}
+\pgfmathsetmacro{\heighl}{-0.8}
+\pgfmathsetmacro{\heighz}{0.3}
+\pgfmathsetmacro{\sep}{0.05}
+\pgfmathsetmacro{\S}{0.8}
+\pgfmathsetmacro{\r}{(-\iO-1.5)/\S}
+
+\draw (-5, 1) -- (-1.2, 1) node[midway, above]{$\mathcal C_m$  updated in $(k_0, t_0)$} -- (-1.2, -1.5) -- (-5, -1.5) -- cycle;
+\draw (5, 1) -- (1.2, 1) node[midway, above]{$\mathcal C_{m+1}$ updated in $(k_1, t_1)$} -- (1.2, -1.5) -- (5, -1.5) -- cycle;
+\draw [<-, dashed] (-4.5, 0) -- (-6, 0);
+\draw [<-, dashed] (4.5, 0) -- (6, 0);
+\foreach \s in {-1, 1}
+\draw[blue] (\s*4.5, \heighl) -- (\s*1.5, \heighl) ;
+\draw[green, line width = 1.5pt] (\ione, \heighl) -- ++(0, 0.3) node[above, black] {\tiny$\Delta Z_{k_1}[t_1]$};
+\draw[red, line width = 1.5pt] (\iO, \heighl) -- ++(0, 0.6)  node[above, black] {\tiny$\Delta Z_{k_0}[t_0]$};
+\foreach \x/\y in {2.3/0.3, 1.6/0.1, 2/0.6, 3.1/0.7, 4.2/1, 3.9/0.4, 3.8/-0.1, 3.2/-0.5, \ione/0.1}
+    \draw[blue] (\x, \heighl) -- ++(0, \y) ;
+\draw[blue, line width = 1.5pt] (\ione, \heighl) -- ++(0, .1) ;
+\foreach \x/\y in {2.3/0.56, 2.2/0.2, 2.7/0.5, 3.7/0.4, 4.2/-0.24, 3.9/0.7, 3.8/-0.1, 3.2/0.1, 3.5/-0.4, -\iO/0.2}
+    \draw[blue] (-\x, \heighl) -- ++(0, \y);
+\draw[blue, line width = 1.5pt] (\iO, \heighl) -- ++(0, .2) ;
+\fill[red] (\iO-\S, \heighl-3*\sep) -- ++(0, -\sep) -- ++(\S+\r*\S, 0) -- ++(0, \sep) -- cycle;
+\draw (\iO+\r*\S, \heighl-2*\sep) -- ++(0, -2*\sep) -- ++ (-\r*\S, 0)  -- ++ (0, 0.15) -- ++ (0, -0.15) node [below] {\tiny $t_0$} -- ++(-0.8, 0) node[below, black] {\tiny \smeq$t_0 - W$} -- ++(0, +0.1);
+
+\fill[red] (1.5, \heighl-3*\sep) -- ++(0, -\sep) -- ++(\S-\r*\S, 0) -- ++(0, \sep) -- cycle;
+\draw (1.5, \heighl-2*\sep) -- ++(0, -0.1) -- ++(\S-\r*\S, 0) node[below, black] {\tiny  \smeq$t_0 + W$} -- ++(0, +0.1);
+\fill[green] (\ione-\S, \heighl-3*\sep) -- ++(0, -\sep) -- ++(2*\S, 0) -- ++(0, \sep) -- cycle;
+\draw (\ione-\S, \heighl-2*\sep) -- ++(0, -2*\sep) node [below] {\tiny \smeq$t_1-W$} -- ++(\S, 0) -- ++(0, 3*\sep)  -- ++(0, -3*\sep) node [below] {\tiny $t_1$}-- ++(\S, 0) node [below] { \smeq \tiny$t_1+W$} -- ++(0, 2*\sep);
+%\draw (-3.5, 1) node[below] {};
+\draw (-4.5, \heighl) node[left] {$\beta$};
+\draw (4.5, \heighl) node[right] {$\beta$};
+
+%% Z on top in red
+
+\draw[black] (4.5, \heighz) -- (1.5, \heighz) ;
+\foreach \x/\y in {2.3/0.3, 1.6/0.1, 2/0.6, 3.1/0.1, 4.2/0.6, 3.9/0.4, 3.8/-0.1, 3.2/-0.5, \ione/0.3}
+    \draw[black] (\x, \heighz) -- ++(0, \y) ;
+\draw[black] (-4.5, \heighz) -- (-1.5, \heighz) ;
+\foreach \x/\y in {2.3/0.56, 2.2/0.2, 2.7/0.5, 3.7/0.4, 4.2/-0.24, 3.9/0.7, 3.8/-0.1, 3.2/0.1, 3.5/-0.4, -\iO/0.6}
+    \draw[black] (-\x, \heighz) -- ++(0, \y);
+\draw (-4.5, \heighz) node[left] {$Z$};
+\draw (4.5, \heighz) node[right] {$Z$};
+
+
+\draw[-triangle 90] (-1.3, 0) arc (135:40:1.8) node[midway, above] {\scriptsize$\smeq\Delta Z_{k_0}[t_0]$, $k_0$, $t_0$};
+\draw[-triangle 90] (1.3, -0.5) arc (135:40:-1.8) node[midway, below] {\small No message};
+
+\end{tikzpicture}
+
+\end{document}

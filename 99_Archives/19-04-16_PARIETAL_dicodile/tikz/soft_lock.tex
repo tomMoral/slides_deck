@@ -1,0 +1,120 @@
+\documentclass[main_tikz.tex]{subfiles}
+%\usetikzlibrary{...}
+
+
+%\usepackage{beamerarticle}
+\begin{document}
+
+\begin{tikzpicture}
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    bL/.style={
+        %        fill=blue!30,
+        %        thick,
+        postaction={
+            pattern=north east lines,
+            pattern color=black
+        }
+    },
+}
+
+\pgfmathsetmacro{\iO}{6}
+\pgfmathsetmacro{\jO}{3}
+\pgfmathsetmacro{\ig}{13}
+\pgfmathsetmacro{\igg}{16}
+\pgfmathsetmacro{\jgg}{2}
+\pgfmathsetmacro{\width}{15}
+\pgfmathsetmacro{\height}{2}
+\pgfmathsetmacro{\wspace}{1}
+\pgfmathsetmacro{\K}{5}
+\pgfmathsetmacro{\L}{7}
+\pgfmathsetmacro{\W}{2}
+\pgfmathtruncatemacro{\k}{\K-1}
+\pgfmathtruncatemacro{\w}{\L-1}
+\pgfmathtruncatemacro{\ww}{\L-2}
+\pgfmathsetmacro{\Lm}{30}
+
+\node[] (Cm) {};
+
+
+% Draw the worker boundaries
+\foreach \i/\c in {1/cyan,2/orange}{
+    \draw [ultra thick, fill=\c!20] ($ (Cm.center) + (\i*\width/\W, 0)$)
+    -- ++(0, -\height)
+    -- ++(-\width/\W, 0)
+    -- ++(0, \height)
+    --cycle node[midway, above] {$\mathcal S_{\i}$};
+}
+
+\only<2->{
+    \fill[gray] ($ (Cm.center) + (\ig*\width /\Lm, -\jO*\height /\K)$)
+        -- ++(0, -\height/\K)
+        -- ++(\width/\Lm, 0)
+        -- ++(0, \height/\K)
+        -- cycle;
+}
+\only<3->{
+    \fill[gray!70] ($ (Cm.center) + (\igg*\width /\Lm, -\jgg*\height /\K)$)
+        -- ++(0, -\height/\K)
+        -- ++(\width/\Lm, 0)
+        -- ++(0, \height/\K)
+        -- cycle;
+}
+\foreach \i/\c in {1/cyan,2/orange}{
+    \fill[
+        pattern=flexible hatch,
+        hatch distance=8pt,
+        hatch thickness=1.0\i pt,
+        pattern color=\c] ($ (Cm.center) + (\width /\W, 0)$)
+    -- ++(0, -\height)
+    -- ++(3*\w/2*\width/\Lm - \i*\w*\width/\Lm, 0) % node [midway] {\i}
+    -- ++(0, \height)
+    -- cycle;
+    \only<1>{
+        \draw [<->, dashed] ($ (Cm.center) + (\width /\W, -2*\height/3)$)
+        -- ++(3*\w/2*\width/\Lm - \i*\w*\width/\Lm, 0) node [midway, above] {$L-1$};
+    }
+}
+
+
+\only<4>{
+
+\fill[green!40] ($ (Cm.center) + (\ig*\width /\Lm, -\jO*\height /\K)$)
+    -- ++(0, -\height/\K)
+    -- ++(\width/\Lm, 0)
+    -- ++(0, \height/\K)
+    -- cycle;
+}
+
+
+\draw (Cm.center)
+-- ++(\width, 0)
+-- ++(0, -\height)
+-- ++(-\width, 0)
+-- cycle;
+
+\foreach \i in {1,...,\k}{
+    \draw ($ (Cm.center) - (0, \i*\height /\K)$)
+    -- ++(\width, 0);
+}
+\foreach \i in {1,...,\Lm}{
+    \draw ($ (Cm.center) + (\i*\width/\Lm, 0)$)
+    -- ++(0, -\height);
+}
+
+% Draw the worker boundaries
+\foreach \i in {1,...,\W}{
+    \draw [ultra thick] ($ (Cm.center) + (\i*\width/\W, 0)$)
+    -- ++(0, -\height)
+    -- ++(-\width/\W, 0)
+    -- ++(0, \height)
+    --cycle node[midway, above] {$\mathcal S_{\i}$};
+}
+
+
+\end{tikzpicture}
+
+
+\end{document}

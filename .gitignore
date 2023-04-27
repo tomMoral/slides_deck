@@ -10,4 +10,5 @@
 *.snm
 *.toc
 *.synctex.gz
-*/.build/
+**/.build/
+**/build/
