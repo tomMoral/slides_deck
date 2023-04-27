@@ -1,0 +1,106 @@
+\documentclass[main_tikz.tex]{subfiles}
+
+\begin{document}
+\begin{tikzpicture}[scale=\tkzscl]
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    varstyle/.style={
+           rectangle,
+           fill=white,
+           rounded corners,
+           draw=black, very thick,
+           text width=2em,
+           minimum height=2em,
+           text centered},
+    %Define style for operators
+    op/.style={
+           circle,
+           draw=black, very thick,
+           fill=white,
+           text width=.5em,
+           minimum height=.3em,
+           text centered},
+    %Define style for st
+    st/.style={
+           draw,
+           thick,
+           rectangle,
+           fill=white,
+           text width=2.2em,
+           minimum height=2.2em,},
+    text_st/.style={font=\scriptsize},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+          % shorten <=2pt,
+           %shorten >=2pt,}
+    },
+};
+
+%nodes
+\node[varstyle] (A) {$W_X$};
+\node[left=1em of A] (X) {$x$};
+
+\node[varstyle, below=2em of A] (B) {$W_z$};
+\node[left=1em of B] (Z) {$z^{(t)}$};
+\node[op, inner sep=4pt,right=1em of B] (p) {};
+\node[st, right=.9em of p] (st) {}; %{ST($\cdot, \theta^{(\j)}$)};
+\node[right=1em of st] (Z1) {$z^{(t+1)}$};
+
+
+% Draw plus sign
+\draw ($ (p.north) - (0, .15)$) -- ($ (p.south) + (0, .15)$);
+\draw ($ (p.east) - (.15, 0)$) -- ($ (p.west) + (.15, 0)$);
+
+% Draw Soft-thresholding
+\draw ($ (st.center) - (0,.9em)  $) -- ($ (st.center) + (0,.9em)  $);
+\draw ($ (st.center) - (.9em,0em)  $) -- (st.center) node[midway,above] {st} -- ($ (st.center) + (.9em,0em)  $) node[midway,below, text_st] {$\beta$};
+\draw ($ (st.center) - (.2em,0em)  $) -- ($ (st.center) - (.8em,.7em)  $);
+\draw ($ (st.center) + (.2em,0em)  $) -- ($ (st.center) + (.8em,.7em)  $);
+
+% Draw path
+\path (X.east) edge[pil] (A.west);
+\draw[pil] (A.east) -| (p.north);
+\path (Z.east) edge[pil] (B.west);
+\path (B.east) edge[pil] (p.west);
+\path (p.east) edge[pil] (st.west);
+\path (st.east) edge[pil] (Z1.west);
+
+%% 3rd node
+% \foreach \i in {0,...,\nlayer}{
+%     \pgfmathsetmacro\j{int(\i - 1)}
+%     % Declare the 1st node and link it to the previous one
+
+%     \path (p.east) edge[pil] (sta\i.west);
+
+%     % Declare the 2 other nodes
+%     \node[varstyle, right=1em of sta\i] (S) {$W_g^{(\i)}$};
+%     \node[op, inner sep=4pt, right=1em of S] (p) {};
+%     \node[varstyle, above=.8em of p] (B\i) {$W_e^{(\i)}$};
+
+
+    %Draw
+%    \draw ($ (sta\i.center) - (0,.9em)  $) -- ($ (sta\i.center) + (0,.9em)  $);
+%    \draw ($ (sta\i.center) - (.9em,0em)  $) -- ($ (sta\i.center) + (.9em,0em)  $);
+%    \draw ($ (sta\i.center) - (.2em,0em)  $) -- ($ (sta\i.center) - (.8em,.7em)  $);
+%    \draw ($ (sta\i.center) + (.2em,0em)  $) -- ($ (sta\i.center) + (.8em,.7em)  $);
+%     \path (sta\i.east) edge[pil] (S.west);
+%     \path (S.east) edge[pil] (p.west);
+%     \draw[pil] (X) -| (B\i) -- (p.north);
+% }
+% \draw[pil] (linear.center) -- (B) |- (sta1.west);
+
+% \node[st, right=1em of p] (sta) {ST($\cdot, \theta^{(\nlayer)}$)};
+%    \draw ($ (sta.center) - (0,.9em)  $) -- ($ (sta.center) + (0,.9em)  $);
+%    \draw ($ (sta.center) - (.9em,0em)  $) -- ($ (sta.center) + (.9em,0em)  $);
+%    \draw ($ (sta.center) - (.2em,0em)  $) -- ($ (sta.center) - (.8em,.7em)  $);
+%    \draw ($ (sta.center) + (.2em,0em)  $) -- ($ (sta.center) + (.8em,.7em)  $);
+
+
+
+\end{tikzpicture}
+\end{document}
