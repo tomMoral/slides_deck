@@ -1,0 +1,69 @@
+\documentclass{beamer}
+
+\usepackage[beamer]{shortcut}
+\graphicspath{{./images/}}
+
+\def\biblio{
+    \nobibliography{../../library}
+    \def\biblio{}
+}
+
+\institute{INRIA Saclay}
+\author{Thomas Moreau}
+\title{
+    Curriculum learning
+}
+
+\setbeamertemplate{title page}[frame]
+\def\extraLogo{}
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+        \biblio{}
+    \end{frame}
+
+    \begin{frame}{Deep learning training with SGD}
+
+        Training a deep model $f_\theta$:
+       \[
+            \min_\theta l(\theta) = \mathbb E \mathcal L(y, f_\theta(X))
+       \]
+
+       \vskip2em
+       {\centering \Large Holistic algorithm: \textbf{Stochastic Gradient Descent}}
+       \vskip2em
+       \begin{enumerate}
+        \item Sample a mini-batch of samples $\mathcal B$.
+        \item Compute the gradient $\nabla_\theta l$
+        \item Update the parameters $\theta -= \gamma\nabla_\theta l$.
+       \end{enumerate}
+       \vskip2em
+       how do you choose the mini-batch $\mathcal B$?
+    \end{frame}
+
+    \frame{
+        \frametitle{Curriculum Learning}
+
+        Theory approach: random sampling\\[.5em]
+        \small\qquad Take mini-batch at random, with replacement.\\[2em]
+
+        Classic approach: random reshuffling\\[.5em]
+        \small\qquad Take mini-batch at random, with replacement.\\[2em]
+
+        Novel Idea: Curriculum learning\\[.5em]
+        \small \qquad See easy samples first and increase the complexity as the training goes on.
+    }
+
+    \frame{
+        \frametitle{Curriculum Learning}
+
+        How to select easy/hard samples?
+
+        \begin{itemize}
+            \item Expert knowledge: can use prior knowledge from your
+        \end{itemize}
+    }
+
+\end{document}

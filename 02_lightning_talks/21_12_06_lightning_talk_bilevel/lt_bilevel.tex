@@ -1,0 +1,91 @@
+\documentclass{beamer}
+
+\usepackage{beamer_tom}
+
+
+\usepackage{tikz}
+\usepgflibrary{shapes.arrows}
+
+\graphicspath{{./images/}}
+
+\institute{INRIA Saclay}
+\author{Thomas Moreau}
+\title{
+    Bi-level optimization in Machine Learning
+}
+
+\setbeamertemplate{title page}[frame]
+\def\extraLogo{}
+
+\newcommand{\citeline}[1]{\textcolor{gray}{\small[{\color{linkcolor} #1}]}}
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+    %	\biblio{}
+    \end{frame}
+
+    \frame{
+        \frametitle{Bi-level optimization}
+
+        Optimize a function $h$ which depends on another optimization problem:
+        \begin{equation}
+            \min_x h(x) = F(x, z^*(x)) \quad s.t.\quad z^*(x) = \argmin_z G(x, z)
+        \end{equation}
+        \vskip3em
+        \underline{\large\bf Examples:}\\[.5em]
+        \begin{itemize}\itemsep.5em
+            \item {\bf Hyperparameter optimization, Data Augmentation,\\Neural Architecture Search:}\\
+            $G$ is the training loss and $F$ the validation loss,
+            \item {\bf GAN, Dictionary Learning:}\\
+            $G$ is the generator loss, $F$ is the discriminator/dictionary loss,
+            \item {\bf Deep Equilibrium Networks:}\\$G$ is a fixed point equation, $F$ is the training loss,
+        \end{itemize}
+
+
+        \begin{tikzpicture}[overlay]
+            \draw[<-, thick, shorten >=8] (2.7, 6.4) -- +(0, -.8) node {Value function};
+            \draw[<-, thick, shorten >=8] (4.5, 6.4) -- +(0, -1.2) node {Outer function};
+            \draw[<-, thick, shorten >=8] (9, 6.4) -- +(0, -.8) node {Inner function/Problem};
+        \end{tikzpicture}
+    }
+
+    \frame{
+        \frametitle{Bi-level optimization resolution strategies}
+
+        First order methods on $h$ needs to compute the gradient:
+        \[
+            \nabla_x h(x) = \frac{\partial F}{\partial x} (x, z^*(x))
+            + \frac{\partial F}{\partial z}(x, z^*(x))\frac{\partial z^*}{\partial x}(x)
+        \]
+        \underline{Three roads to the gradient:}
+        \begin{itemize}\itemsep1em
+            \item {\bf Alternate minimization:}
+            Solve the inner problem and consider $z^*$ fixed. \keypoint{Only work for $F=G$.}
+            \item {\bf Implicit gradient:} Compute $z^*$ and use the implicit function theorem.
+            \item {\bf Unrolled algorithms:} Compute $z^*$ with an iterative solver and use automatic differentiation.
+        \end{itemize}
+    }
+
+    \frame{
+
+    \frametitle{Some recent research directions}
+
+        \begin{itemize}\itemsep1em
+            \item Do we need to compute $z^*$?\\
+            \citeline{Pedregosa 2016}
+            \item What is the best gradient estimate with $z_t$?
+            \keypoint{w/ Benoit Malezieux}\\
+            \citeline{Ablin et al. 2020}
+            \item How to efficiently compute the implicit gradient?
+            \keypoint{w/ Zaccharie Ramzi}\\
+            \citeline{Lorraine et al. 2017}
+            \item How to use stochastic methods?
+            \keypoint{w/ Mathieu Dagreou}\\
+            \citeline{Grazzie et al. 2021, Chen et al. 2021}
+        \end{itemize}
+    }
+
+
+\end{document}

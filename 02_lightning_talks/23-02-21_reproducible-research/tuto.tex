@@ -1,0 +1,167 @@
+\documentclass[unknownkeysallowed]{beamer}
+\usepackage[french,english]{babel}
+\usepackage{sty/beamer_js}
+\usepackage{sty/shortcuts_js}
+
+\usepackage{graphicx}
+\usepackage{dirtree}
+\newcommand{\Benchopt}{\texttt{Benchopt}}
+
+\graphicspath{{/home/temp/Pictures/Logos/}}
+
+\definecolor{tomcolor}{rgb}{0.,.3,.6}
+\lstset{basicstyle=\color{tomcolor}\scriptsize\ttfamily}
+\addbibresource{../biblio/biblio.bib}
+\captionsetup[subfigure]{labelformat=empty}
+\begin{document}
+\setbeamercovered{invisible}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%             Headers               %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\bigskip
+\bigskip
+\begin{center}{
+\LARGE\color{marron}
+\textbf{Code for Reproducible Research}
+\textbf{ }\\
+}
+
+\color{marron}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\textbf{ } \\
+\vspace{0.1cm}
+Thomas Moreau\\
+\end{center}
+
+\centering
+\includegraphics[width=0.43\textwidth]{sharedimages/benchopt_logo.pdf}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Reproducible research}
+
+    Different goals:\\[.5em]
+    \begin{itemize}\itemsep.5em
+        \item Reproduce the exact same results?
+        \item Run with new parameters with robust results?
+        \item Run with a new dataset?
+        \item Extend the results with a new method?
+        \item Provide tools for other to use?
+    \end{itemize}
+    \vskip2em
+    {\centering \large Does not require the same set of tools!\\[2em]}
+    % \end{minipage}
+    \pause
+    {\centering \large Here is my take.\\}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Reproducing the same results}
+
+    Minimal requirement for a research project:\\[.5em]
+    \begin{itemize}\itemsep.5em
+        \item Write clean code:
+            \begin{itemize}
+                \item Consistent style: \emph{Use \texttt{black} or \texttt{flake8}}.
+                \item Use readable names.
+                \item No notebooks!
+            \end{itemize}
+        \item Document your code: \emph{docstring and \texttt{README.md}.}
+        \item Determinist output: \emph{Set a random seed!}
+    \end{itemize}
+    \vskip2em
+    Optional but advised
+    \begin{itemize}\itemsep.5em
+        \item Document dependencies.
+        \item Proper package organization
+        \item Add some tests: \emph{Use \texttt{pytest}.}
+    \end{itemize}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Extending the results?}
+
+
+    These advice makes it easier to reproduce the same results, but we want to extend them!
+    \pause
+    \vskip2em
+
+    Pain points of a benchmark:\\[.2em]
+    \begin{itemize}
+        \item competitors' methods do not work out of the box.
+        \item re-code methods and tools to integrate a new method.
+        \item hard to extend with new settings.
+    \end{itemize}
+    \vskip1em
+    {\centering \large all of this started from scratch by every submission!\\}
+    % \end{minipage}
+
+    \vskip2em
+
+
+    \Benchopt{} produces \textbf{open}, \textbf{reproducible}, \textbf{extendable} benchmarks
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Going further: creating a package}
+
+    If you really want to make your research \emph{reproductible} by other in different contexts, you need to properly package it.\\[2em]
+
+    \begin{itemize}
+        \item Documentation: \emph{Sphinx}.
+        \item Test on multiple platforms: \emph{Continuous Integration}.
+        \item Release on pypi/conda-forge
+        \item Talk about it ! :)
+    \end{itemize}
+
+    \vskip2em
+    Example of package:
+    \url{https://github.com/tomMoral/test_package}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conclusion}
+
+    Reproducible research needs more than just releasing code:\\[2em]
+
+    \begin{itemize}
+        \item Clean and Documented.
+        \item Reusable.
+        \item Extendable.
+    \end{itemize}
+
+    \vskip2em
+    Use proper tools to make it possible!
+    \vskip2em
+    Research is also collaborative: don't hesitate to report your issues and give feedback :)
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[main_tikz.tex]{subfiles}
+
+\begin{document}
+\begin{tikzpicture}[scale=1]
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    varstyle/.style={
+           rectangle,
+           fill=white,
+           rounded corners,
+           draw=black, very thick,
+           text width=2em,
+           minimum height=2em,
+           text centered},
+    %Define style for operators
+    op/.style={
+           circle,
+           draw=black, very thick,
+           fill=white,
+           text width=.5em,
+           minimum height=.3em,
+           text centered},
+    %Define style for st
+    st/.style={
+           draw,
+           thick,
+           rectangle,
+           fill=white,
+           text width=2.2em,
+           minimum height=2.2em,},
+    text_st/.style={font=\scriptsize},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+          % shorten <=2pt,
+           %shorten >=2pt,}
+    }
+};
+
+
+\def\nlayer{3}
+
+%nodes
+\node (X) {$x$};
+\node[right=1em of X] (linear) {}; %{$W_X$};
+\node[below=3.3em of linear] (p0) {};
+\node[above=1.45em of p0, inner sep=0] (B) {};
+\draw[thick] (linear.center) -- (p0);
+
+%% 3rd node
+\foreach \i in {1,...,\nlayer}{
+    \pgfmathsetmacro\j{int(\i - 1)}
+    % Declare the 1st node and link it to the previous one
+
+    % Declare the 2 other nodes
+    \node[varstyle, right=1em of p\j] (S\i) {$f_{\i}$};
+    \node[op, inner sep=4pt, right=1.45em of S\i] (p\i) {};
+    \node[above=.8em of p\i,inner sep=0] (B\i) {};
+
+    % Draw plus sign
+    \draw ($ (p\i.north) - (0, .15)$) -- ($ (p\i.south) + (0, .15)$);
+    \draw ($ (p\i.east) - (.15, 0)$) -- ($ (p\i.west) + (.15, 0)$);
+
+
+
+    % Rest of the paths
+    \path (p\j.east) edge[pil] (S\i.west);
+    \path (S\i.east) edge[pil] (p\i.west);
+    \draw[pil] (X) -| (p\i.north);
+}
+\draw[pil] (B) |- (S1.west);
+
+
+\pgfmathsetmacro\L{int(\nlayer + 1)}
+\node[right=1em of p\nlayer] (Z) {$F_{\nlayer}(x)$};
+\path (p\nlayer.east) edge[pil] (Z.west);
+
+
+\end{tikzpicture}
+\end{document}

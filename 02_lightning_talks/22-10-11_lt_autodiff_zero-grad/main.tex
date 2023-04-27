@@ -1,0 +1,143 @@
+\documentclass{beamer}
+
+\usepackage[beamer]{shortcut}
+\graphicspath{{./images/}}
+
+\def\biblio{
+    \nobibliography{../../library}
+    \def\biblio{}
+}
+
+\institute{INRIA Saclay}
+\author{Thomas Moreau}
+\title{
+    Automatic differentiation:\\
+    the \texttt{zero\_grad} case
+}
+
+\setbeamertemplate{title page}[frame]
+\def\extraLogo{}
+
+
+\definecolor{tomcolor}{rgb}{0.,.3,.6}
+\definecolor{kw}{RGB}{0,112,26}
+\definecolor{var}{RGB}{0,133,182}
+\definecolor{func}{RGB}{0,35,126}
+\definecolor{palegreen}{RGB}{236,240,241}
+\setbeamercolor{bgcolor}{fg=black!60,bg=palegreen}
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+    	\biblio{}
+    \end{frame}
+
+    \frame{
+        \frametitle{The anoying \texttt{zero\_grad}}
+
+        Who never forgot the \texttt{zero\_grad} in a deep learning training loop?\\[1em]
+
+        \begin{beamercolorbox}[rounded=true,shadow=true,leftskip=2ex,colsep*=.75ex]{bgcolor}%
+            \texttt{
+                \textcolor{kw}{\bf for} \textcolor{var}{X}, \textcolor{var}{y} \textcolor{kw}{in} \textcolor{var}{data\_loader}:\\
+                \hskip4ex \textcolor{var}{model}.\textbf{\textcolor{red!70}{zero\_grad}}()\\
+                \hskip4ex \textcolor{var}{y\_pred} = \textcolor{var}{model}(\textcolor{var}{X})\\
+                \hskip4ex \textcolor{var}{loss} = \textcolor{var}{criterion}(\textcolor{var}{y\_pred}, \textcolor{var}{y})\\
+                \hskip4ex \textcolor{var}{loss}.backward()\\[1em]
+                \hskip4ex \textcolor{var}{optimizer}.step()\\
+            }
+        \end{beamercolorbox}%
+
+        \vskip1em
+        \strongpoint{This leads to bad gradient... Why?}
+
+    }
+
+    \begin{frame}{\texttt{backward}: Automatic differentiation}
+        \myitem{} Method to compute efficiently the gradient of a composition of function \texttt{loss}(x)$= F_n(x) = f_n \circ \dots f_0(x)$.\\[2em]
+        \myitem{} Make use of the chain rule for a composition :\\[1em]
+        \[
+            \textbf{Forward:} \quad\frac{d F_{k+1}}{d x}(x) = \frac{\partial f_{k+1}}{\partial f_{k}}(F_k(x))\frac{d F_{k}}{d x}(x)
+        \]
+        \[
+            \textbf{Backward:} \quad\frac{d F_{n}}{d F_k(x)}(F_k(x)) = \frac{d F_{n}}{d F_{k+1}}(F_{k+1}(x))\frac{\partial f_{k+1}}{\partial f_{k}}(F_k(x))
+        \]
+        \vskip1em
+        \myitem{} Usually compute the gradient for leaf of the computational graph.
+
+
+    \end{frame}
+    \begin{frame}{Automatic differentiation}
+        Forward and reverse differentiation are 2 ways to compute the same product:
+        \[
+        \begin{split}
+        \frac{d F_n}{d x}(x)
+            & = \frac{\partial f_n}{\partial f_{n-1}}(f_{n-1}(x))
+                \frac{\partial f_{n-1}}{\partial f_{n-2}}(f_{n-2}(x))
+                \dots
+                \frac{\partial f_1}{\partial f_0}(f_0(x))
+                \frac{\partial f_0}{\partial x}(x)\\
+            & = \Bigg(\underbrace{\Big(\frac{\partial f_n}{\partial f_{n-1}}
+                \frac{\partial f_{n-1}}{\partial f_{n-2}}
+                \dots\Big)}_{\frac{d F_n}{d F_{k}}(F_{k}(x))}
+                \frac{\partial f_1}{\partial f_0}\Bigg)
+                \frac{\partial f_0}{\partial x}\\
+            & = \frac{\partial f_n}{\partial f_{n-1}}
+                \Bigg(\frac{\partial f_{n-1}}{\partial f_{n-2}}
+                \underbrace{\Big(\dots
+                \frac{\partial f_1}{\partial f_0}
+                \frac{\partial f_0}{\partial x}\Big)}_{\frac{d F_k}{d x}(x)}\Bigg)
+        \end{split}
+        \]
+    \end{frame}
+
+    \frame{
+        \frametitle{What about residual connections?}
+
+        Residual connections (or weight sharing):
+        \[
+            F_{k+1}(x) = f_{k+1}(x + F_k(x))
+        \]
+        This creates a graph structure that is much more complex:\\[.5em]
+        {\centering
+            \alt<1>{\inputTikZ{1}{connected}}{\inputTikZ{1}{separated}}\\[1em]
+        }
+        \alt<1>{
+            Backpropagation in this case gives:
+            \[
+            \frac{d F_{n}}{d x} = \sum_{i=0}^n\frac{d F_{n}}{d F_k}
+        \]}{
+            With aggregation, it becomes simpler. Each $x$ is a leaf of the computational graph:
+            \[
+                \frac{d F_{n}}{d x} \mathrel{+}= \frac{d F_{n}}{d F_k}
+        \]}
+
+        \visible<3>{
+            \vskip.5em
+            That is why the gradients are aggregated by default.\\
+            \strongpoint{Thus the need for \texttt{zero\_grad}!}
+        }
+
+    }
+
+    \frame{
+        \frametitle{Another benefit from aggregation}
+
+        We can split the processing of a batch if it doesn't fit memory:\\[1em]
+
+        \begin{beamercolorbox}[rounded=true,shadow=true,leftskip=2ex,colsep*=.75ex]{bgcolor}%
+            \texttt{%
+            \textcolor{kw}{\bf for} \textcolor{var}{X}, \textcolor{var}{y} \textcolor{kw}{in} \textcolor{var}{data\_loader}:\\
+            \hskip4ex \textcolor{var}{model}.\textbf{\textcolor{red!70}{zero\_grad}}()\\[1em]
+            \hskip4ex \# Gradient are aggregated\\
+            \hskip4ex\textcolor{kw}{\bf for} \textcolor{var}{X\_i}, \textcolor{var}{y\_i} \textcolor{kw}{in} \textcolor{func}{zip}(\textcolor{var}{X}, \textcolor{var}{y}):\\
+            \hskip8ex \textcolor{var}{y\_pred} = \textcolor{var}{model}(\textcolor{var}{X\_i})\\
+            \hskip8ex \textcolor{var}{loss} = \textcolor{var}{criterion}(\textcolor{var}{y\_pred}, \textcolor{var}{y\_i})\\
+            \hskip8ex \textcolor{var}{loss}.backward()\\[1em]
+            \hskip4ex \textcolor{var}{optimizer}.step()\\
+            }
+        \end{beamercolorbox}%
+    }
+
+\end{document}
