@@ -1,0 +1,148 @@
+\documentclass{beamer}
+
+\usepackage[beamer]{shortcut}
+\graphicspath{{./images/}}
+
+\def\biblio{
+    \nobibliography{library}
+    \def\biblio{}
+}
+
+\institute{INRIA Saclay}
+\author{Thomas Moreau}
+\title{
+    EULPS: Event-based Unsupervised Learning for Physiological Signals
+}
+
+\setbeamertemplate{title page}[frame]
+\setbeamercovered{invisible}
+\def\extraLogo{\vskip-4em\includegraphics[height=8em]{logo_EULPS}}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    % \biblio{}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+\begin{frame}{Test}
+    content...
+    \cite{Moreau2018}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+\frame[t]{
+    \frametitle{Principal Investigator: Thomas Moreau}
+
+    {\bf Carrier Path:}\\[.5em]
+    \highlightbox{\parbox{.9\textwidth}{
+        \begin{tabular}{c p{2ex} l p{2ex} c}
+            {\bf\color{black} 2014-2017}&&PhD in && ENS Cachan\\
+            {\bf\color{black} 2018-2019}&&Postdoc && Inria\\
+            {\bf\color{black} 2019-Present}&&Research faculty&& Inria\\
+
+        \end{tabular}
+
+    }}
+
+    % tikz figure with 3 circles linked with arrows going forward and backward and the the following text in each circle:
+    % - Core ML
+    %- Applications
+    % - Software
+    \begin{tikzpicture}[overlay, remember picture]
+
+        \node[anchor=south, xshift=-12ex, yshift=9em] at (current page.south) (cloud_ML) {\includegraphics[width=15ex]{cloud}};
+        \node[anchor=north, yshift=.7em] at (cloud_ML) (ML) {Core ML\phantom{p}};
+        \node[anchor=south, xshift=12ex, yshift=9em] at (current page.south) (cloud_app) {\includegraphics[width=15ex]{cloud}};
+        \node[anchor=north, yshift=.3em] at (cloud_app) (App) {Applications};
+        \node[anchor=south, yshift=2em] at (current page.south) (cloud_soft) {\includegraphics[width=15ex]{cloud}};
+        \node[anchor=north, yshift=.7em] at (cloud_soft) (Soft) {Software\phantom{p}};
+
+        \draw[-latex] (cloud_app) to[bend right=5] node[above,rotate=60] {} (cloud_ML);
+        \draw[-latex] (cloud_ML) to[bend right=5] node[above,rotate=60] {} (cloud_app);
+        \draw[-latex] (cloud_app) to[bend right=5] node[above,rotate=60] {} (cloud_soft);
+        \draw[-latex] (cloud_soft) to[bend right=5] node[above,rotate=60] {} (cloud_app);
+        \draw[-latex] (cloud_soft) to[bend right=5] node[above,rotate=60] {} (cloud_ML);
+        \draw[-latex] (cloud_ML) to[bend right=5] node[above,rotate=60] {} (cloud_soft);
+
+        \node[anchor=west, xshift=-1ex, yshift=3ex] at (cloud_soft.east) {\includegraphics[height=3em]{logo_benchopt}};
+        \node[anchor=east, xshift=-1ex, yshift=4ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_joblib}};
+        \node[anchor=east, xshift=-1ex, yshift=-3ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_loky}};
+    \end{tikzpicture}
+
+    \highlight{\parbox[c]{.18\textwidth}{
+        \small 10 ML conf paper in the last years
+    }}
+    \hfill
+    \highlight{\parbox[c]{.2\textwidth}{TEst}}\\
+
+}
+
+%------------------------------------------------------------------------------
+\frame{
+    \frametitle[t]{Recent advances in ML}
+
+    \begin{columns}[T]
+        \column{.2\textwidth}\centering
+        \includegraphics[height=4em]{logo_chatGPT}\\
+        \textbf{ChatGPT}
+        \column{.2\textwidth}\centering
+        \includegraphics[height=4em]{logo_midjourney}\\
+        \textbf{Midjourney}
+    \end{columns}
+    \vskip2em
+    {\centering \Large What do they have in common?\\}
+
+    \vskip2em
+    \pause
+
+    \begin{columns}[T]
+        \techterm{Unsupervised Pretraining}
+        \visible<3>{\techterm{Global Interaction}}
+    \end{columns}
+
+    \only<2>{
+        \vskip2em
+        \begin{itemize}\itemindent4em
+            \item Leverages large amount of unlabeled data.
+            \item Learn "good" representation.
+            \item Can be tweaked for various tasks.
+        \end{itemize}
+    }
+
+    \only<3>{
+        \vskip2em
+        \begin{itemize}\itemindent4em
+            \item Transformers, Self-attention, Cross attention, \dots.
+            \item Capture long range interactions.
+        \end{itemize}
+    }
+
+
+}
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \frametitle{Non-stationary signals have events}
+
+    \begin{itemize}
+        \item ECG: heart beat
+        \item Gait: steps
+        \item
+    \end{itemize}
+
+    \strongpoint{Building blocks of the signals}
+    \strongpoint{Sparsify the signals}
+}
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \bibliography{library}
+}
+
+\end{document}
