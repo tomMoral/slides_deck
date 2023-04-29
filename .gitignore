@@ -12,3 +12,10 @@
 *.synctex.gz
 **/.build/
 **/build/
+
+# IDE specific folders
+.vscode
+
+# Separate repos
+/benchopt/
+/team-parietal/
