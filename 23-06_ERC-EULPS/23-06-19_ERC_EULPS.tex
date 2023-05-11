@@ -16,7 +16,19 @@
 
 \setbeamertemplate{title page}[frame]
 \setbeamercovered{invisible}
-\def\extraLogo{\vskip-4em\includegraphics[height=8em]{logo_EULPS}}
+% \def\extraLogo{\vskip-4em\includegraphics[height=8em]{logo_EULPS}}
+
+\setlength\SizeLogoPage{8em}
+\def\LOGOS{
+% \includeLogos[1em]{logo_mind_big,logo_EULPS,logo_inria}\\[.5em]
+    \vskip-1em
+    \raisebox{-1.5em}{\includegraphics[height=3em]{logo_inria}}
+    \hskip2em
+    \raisebox{-4em}{\includegraphics[height=8em]{logo_EULPS}}
+    \hskip2em
+    \raisebox{-1.5em}{\includegraphics[height=3em]{logo_mind_big}}\\[.5em]
+}
+\collaborators[]{Audition ERC StG 2023 -- PE6}
 
 \begin{document}
 
@@ -26,11 +38,292 @@
 \end{frame}
 
 %------------------------------------------------------------------------------
+{
+\usebackgroundtemplate{
+    \begin{picture}(400, 300)(45, 0)
+        \includegraphics[
+            width=1.16\paperwidth
+        ]{GA_monitor}
+    \end{picture}
+}
+\frame{
+    \frametitle{General Anesthesia recordings}
 
-\begin{frame}{Test}
-    content...
-    \cite{Moreau2018}
+
+    \begin{tikzpicture}[overlay, remember picture]
+        \visible<2->{
+            \node[anchor=center, white, xshift=-32ex, yshift=-9em] at (current page.north) (ECG) {\highlight{\Large \bf ECG}};
+            \node[anchor=center, white, xshift=-12ex, yshift=-6em] at (current page.north) (ECG_head) {};
+            \draw[->, very thick, white] (ECG) -- (ECG_head);
+
+            \node[anchor=center, white, xshift=-32ex, yshift=-12.5em] at (current page.north) (Pleth) {\highlight{\Large \bf Pleth.}};
+            \node[anchor=center, white, xshift=-16ex, yshift=-11.5em] at (current page.north) (Pleth_head) {};
+            \draw[->, very thick, white] (Pleth) -- (Pleth_head);
+
+            \node[anchor=center, white, xshift=-32ex, yshift=-16.5em] at (current page.north) (Resp) {\highlight{\Large \bf Resp.}};
+            \node[anchor=center, white, xshift=-20ex, yshift=-15.5em] at (current page.north) (Resp_head) {};
+            \draw[->, very thick, white] (Resp) -- (Resp_head);
+        }
+        \only<3>{
+            \node[anchor=south, yshift=5em] at (current page.south) {
+                \highlight{\parbox{.5\textwidth}{
+                    \vskip.3em
+                    \centering
+                    Need to model and summarize complex signals
+                    \vskip.3em
+                }}
+            };
+        }
+
+    \end{tikzpicture}
+}
+}
+
+%------------------------------------------------------------------------------
+\frame{
+    \frametitle[t]{Recent successes in AI}
+
+    \begin{columns}[T]
+        \column{.2\textwidth}\centering
+        \includegraphics[height=4em]{logo_chatGPT}\\
+        \textbf{ChatGPT}
+        \column{.2\textwidth}\centering
+        \includegraphics[height=4em]{logo_copilot}\\
+        \textbf{Copilot}
+        \column{.2\textwidth}\centering
+        \includegraphics[height=4em]{logo_midjourney}\\
+        \textbf{Midjourney}
+    \end{columns}
+    \vskip2em
+    {\centering \Large What do they have in common?\\}
+
+    \vskip2em
+    \pause
+
+    \begin{columns}[T]
+        \techterm{Unsupervised Pretraining}
+        \visible<3->{\techterm{Global Interaction Model}}
+    \end{columns}
+
+    \vskip2em
+
+    \only<2>{
+        \begin{itemize}\itemindent3em
+            \item Leverages large amount of unlabeled data.
+            \item Learn "good" representation characterizing $\mathbb P(X)$.
+            \item Easy fine-tuning for various tasks.
+        \end{itemize}
+    }
+
+    \only<3>{
+        \begin{itemize}\itemindent3em
+            \item Shift from convolution to self-attention.
+            \item Capture long range interactions.
+            \item Hierarchical structure for $\mathbb P(X)$.
+        \end{itemize}
+    }
+    \only<4>{
+        \strongpoint{Powerful tools are based on symbolic representation of the complex data distribution $\mathbb P(X)$.}
+        \strongpoint{What are the tokens for the signals?}
+    }
+
+
+}
+
+
+%------------------------------------------------------------------------------
+{
+\usebackgroundtemplate{
+    \begin{picture}(400, 300)(45, 0)
+        \includegraphics[
+            width=1.16\paperwidth
+        ]{GA_monitor}
+    \end{picture}
+}
+\frame{
+    \frametitle{Event: signals' building blocks}
+
+
+    \begin{tikzpicture}[overlay, remember picture]
+        \visible<1->{
+            \node[anchor=center, white, xshift=-32ex, yshift=-9em] at (current page.north) (ECG) {\large \bf ECG};
+            \node[anchor=center, white, xshift=-12ex, yshift=-6em] at (current page.north) (ECG_head) {};
+            \draw[->, very thick, white] (ECG) -- (ECG_head);
+
+            \node[anchor=center, white, xshift=-32ex, yshift=-12.5em] at (current page.north) (Pleth) {\Large \bf Pleth.};
+            \node[anchor=center, white, xshift=-16ex, yshift=-11.5em] at (current page.north) (Pleth_head) {};
+            \draw[->, very thick, white] (Pleth) -- (Pleth_head);
+
+            \node[anchor=center, white, xshift=-32ex, yshift=-16.5em] at (current page.north) (Resp) {\Large \bf Resp.};
+            \node[anchor=center, white, xshift=-20ex, yshift=-15.5em] at (current page.north) (Resp_head) {};
+            \draw[->, very thick, white] (Resp) -- (Resp_head);
+
+            \node[rectangle, white, draw=white, very thick,
+                minimum width=6ex,
+                minimum height=2.2em, xshift=-11ex, yshift=-5.5em]
+                    at (current page.north) {};
+            \node[rectangle, white, draw=white, very thick,
+                minimum width=6ex,
+                minimum height=2.2em, xshift=-13.5ex, yshift=-11.5em]
+                    at (current page.north) {};
+            \node[rectangle, white, draw=white, very thick,
+                minimum width=6ex,
+                minimum height=2.2em, xshift=-18ex, yshift=-15.5em]
+                    at (current page.north) {};
+
+            \node[anchor=east, xshift=-3em] at (current page.east)
+                {\parbox{.3\textwidth}{
+                    \addtobeamertemplate{block begin}{%
+                    \setlength{\textwidth}{0.3\textwidth}}{}
+                    \begin{block}{External events}
+                    \begin{itemize}
+                        \item Drug injection,
+                        \item Surgery acts,
+                        \item \dots
+                    \end{itemize}
+                \end{block}
+                }};
+
+
+    \end{tikzpicture}
+}
+}
+}
+
+
+
+%------------------------------------------------------------------------------
+
+\begin{frame}[t]{Event: signals' building blocks}
+
+    \vskip-1em
+    \begin{columns}[T]
+        \column{.5\textwidth}
+        \centering
+        \overimg[\linewidth]{1}{accelero}{2}{accelero_dict}\\
+        {\large Gait analysis}
+
+        \overimg[\linewidth]{1}{Hubble}{2}{Hubble_dict}\\
+        {\large Astronomy}\\
+    \column{.5\textwidth}
+        \centering
+        \overimg[.9\linewidth]{1}{meg_signal}{2}{meg_dict}\\
+        {\large MEG}\\
+        \overimg[.9\linewidth]{1}{tokamak}{2}{tokamak_dict}\\
+        {\large Plasma Simulation}\\
+
+    \end{columns}
+
+    \visible<2>{\vskip-12em
+    \centering
+    \highlight{
+        General for physical signals
+    }\\
+    }
 \end{frame}
+
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \frametitle{EULPS: Event-based unsupervised learning for Physiological Signals}
+
+    \begin{block}{Goal}
+        Develop {\bf unsupervised learning} methods to
+        jointly model events in {\bf physiological signals}.
+    \end{block}
+
+    \vskip1em
+    {\bf Core idea:} Factorize the signals' distribution $\mathbb P(X)$ as the distribution of its events $\mathbb P(\{T_k\}_k)$.
+    \vskip1em
+
+    \begin{columns}[T]
+        \techterm{Anomaly detection}
+        \techterm{Classification/Forecasting}
+        \techterm{Causality}
+    \end{columns}
+    \begin{columns}[T]
+        \column{.3\textwidth}
+        \includegraphics[width=1\textwidth]{anomaly_detection}
+        \column{.3\textwidth}
+        \includegraphics[width=\textwidth]{forecasting}
+        \column{.3\textwidth}
+        \includegraphics[width=\textwidth]{images/causality.png}
+    \end{columns}
+
+
+}
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \frametitle{WP1: Parametric PP to model Physiological Signals Events}
+
+    \begin{block}{Challenge 1}
+        Parametric models for $\mathbb P(\{T_k\}_k)$ adapted to physiological signals.
+    \end{block}
+
+    \begin{itemize}
+        \item Framework of point processes: model event arrival,
+        \item Existing methods focus on network interactions,
+        \item Location variability is key for signal.
+    \end{itemize}
+
+    \begin{columns}
+        \column{.6\textwidth}
+        \includegraphics[width=\textwidth]{csc_and_pp}\\
+        \column{.4\textwidth}
+        \includegraphics[width=\textwidth]{connectivity_default_mode}
+    \end{columns}
+    {\centering
+    }
+}
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \frametitle{WP2: Event-based unsupervised waveform learning for physiological signals}
+
+    \begin{block}{Challenge 2}
+        Joint modeling of signals and events.
+    \end{block}
+
+    \vskip2em
+    \begin{columns}
+        \column{.5\textwidth}
+        {\centering
+        \highlight{Parametric models}}\\[1em]
+        \begin{itemize}
+            \item Sample efficiency
+            \item Interpretable
+        \end{itemize}
+        \column{.5\textwidth}
+        {\centering
+        \highlight{Deep Learning models}}\\[1em]
+        \begin{itemize}
+            \item Fully differentiable,
+            \item Interpretable
+        \end{itemize}
+    \end{columns}
+}
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \frametitle{WP3: Leveraging unsupervised representations for actionable feedbacks}
+
+    \begin{block}{Challenge 3}
+        Develop methods to fine tune models to solve anomaly detection using $\mathbb P(X)$.
+    \end{block}
+
+}
+
+%------------------------------------------------------------------------------
+
+\frame{
+    \frametitle{WP4: Reproducible and reusable event base signal analysis research}
+
+}
 
 %------------------------------------------------------------------------------
 
@@ -40,7 +333,7 @@
     {\bf Carrier Path:}\\[.5em]
     \highlightbox{\parbox{.9\textwidth}{
         \begin{tabular}{c p{2ex} l p{2ex} c}
-            {\bf\color{black} 2014-2017}&&PhD in && ENS Cachan\\
+            {\bf\color{black} 2014-2017}&&PhD && ENS Cachan\\
             {\bf\color{black} 2018-2019}&&Postdoc && Inria\\
             {\bf\color{black} 2019-Present}&&Research faculty&& Inria\\
 
@@ -68,9 +361,12 @@
         \draw[-latex] (cloud_soft) to[bend right=5] node[above,rotate=60] {} (cloud_ML);
         \draw[-latex] (cloud_ML) to[bend right=5] node[above,rotate=60] {} (cloud_soft);
 
-        \node[anchor=west, xshift=-1ex, yshift=3ex] at (cloud_soft.east) {\includegraphics[height=3em]{logo_benchopt}};
+        \node[anchor=east, xshift=-20ex] at (cloud_soft.west) {\includegraphics[height=2em]{logo_python}};
+        \node[anchor=east, xshift=-10ex] at (cloud_soft.west) {\includegraphics[height=2em]{logo_sklearn}};
         \node[anchor=east, xshift=-1ex, yshift=4ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_joblib}};
         \node[anchor=east, xshift=-1ex, yshift=-3ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_loky}};
+        \node[anchor=west, xshift=-1ex, yshift=3ex] at (cloud_soft.east) {\includegraphics[height=3em]{logo_benchopt}};
+        \node[anchor=west, xshift=10ex] at (cloud_soft.east) {\includegraphics[height=3em]{brain_and_signals}};
     \end{tikzpicture}
 
     \highlight{\parbox[c]{.18\textwidth}{
@@ -82,62 +378,23 @@
 }
 
 %------------------------------------------------------------------------------
+
 \frame{
-    \frametitle[t]{Recent advances in ML}
-
-    \begin{columns}[T]
-        \column{.2\textwidth}\centering
-        \includegraphics[height=4em]{logo_chatGPT}\\
-        \textbf{ChatGPT}
-        \column{.2\textwidth}\centering
-        \includegraphics[height=4em]{logo_midjourney}\\
-        \textbf{Midjourney}
-    \end{columns}
-    \vskip2em
-    {\centering \Large What do they have in common?\\}
-
-    \vskip2em
-    \pause
-
-    \begin{columns}[T]
-        \techterm{Unsupervised Pretraining}
-        \visible<3>{\techterm{Global Interaction}}
-    \end{columns}
-
-    \only<2>{
-        \vskip2em
-        \begin{itemize}\itemindent4em
-            \item Leverages large amount of unlabeled data.
-            \item Learn "good" representation.
-            \item Can be tweaked for various tasks.
-        \end{itemize}
-    }
-
-    \only<3>{
-        \vskip2em
-        \begin{itemize}\itemindent4em
-            \item Transformers, Self-attention, Cross attention, \dots.
-            \item Capture long range interactions.
-        \end{itemize}
-    }
-
+    \frametitle{EULPS}
 
 }
+
+
+
+\appendix
 
 %------------------------------------------------------------------------------
 
-\frame{
-    \frametitle{Non-stationary signals have events}
+\begin{frame}{Test}
+    content...
+    \cite{Moreau2018}
+\end{frame}
 
-    \begin{itemize}
-        \item ECG: heart beat
-        \item Gait: steps
-        \item
-    \end{itemize}
-
-    \strongpoint{Building blocks of the signals}
-    \strongpoint{Sparsify the signals}
-}
 
 %------------------------------------------------------------------------------
 
