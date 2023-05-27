@@ -30,11 +30,13 @@
 }
 \collaborators[]{Audition ERC StG 2023 -- PE6}
 
+\newcommand{\fakecite}[1]{\textcolor{gray}{[{\color{linkcolor} #1}]}}
+
 \begin{document}
 
 \begin{frame}
     \titlepage
-    % \biblio{}
+    \biblio{}
 \end{frame}
 
 %------------------------------------------------------------------------------
@@ -43,7 +45,7 @@
     \begin{picture}(400, 300)(45, 0)
         \includegraphics[
             width=1.16\paperwidth
-        ]{GA_monitor}
+        ]{GA_monitor_1}
     \end{picture}
 }
 \frame{
@@ -51,37 +53,56 @@
 
 
     \begin{tikzpicture}[overlay, remember picture]
-        \visible<2->{
-            \node[anchor=center, white, xshift=-32ex, yshift=-9em] at (current page.north) (ECG) {\highlight{\Large \bf ECG}};
-            \node[anchor=center, white, xshift=-12ex, yshift=-6em] at (current page.north) (ECG_head) {};
-            \draw[->, very thick, white] (ECG) -- (ECG_head);
+            \node[anchor=center, white, xshift=-32ex, yshift=-6em] at (current page.north) (ECG) {\highlight[shadow=false]{\Large \bf ECG}};
+            \node[anchor=center, white, xshift=-13ex, yshift=-7.5em] at (current page.north) (ECG_head) {};
+            \draw[->, very thick, white] (ECG.east) -- (ECG_head);
 
-            \node[anchor=center, white, xshift=-32ex, yshift=-12.5em] at (current page.north) (Pleth) {\highlight{\Large \bf Pleth.}};
-            \node[anchor=center, white, xshift=-16ex, yshift=-11.5em] at (current page.north) (Pleth_head) {};
-            \draw[->, very thick, white] (Pleth) -- (Pleth_head);
+            \node[anchor=center, white, xshift=-32ex, yshift=-9.5em] at (current page.north) (Pleth) {\highlight[shadow=false]{\Large \bf Pleth.}};
+            \node[anchor=center, white, xshift=-11ex, yshift=-10.5em] at (current page.north) (Pleth_head) {};
+            \draw[->, very thick, white] (Pleth.east) -- (Pleth_head);
 
-            \node[anchor=center, white, xshift=-32ex, yshift=-16.5em] at (current page.north) (Resp) {\highlight{\Large \bf Resp.}};
-            \node[anchor=center, white, xshift=-20ex, yshift=-15.5em] at (current page.north) (Resp_head) {};
-            \draw[->, very thick, white] (Resp) -- (Resp_head);
-        }
-        \only<3>{
-            \node[anchor=south, yshift=5em] at (current page.south) {
-                \highlight{\parbox{.5\textwidth}{
-                    \vskip.3em
-                    \centering
-                    Need to model and summarize complex signals
-                    \vskip.3em
-                }}
+            \node[anchor=center, white, xshift=-32ex, yshift=-13.5em] at (current page.north) (Resp) {\highlight[shadow=false]{\Large \bf Resp.}};
+            \node[anchor=center, white, xshift=-7ex, yshift=-15em] at (current page.north) (Resp_head) {};
+            \draw[->, very thick, white] (Resp.east) -- (Resp_head);
+
+            \node[anchor=center, white, xshift=-32ex, yshift=-16.5em] at (current page.north) (EEG) {\highlight[shadow=false]{\Large \bf EEG}};
+            \node[anchor=center, white, xshift=-5ex, yshift=-17.5em] at (current page.north) (EEG_head) {};
+            \draw[->, very thick, white] (EEG.east) -- (EEG_head);
+            \node[anchor=north west, xshift=18ex, yshift=-6em] at (current page.north) {
+                \highlight[shadow=false]{Indicators}
             };
-        }
 
     \end{tikzpicture}
 }
 }
 
-%------------------------------------------------------------------------------
 \frame{
-    \frametitle[t]{Recent successes in AI}
+    \frametitle{AI-powered General Anesthesia}
+
+    \begin{columns}
+        \column{.4\textwidth}
+        \includegraphics[width=\textwidth]{seringe1}
+        \column{.6\textwidth}
+        Anesthetists make {\bf decisions} based on these indicators.\\[1em]
+
+        \begin{itemize}\itemsep.5em
+            \color{black}\normalfont
+            \item Instantaneous snapshot,
+            \item Reading needs expertise,
+            \item Not personalized.
+        \end{itemize}
+        \vskip1em
+        F. Vallée and the MASCOT team from LAriboisière (hospital in Paris) have been collecting GA recordings for 5 years.
+        \vskip2em
+        \strongpoint{Can we leverage AI to better drive GA?}
+    \end{columns}
+
+
+}
+
+%------------------------------------------------------------------------------
+\frame[t]{
+    \frametitle[t]{Recent successes in AI: Foundation Models}
 
     \begin{columns}[T]
         \column{.2\textwidth}\centering
@@ -94,42 +115,31 @@
         \includegraphics[height=4em]{logo_midjourney}\\
         \textbf{Midjourney}
     \end{columns}
-    \vskip2em
-    {\centering \Large What do they have in common?\\}
+    \vskip1em
+    {\centering \large What do they have in common?\\}
 
-    \vskip2em
     \pause
 
+    \vskip1em
     \begin{columns}[T]
         \techterm{Unsupervised Pretraining}
-        \visible<3->{\techterm{Global Interaction Model}}
+        \techterm{Transformers}
+        \techterm{Fine-tuning}
     \end{columns}
-
-    \vskip2em
-
-    \only<2>{
-        \begin{itemize}\itemindent3em
-            \item Leverages large amount of unlabeled data.
-            \item Learn "good" representation characterizing $\mathbb P(X)$.
-            \item Easy fine-tuning for various tasks.
-        \end{itemize}
-    }
+    \vskip1em
+    \myitem{} Characterize $\mathbb P(X)$ through interaction between {\bf tokens}.
 
     \only<3>{
-        \begin{itemize}\itemindent3em
-            \item Shift from convolution to self-attention.
-            \item Capture long range interactions.
-            \item Hierarchical structure for $\mathbb P(X)$.
+        \vskip1em
+        {\bf Challenges for signals:}\\[1em]
+        \begin{itemize}\itemsep.5em
+            \item Databases are smaller than Text and Images,
+            \item What are the tokens for the physiological signals?
         \end{itemize}
-    }
-    \only<4>{
-        \strongpoint{Powerful tools are based on symbolic representation of the complex data distribution $\mathbb P(X)$.}
-        \strongpoint{What are the tokens for the signals?}
     }
 
 
 }
-
 
 %------------------------------------------------------------------------------
 {
@@ -137,78 +147,95 @@
     \begin{picture}(400, 300)(45, 0)
         \includegraphics[
             width=1.16\paperwidth
-        ]{GA_monitor}
+        ]{GA_monitor_1}
     \end{picture}
 }
 \frame{
-    \frametitle{Event: signals' building blocks}
+    \frametitle{Signals' tokens: Patterns and Events}
 
 
     \begin{tikzpicture}[overlay, remember picture]
-        \visible<1->{
-            \node[anchor=center, white, xshift=-32ex, yshift=-9em] at (current page.north) (ECG) {\large \bf ECG};
-            \node[anchor=center, white, xshift=-12ex, yshift=-6em] at (current page.north) (ECG_head) {};
-            \draw[->, very thick, white] (ECG) -- (ECG_head);
 
-            \node[anchor=center, white, xshift=-32ex, yshift=-12.5em] at (current page.north) (Pleth) {\Large \bf Pleth.};
-            \node[anchor=center, white, xshift=-16ex, yshift=-11.5em] at (current page.north) (Pleth_head) {};
-            \draw[->, very thick, white] (Pleth) -- (Pleth_head);
+        \node[anchor=west, yshift=7em] at (current page.west)
+            (patterns) {\highlight[shadow=false]{Signal's patterns}};
 
-            \node[anchor=center, white, xshift=-32ex, yshift=-16.5em] at (current page.north) (Resp) {\Large \bf Resp.};
-            \node[anchor=center, white, xshift=-20ex, yshift=-15.5em] at (current page.north) (Resp_head) {};
-            \draw[->, very thick, white] (Resp) -- (Resp_head);
+        \node[anchor=west, yshift=-2.5em] at (patterns.west) (ECG) {\highlight[shadow=false]{\color{black}\normalfont Heartbeat}};
+        \node[anchor=center, white, xshift=-13ex, yshift=-7.5em] at (current page.north) (ECG_head) {};
+        \draw[->, very thick, white] (ECG.east) -- (ECG_head);
 
-            \node[rectangle, white, draw=white, very thick,
-                minimum width=6ex,
-                minimum height=2.2em, xshift=-11ex, yshift=-5.5em]
-                    at (current page.north) {};
-            \node[rectangle, white, draw=white, very thick,
-                minimum width=6ex,
-                minimum height=2.2em, xshift=-13.5ex, yshift=-11.5em]
-                    at (current page.north) {};
-            \node[rectangle, white, draw=white, very thick,
-                minimum width=6ex,
-                minimum height=2.2em, xshift=-18ex, yshift=-15.5em]
-                    at (current page.north) {};
+        \node[rectangle, white, draw=white, very thick,
+            minimum width=5ex,
+            minimum height=2em, xshift=-9ex, yshift=-7.8em]
+                at (current page.north) {};
 
-            \node[anchor=east, xshift=-3em] at (current page.east)
-                {\parbox{.3\textwidth}{
-                    \addtobeamertemplate{block begin}{%
-                    \setlength{\textwidth}{0.3\textwidth}}{}
-                    \begin{block}{External events}
-                    \begin{itemize}
-                        \item Drug injection,
-                        \item Surgery acts,
-                        \item \dots
-                    \end{itemize}
-                \end{block}
-                }};
+        \node[anchor=west, yshift=-5em] at (patterns.west) (Pleth) {\highlight[shadow=false]{\color{black}\normalfont  Dicrote}};
+        \node[anchor=center, white, xshift=-9ex, yshift=-10.5em] at (current page.north) (Pleth_head) {};
+        \draw[->, very thick, white] (Pleth.east) -- (Pleth_head);
 
+        \node[rectangle, white, draw=white, very thick,
+            minimum width=4ex,
+            minimum height=2em, xshift=-7ex, yshift=-10.8em]
+                at (current page.north) {};
+
+        \node[anchor=west, yshift=-7.5em] at (patterns.west) (Resp) {\highlight[shadow=false]{\color{black}\normalfont  Cycle}};
+        \node[anchor=center, white, xshift=-8ex, yshift=-15em] at (current page.north) (Resp_head) {};
+        \draw[->, very thick, white] (Resp.east) -- (Resp_head);
+
+        \node[rectangle, white, draw=white, very thick,
+            minimum width=4ex,
+            minimum height=2em, xshift=-6ex, yshift=-15.5em]
+                at (current page.north) {};
+
+        \node[anchor=west, yshift=-10em] at (patterns.west) (EEG) {\highlight[shadow=false]{\color{black}\normalfont  Brain waves}};
+        \node[anchor=center, white, xshift=-5ex, yshift=-17.5em] at (current page.north) (EEG_head) {};
+        \draw[->, very thick, white] (EEG.east) -- (EEG_head);
+
+        \node[rectangle, white, draw=white, very thick,
+            minimum width=6ex,
+            minimum height=1.3em, xshift=-2ex, yshift=-17.8em]
+                at (current page.north) {};
+
+
+
+
+        \node[anchor=east, xshift=-3em, yshift=7em] at (current page.east)
+            (events) {\highlight[shadow=false]{External events}};
+        \node[anchor=east, yshift=-2.5em] at (events.east)
+            {\highlight[shadow=false]{\color{black}\normalfont Drug injection}};
+        \node[anchor=east, yshift=-5em] at (events.east)
+            {\highlight[shadow=false]{\color{black}\normalfont Surgery acts}};
+        \node[anchor=east, yshift=-7.5em] at (events.east)
+            {\highlight[shadow=false]{\color{black}\normalfont Wakeup}};
+        \node[anchor=east, yshift=-10em] at (events.east)
+            {\highlight[shadow=false]{\color{black}\normalfont Death}};
+
+        \only<2>{
+
+        \node[anchor=west, yshift=-8em] at (current page.west)
+        {\highlight[shadow=false]{Physiological events}};
+        }
 
     \end{tikzpicture}
 }
 }
-}
-
 
 
 %------------------------------------------------------------------------------
 
-\begin{frame}[t]{Event: signals' building blocks}
+\begin{frame}[t]{Signals' tokens: Events}
 
     \vskip-1em
     \begin{columns}[T]
         \column{.5\textwidth}
         \centering
-        \overimg[\linewidth]{1}{accelero}{2}{accelero_dict}\\
-        {\large Gait analysis}
-
+        \overimg[.9\linewidth]{1}{meg_signal}{2}{meg_dict}\\
+        {\large MEG}\\
         \overimg[\linewidth]{1}{Hubble}{2}{Hubble_dict}\\
         {\large Astronomy}\\
     \column{.5\textwidth}
         \centering
-        \overimg[.9\linewidth]{1}{meg_signal}{2}{meg_dict}\\
-        {\large MEG}\\
+        \overimg[\linewidth]{1}{accelero}{2}{accelero_dict}\\
+        {\large Gait analysis}\\
         \overimg[.9\linewidth]{1}{tokamak}{2}{tokamak_dict}\\
         {\large Plasma Simulation}\\
 
@@ -216,9 +243,12 @@
 
     \visible<2>{\vskip-12em
     \centering
-    \highlight{
-        General for physical signals
-    }\\
+    \highlight{\parbox{.4\textwidth}{
+        \centering
+        Physical Signals\\
+        composed of
+        Reccuring Patterns \& Events
+    }}\\
     }
 \end{frame}
 
@@ -228,30 +258,42 @@
 \frame{
     \frametitle{EULPS: Event-based unsupervised learning for Physiological Signals}
 
-    \begin{block}{Goal}
-        Develop {\bf unsupervised learning} methods to
-        jointly model events in {\bf physiological signals}.
+    {\bf Hyp.:} Events' time distribution $\mathbb P(\{t_k\}_k)$ is much simpler than $\mathbb P(X)$.\\[1em]
+
+    % {\bf Two roads:}
+    % \begin{columns}[T]
+    %     \column{.5\textwidth}
+    %     {\centering\highlight{Deep Learning}\\}
+    %     \vskip.5em
+    %     \begin{itemize}
+    %         \item Very expressive,
+    %         \item Require very large database,
+    %         \item Black-box.
+    %     \end{itemize}
+    %     \column{.5\textwidth}
+    %     {\centering\highlight{Parametric Model}\\}
+    %     \vskip.5em
+    %     \begin{itemize}
+    %         \item Limited fine-tuning,
+    %         \item Sample efficient,
+    %         \item Explicit.
+    %     \end{itemize}
+    % \end{columns}
+
+    % \strongpoint{From parametric to deep models}
+
+    % TODO: here I need to explain the issue!!
+
+    \begin{block}{\bf EBUL Goal}
+        Model Physiological Signals as the distribution of its Events.
     \end{block}
 
     \vskip1em
-    {\bf Core idea:} Factorize the signals' distribution $\mathbb P(X)$ as the distribution of its events $\mathbb P(\{T_k\}_k)$.
-    \vskip1em
+    {\bf Challenge:} Need to find events and model their distribution jointly.\\[1em]
 
-    \begin{columns}[T]
-        \techterm{Anomaly detection}
-        \techterm{Classification/Forecasting}
-        \techterm{Causality}
-    \end{columns}
-    \begin{columns}[T]
-        \column{.3\textwidth}
-        \includegraphics[width=1\textwidth]{anomaly_detection}
-        \column{.3\textwidth}
-        \includegraphics[width=\textwidth]{forecasting}
-        \column{.3\textwidth}
-        \includegraphics[width=\textwidth]{images/causality.png}
-    \end{columns}
+    {\centering\includegraphics[width=.8\textwidth]{finding_events}\\[1em]}
 
-
+    {\bf Approach:} from parametric to deep models.
 }
 
 %------------------------------------------------------------------------------
@@ -259,15 +301,11 @@
 \frame{
     \frametitle{WP1: Parametric PP to model Physiological Signals Events}
 
-    \begin{block}{Challenge 1}
-        Parametric models for $\mathbb P(\{T_k\}_k)$ adapted to physiological signals.
+    \begin{block}{\bf Challenge 1}
+        Which parametric models for Physiological Signals Events?
     \end{block}
 
-    \begin{itemize}
-        \item Framework of point processes: model event arrival,
-        \item Existing methods focus on network interactions,
-        \item Location variability is key for signal.
-    \end{itemize}
+    {\bf Idea:} model the events' distribution $\mathbb P(\{t_k\}_k)$ with Point Processes (PP)\\[1em]
 
     \begin{columns}
         \column{.6\textwidth}
@@ -275,71 +313,111 @@
         \column{.4\textwidth}
         \includegraphics[width=\textwidth]{connectivity_default_mode}
     \end{columns}
-    {\centering
-    }
+
+    \vskip1em
+    {\bf Expected Results:}\\
+    \myitem{} General Parametric Family for temporal, marked and spatial PP.
+
+    \vskip1em
+    {\bf Preliminary Studies:} \fakecite{ICLR 2022; ICML 2023}
+
 }
 
 %------------------------------------------------------------------------------
 
 \frame{
-    \frametitle{WP2: Event-based unsupervised waveform learning for physiological signals}
+    \frametitle{WP2: Event-based unsupervised waveform learning\\for physiological signals}
 
-    \begin{block}{Challenge 2}
-        Joint modeling of signals and events.
+    \begin{block}{\bf Challenge 2}
+        Can we jointly discover the Events and model them?
     \end{block}
 
-    \vskip2em
-    \begin{columns}
+    \begin{columns}[T]
         \column{.5\textwidth}
         {\centering
-        \highlight{Parametric models}}\\[1em]
+        \highlight{Parametric models}\\[1em]}
         \begin{itemize}
-            \item Sample efficiency
-            \item Interpretable
+            \item Based on Convolutional Dictionary Learning and PP,
+            \item Use bilevel optimization.
         \end{itemize}
         \column{.5\textwidth}
         {\centering
-        \highlight{Deep Learning models}}\\[1em]
+        \highlight{Deep Learning models}\\[1em]}
         \begin{itemize}
-            \item Fully differentiable,
-            \item Interpretable
+            \item Architecture based on parametric models unrolling,
+            \item Fully differentiable.
         \end{itemize}
     \end{columns}
+
+    \vskip2em
+    {\bf Expected Results:}\\[.5em]
+    \myitem{} Methods to build joint representations for signal and events.\hfill
+
+    \vskip1em
+    {\bf Preliminary Studies:} \fakecite{ICLR 2022a; NeurIPS 2022}
 }
 
 %------------------------------------------------------------------------------
 
 \frame{
-    \frametitle{WP3: Leveraging unsupervised representations for actionable feedbacks}
+    \frametitle{WP3: Validating representations with practical tasks}
 
-    \begin{block}{Challenge 3}
-        Develop methods to fine tune models to solve anomaly detection using $\mathbb P(X)$.
+    \begin{block}{\bf Challenge 3}
+        Develop methods to impact GA with fine-tuned models using $\mathbb P(\{t_k\}_k)$.
     \end{block}
 
+    {\bf Idea:} Leverage likelihood and differentiable architecture.
+
+    \vskip1em
+    {\bf Expected Results:} Data processing for GA and Neurosciences.\\[1em]
+    \begin{columns}[T]
+        \techterm{Event Prediction}
+        \techterm{Anomaly Detection}
+        \techterm{Causality}
+    \end{columns}\vskip1em
+    \begin{columns}[T]
+        \column{.3\textwidth}
+        \includegraphics[width=\textwidth]{forecasting}
+        \column{.3\textwidth}
+        \includegraphics[width=1\textwidth]{anomaly_detection}
+        \column{.3\textwidth}
+        \includegraphics[width=\textwidth]{images/causality.png}
+    \end{columns}
+
 }
 
 %------------------------------------------------------------------------------
 
-\frame{
-    \frametitle{WP4: Reproducible and reusable event base signal analysis research}
+% \frame{
+%     \frametitle{WP4: Reproducible and Reusable Research}
 
-}
+%     \begin{block}{\bf Challenge 4}
+%         Disseminate these techniques.
+%     \end{block}
+
+% }
 
 %------------------------------------------------------------------------------
 
 \frame[t]{
     \frametitle{Principal Investigator: Thomas Moreau}
 
-    {\bf Carrier Path:}\\[.5em]
-    \highlightbox{\parbox{.9\textwidth}{
-        \begin{tabular}{c p{2ex} l p{2ex} c}
-            {\bf\color{black} 2014-2017}&&PhD && ENS Cachan\\
-            {\bf\color{black} 2018-2019}&&Postdoc && Inria\\
-            {\bf\color{black} 2019-Present}&&Research faculty&& Inria\\
+    % {\bf Carrier Path:}\\[.5em]
+    % \highlightbox{\parbox{.9\textwidth}{
+    %     \begin{tabular}{c p{2ex} l p{2ex} c}
+    %         {\bf\color{black} 2014-2017}&&PhD && ENS Cachan\\
+    %         {\bf\color{black} 2018-2019}&&Postdoc && Inria\\
+    %         {\bf\color{black} 2019-Present}&&Research faculty&& Inria\\
 
-        \end{tabular}
+    %     \end{tabular}
 
-    }}
+    % }}
+    \begin{block}{\bf Goal}
+        Model Physiological Signals as the distribution of its Events.
+    \end{block}
+    \vskip1em
+
+    {\bf Impact:} New road for signals processing.\\[.5em]
 
     % tikz figure with 3 circles linked with arrows going forward and backward and the the following text in each circle:
     % - Core ML
@@ -353,6 +431,7 @@
         \node[anchor=north, yshift=.3em] at (cloud_app) (App) {Applications};
         \node[anchor=south, yshift=2em] at (current page.south) (cloud_soft) {\includegraphics[width=15ex]{cloud}};
         \node[anchor=north, yshift=.7em] at (cloud_soft) (Soft) {Software\phantom{p}};
+        \node[anchor=south, yshift=7em] at (current page.south) {\parbox{.15\textwidth}{\centering \bf \color{darkred} Thomas Moreau}};
 
         \draw[-latex] (cloud_app) to[bend right=5] node[above,rotate=60] {} (cloud_ML);
         \draw[-latex] (cloud_ML) to[bend right=5] node[above,rotate=60] {} (cloud_app);
@@ -361,45 +440,79 @@
         \draw[-latex] (cloud_soft) to[bend right=5] node[above,rotate=60] {} (cloud_ML);
         \draw[-latex] (cloud_ML) to[bend right=5] node[above,rotate=60] {} (cloud_soft);
 
-        \node[anchor=east, xshift=-20ex] at (cloud_soft.west) {\includegraphics[height=2em]{logo_python}};
-        \node[anchor=east, xshift=-10ex] at (cloud_soft.west) {\includegraphics[height=2em]{logo_sklearn}};
+        \node[anchor=east, xshift=-20ex, yshift=-2ex] at (cloud_soft.west) {\includegraphics[height=1.5em]{logo_python}};
+        \node[anchor=east, xshift=-12ex, yshift=-2ex] at (cloud_soft.west) (sklearn){\includegraphics[height=1.5em]{logo_sklearn}};
+        \node[anchor=south, xshift=-3ex, yshift=-1ex] at (sklearn.north) {\footnotesize Contributor};
         \node[anchor=east, xshift=-1ex, yshift=4ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_joblib}};
         \node[anchor=east, xshift=-1ex, yshift=-3ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_loky}};
-        \node[anchor=west, xshift=-1ex, yshift=3ex] at (cloud_soft.east) {\includegraphics[height=3em]{logo_benchopt}};
-        \node[anchor=west, xshift=10ex] at (cloud_soft.east) {\includegraphics[height=3em]{brain_and_signals}};
+        \node[anchor=west, xshift=-1ex, yshift=4ex] at (cloud_soft.east) {\includegraphics[height=3em]{logo_benchopt}};
+        \node[anchor=west, xshift=0ex, yshift=-2ex] at (cloud_soft.east) (alpha) {\includegraphics[height=3em]{brain_and_signals}};
+        \node[anchor=north, yshift=1ex] at (alpha.south) {\footnotesize\texttt{{\color{orange}$\pmb\alpha$}csc}};
     \end{tikzpicture}
 
     \highlight{\parbox[c]{.18\textwidth}{
-        \small 10 ML conf paper in the last years
+        2018-2023\\
+        \normalfont\color{black} 17 papers in top ML conf.
     }}
     \hfill
-    \highlight{\parbox[c]{.2\textwidth}{TEst}}\\
+    \highlight{\parbox[c]{.2\textwidth}{
+        2015-2023\\
+        \normalfont\color{black}
+        7 journal pub.\\
+        1 Patent
+    }}\\
 
 }
 
-%------------------------------------------------------------------------------
-
-\frame{
-    \frametitle{EULPS}
-
-}
 
 
 
 \appendix
 
 %------------------------------------------------------------------------------
+\frame{
+    \frametitle{References}
 
-\begin{frame}{Test}
-    content...
-    \cite{Moreau2018}
-\end{frame}
+    \footnotesize
+    \begin{itemize}\itemindent4em
+        \item[\fakecite{ICLR2022}] Allain, C., Gramfort, A. \& {\bf Moreau, T.} \emph{DriPP: Driven Point Process to Model Stimuli Induced Patterns in M/EEF Signals.} in ICLR 2022.
+        \item[\fakecite{ICLR2022a}] Malézieux, B., {\bf Moreau, T.} \& Kowalski, M. \emph{Understanding approximate and Unrolled Dictionary Learning for Pattern Recovery.} in ICLR 2022.
+        \item[\fakecite{NeurIPS2022}] Dagréou, M., Ablin, P., Vaiter, S. \& {\bf Moreau, T.} \emph{A framework for bilevel optimization that enables stochastic and global variance reduction algorithms.} in NeurIPS 2022.
+        \item[\fakecite{ICML2023}] Staerman, G., Allain, C., Gramfort, A. \& {\bf Moreau, T.} \emph{FaDIn: Fast Discretized Inference for Hawkes Processes with General Parametric Kernels.} in ICML 2023.
+        \item[\fakecite{NImg 2023}] Power, L., Allain, C., {\bf Moreau, T.}, Gramfort, A. \& Bardouille, T. \emph{Using convolutional dictionary learning to detect task-related neuromagnetic transients and ageing trends in a large open-access dataset.} NeuroImage 2023.
+
+    \end{itemize}
+}
 
 
 %------------------------------------------------------------------------------
 
 \frame{
-    \bibliography{library}
+    \frametitle{EULPS}
+
+
+    \begin{block}{\bf Goal}
+        Model Physiological Signals as the distribution of its Events.
+    \end{block}
+
+    \vskip1em
+    {\bf Road:} From Parametric to Deep Models.
+    \vskip1em
+    {\bf Impact:} Physiological \& Physical Signals Processing
+    \vskip1em
+    {\bf Applications:} General Anesthesia \& Neuroscience
+    \vskip1em
+    {\bf Team:}\\
+    \myitem{} PI, 4 PhDs, 2 post doc, 1 engineer\\
+    \myitem{} Local support: point process/bilevel optimization/anesthesia
+
 }
+
+
+% %------------------------------------------------------------------------------
+
+% \frame{
+%     \bibliography{library}
+% }
 
 \end{document}
