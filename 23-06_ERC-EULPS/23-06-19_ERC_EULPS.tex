@@ -76,39 +76,134 @@
 }
 }
 
-\frame{
-    \frametitle{AI-powered General Anesthesia}
 
-    \begin{columns}
-        \column{.4\textwidth}
-        \centering
-        \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
-        \highlight{\parbox{.7\textwidth}{
-            APHP Database\\
-            \normalfont \normalcolor
-            46k records; 25Tb\\
-            All procedure types
-        }}
-        \vskip1em
-        \includegraphics[height=2em]{logo_APHP}
-        \column{.6\textwidth}
-        Anesthetists make {\bf decisions} based on these
-        indicators.\\[1em]
+%------------------------------------------------------------------------------
 
-        \begin{itemize}\itemsep.5em
-            \color{black}\normalfont
-            \item Instantaneous snapshot,
-            \item Reading needs expertise,
-            \item Not personalized.
-        \end{itemize}
-        \vskip1em
-        The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
-        \vskip2em
-        \strongpoint{Can we leverage AI to better drive GA?}
+\begin{frame}[t]{Large Scale Multivariate Physical Signals}
+
+    \vskip-1em
+    \begin{columns}[T]
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=.9\linewidth]{meg_signal}\\
+            {\large Neuroscience (MEG)}\\[1em]
+            \includegraphics[width=.9\linewidth]{Hubble}\\
+            {\large Astronomy}\\
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=.8\linewidth]{ga_signal}\\
+            {\large General Anesthesia}\\[1em]
+            \includegraphics[width=.85\linewidth]{tokamak}\\
+            {\large Physical Simulation}\\
+
     \end{columns}
 
+    \visible<2>{\vskip-14em
+    \centering
+    \highlight{\parbox{.4\textwidth}{
+        \centering
+        How to summarize large multivariate signals with AI?
+    }}\\
+    }
+\end{frame}
 
-}
+% \frame{
+%     \frametitle{AI-powered General Anesthesia}
+
+%     \begin{columns}
+%         \column{.4\textwidth}
+%         \centering
+%         \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
+%         \highlight{\parbox{.7\textwidth}{
+%             APHP Database\\
+%             \normalfont \normalcolor
+%             46k records; 25me{
+%     \frametitle{AI-powered General Anesthesia}
+
+%     \begin{columns}
+%         \column{.4\textwidth}
+%         \centering
+%         \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
+%         \highlight{\parbox{.7\textwidth}{
+%             APHP Database\\
+%             \normalfont \normalcolor
+%             46k records; 25Tb\\
+%             All procedure types
+%         }}
+%         \vskip1em
+%         \includegraphics[height=2em]{logo_APHP}
+%         \column{.6\textwidth}
+%         Anesthetists make {\bf decisions} based on these
+%         indicators.\\[1em]
+
+%         \begin{itemize}\itemsep.5em
+%             \color{black}\normalfont
+%             \item Instantaneous snapshot,
+%             \item Reading needs expertise,
+%             \item Not personalized.
+%         \end{itemize}
+%         \vskip1em
+%         The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
+%         \vskip2em
+%         \strongpoint{Can we leverage AI to better drive GA?}
+%     \end{columns}
+
+
+% }Tb\\
+%             All procedure types
+%         }}
+%         \vskip1emme{
+%     \frametitle{AI-powered General Anesthesia}
+
+%     \begin{columns}
+%         \column{.4\textwidth}
+%         \centering
+%         \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
+%         \highlight{\parbox{.7\textwidth}{
+%             APHP Database\\
+%             \normalfont \normalcolor
+%             46k records; 25Tb\\
+%             All procedure types
+%         }}
+%         \vskip1em
+%         \includegraphics[height=2em]{logo_APHP}
+%         \column{.6\textwidth}
+%         Anesthetists make {\bf decisions} based on these
+%         indicators.\\[1em]
+
+%         \begin{itemize}\itemsep.5em
+%             \color{black}\normalfont
+%             \item Instantaneous snapshot,
+%             \item Reading needs expertise,
+%             \item Not personalized.
+%         \end{itemize}
+%         \vskip1em
+%         The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
+%         \vskip2em
+%         \strongpoint{Can we leverage AI to better drive GA?}
+%     \end{columns}
+
+
+% }
+%         \includegraphics[height=2em]{logo_APHP}
+%         \column{.6\textwidth}
+%         Anesthetists make {\bf decisions} based on these
+%         indicators.\\[1em]
+
+%         \begin{itemize}\itemsep.5em
+%             \color{black}\normalfont
+%             \item Instantaneous snapshot,
+%             \item Reading needs expertise,
+%             \item Not personalized.
+%         \end{itemize}
+%         \vskip1em
+%         The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
+%         \vskip2em
+%         \strongpoint{Can we leverage AI to better drive GA?}
+%     \end{columns}
+
+
+% }
 
 %------------------------------------------------------------------------------
 \frame[t]{
@@ -132,24 +227,29 @@
 
     \vskip1em
     \begin{columns}[T]
-        \techterm{Self-supervised Pretraining}
-        \techterm{Transformers}
-        \techterm{Fine-tuning}
+        \techterm{Tokens}
+        \techterm{Self-supervised Pretraining + Fine-tuning}
     \end{columns}
     \vskip1em
-    \myitem{} Capture $\mathbb P(X)$ through interaction between {\bf tokens}.
+    {\centering Capture the input distribution $\mathbb P(X)$ with interaction between tokens.\\}
 
     \only<3>{
         \vskip1em
         {\bf Challenges for signals:}\\[1em]
+
         \begin{itemize}\itemsep.5em
-            \item What are the tokens for the physiological signals?
-            \item Databases are smaller than Text and Images,
+            % \item Which pretext task to use to capture the signals' distribution?
+            \item What are the tokens of the signals?
+            \item How to derive more interpretable models?
+        %     \item Smaller Databases compared to Text and Images\\
+        %     \item Interpretability \hskip8ex \myitem What are the tokens ?
         \end{itemize}
     }
 
 
 }
+
+
 
 %------------------------------------------------------------------------------
 {
@@ -161,14 +261,17 @@
     \end{picture}
 }
 \frame{
-    \frametitle{Signals' tokens: Patterns and Events}
+    \frametitle{Signals' tokens: Events}
 
 
     \setbeamercolor{events}{bg=darkred!50}
     \begin{tikzpicture}[overlay, remember picture]
 
         \node[anchor=west, yshift=7em] at (current page.west)
-            (patterns) {\highlight[shadow=false]{Signal's patterns}};
+            (patterns) {\highlight[shadow=false]{
+                % Signal's patterns
+                Physiological events
+            }};
 
         \node[anchor=west, yshift=-2.5em] at (patterns.west) (ECG) {\highlight[shadow=false]{\color{black}\normalfont Heartbeat}};
         \node[anchor=center, lightblue!70, xshift=-13ex, yshift=-7.5em] at (current page.north) (ECG_head) {};
@@ -176,8 +279,11 @@
 
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
             minimum width=5ex,
-            minimum height=2em, xshift=-9ex, yshift=-7.8em]
-                at (current page.north) {};
+            minimum height=2em, xshift=-8.7ex, yshift=-7.8em]
+                at (current page.north) (box_ecg) {};
+        \node[anchor=south, xshift=.2ex, yshift=1em] at (box_ecg.west) (ecg_tip) {};
+        \node[anchor=south, xshift=.2ex, yshift=-.8em] at (box_ecg.west) (ecg_base) {};
+        \draw[-{Square[]}, ultra thick, green] (ecg_base) -- (ecg_tip) ;
 
         \node[anchor=west, yshift=-5em] at (patterns.west) (Pleth) {\highlight[shadow=false]{\color{black}\normalfont  Dicrote}};
         \node[anchor=center, lightblue!70, xshift=-9ex, yshift=-10.5em] at (current page.north) (Pleth_head) {};
@@ -186,7 +292,10 @@
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
             minimum width=4ex,
             minimum height=2em, xshift=-7ex, yshift=-10.8em]
-                at (current page.north) {};
+                at (current page.north) (box_pleth) {};
+        \node[anchor=south, xshift=.1ex, yshift=1.5em] at (box_pleth.west) (pleth_tip) {};
+        \node[anchor=south, xshift=.1ex, yshift=-1em] at (box_pleth.west) (pleth_base) {};
+        \draw[-{Circle[]}, ultra thick, blue] (pleth_base) -- (pleth_tip) ;
 
         \node[anchor=west, yshift=-7.5em] at (patterns.west) (Resp) {\highlight[shadow=false]{\color{black}\normalfont  Cycle}};
         \node[anchor=center, lightblue!70, xshift=-8ex, yshift=-15em] at (current page.north) (Resp_head) {};
@@ -195,7 +304,10 @@
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
             minimum width=4ex,
             minimum height=2em, xshift=-6ex, yshift=-15.5em]
-                at (current page.north) {};
+                at (current page.north) (resp_box) {};
+        \node[anchor=south, xshift=.2ex, yshift=1.5em] at (resp_box.west) (resp_tip) {};
+        \node[anchor=south, xshift=.2ex, yshift=-1em] at (resp_box.west) (resp_base) {};
+        \draw[-{Triangle[]}, ultra thick, yellow] (resp_base) -- (resp_tip) ;
 
         \node[anchor=west, yshift=-10em] at (patterns.west) (EEG) {\highlight[shadow=false]{\color{black}\normalfont  Brain waves}};
         \node[anchor=center, lightblue!70, xshift=-5ex, yshift=-17.5em] at (current page.north) (EEG_head) {};
@@ -204,7 +316,10 @@
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
             minimum width=6ex,
             minimum height=1.3em, xshift=-2ex, yshift=-17.8em]
-                at (current page.north) {};
+                at (current page.north) (eeg_box) {};
+        \node[anchor=south, xshift=.2ex, yshift=1.5em] at (eeg_box.west) (eeg_tip) {};
+        \node[anchor=south, xshift=.2ex, yshift=-.6em] at (eeg_box.west) (eeg_box) {};
+        \draw[-{Turned Square[]}, ultra thick, orange] (eeg_box) -- (eeg_tip) ;
 
 
 
@@ -226,12 +341,12 @@
                 \normalfont Adverse outcomes
             }};
 
-        \only<2>{
-            \node[anchor=west, yshift=-8em] at (current page.west)
-            {\highlight[shadow=false,col=events,c=white]{
-                Physiological events
-            }};
-        }
+        % \only<2>{
+        %     \node[anchor=west, yshift=-8em] at (current page.west)
+        %     {\highlight[shadow=false,col=events,c=white]{
+        %         Physiological events
+        %     }};
+        % }
 
     \end{tikzpicture}
 }
@@ -240,7 +355,7 @@
 
 %------------------------------------------------------------------------------
 
-\begin{frame}[t]{Signals' tokens: Events}
+\begin{frame}[t]{Signals' tokens: Physical Events}
 
     \vskip-1em
     \begin{columns}[T]
@@ -253,7 +368,7 @@
                   in
                   node {\includegraphics[height=\y1-\y2]{meg_dict}};
             \end{tikzpicture}\\
-        {\large MEG}\\[1em]
+        {\large Neuroscience (MEG)}\\[1em]
         \begin{tikzpicture}
             \node[inner sep=0em, outer sep=0em] (img) {\includegraphics[width=.9\linewidth]{Hubble}};
             \path let
@@ -265,13 +380,13 @@
     \column{.5\textwidth}
         \centering
         \begin{tikzpicture}
-            \node[inner sep=0em, outer sep=0em] (img) {\includegraphics[width=.9\linewidth]{accelero}};
+            \node[inner sep=0em, outer sep=0em] (img) {\includegraphics[width=.8\linewidth]{ga_signal}};
             \path let
                 \p1=($(img.north) - (0, 1em)$), \p2=(img.south)
                 in
-                node {\includegraphics[height=\y1-\y2]{accelero_dict}};
+                node {\includegraphics[height=\y1-\y2]{ga_dict}};
         \end{tikzpicture}\\
-        {\large Gait analysis}\\[1em]
+        {\large General Anesthesia}\\[1em]
         \begin{tikzpicture}
             \node[inner sep=0em, outer sep=0em] (img) {\includegraphics[width=.9\linewidth]{tokamak}};
             \path let
@@ -279,11 +394,12 @@
                 in
                 node {\includegraphics[height=\y1-\y2]{tokamak_dict}};
         \end{tikzpicture}\\
-        {\large Plasma Simulation}\\
+        {\large Physics Simulation}\\
 
     \end{columns}
 
-    \visible<2>{\vskip-14em
+    % \visible<2>
+    {\vskip-14em
     \centering
     \highlight{\parbox{.4\textwidth}{
         \centering
@@ -300,48 +416,24 @@
 \frame{
     \frametitle{EULPS: Event-based unsupervised learning for Physiological Signals}
 
-    {\bf Hyp.:} Events' time distribution $\mathbb P(\{t_k\}_k)$ is much simpler than $\mathbb P(X)$.\\[1em]
-
-    % {\bf Two roads:}
-    % \begin{columns}[T]
-    %     \column{.5\textwidth}
-    %     {\centering\highlight{Deep Learning}\\}
-    %     \vskip.5em
-    %     \begin{itemize}
-    %         \item Very expressive,
-    %         \item Require very large database,
-    %         \item Black-box.
-    %     \end{itemize}
-    %     \column{.5\textwidth}
-    %     {\centering\highlight{Parametric Model}\\}
-    %     \vskip.5em
-    %     \begin{itemize}
-    %         \item Limited fine-tuning,
-    %         \item Sample efficient,
-    %         \item Explicit.
-    %     \end{itemize}
-    % \end{columns}
-
-    % \strongpoint{From parametric to deep models}
-
-    % TODO: here I need to explain the issue!!
-
     \begin{block}{\bf EULPS Goal}
         Model the Distribution of Events for Physiological Signals.
     \end{block}
 
     \vskip1em
-    {\bf Challenge:} Need to find events and model their distribution jointly.\\[1em]
+    {\bf Challenge:} Need to find transform signals into events and model their distribution jointly.\\[1em]
 
     {\centering\includegraphics[width=.8\textwidth]{finding_events}\\[1em]}
 
-    {\bf Approach:} from parametric to deep models.
+    {\bf Hyp.:} Events' time distribution $\mathbb P(\{t_k\}_k)$ is much simpler than $\mathbb P(X)$.\\[1em]
+
+    {\bf Approach:} from interpretable models to deep learning.
 }
 
 %------------------------------------------------------------------------------
 
 \frame{
-    \frametitle{WP1: Parametric PP to model Physiological Signals Events}
+    \frametitle{WP1: Parametric Point Process for Physiological Signals Events}
 
     \begin{block}{\bf Challenge 1}
         Which parametric models for Physiological Signals Events?
@@ -361,7 +453,7 @@
     % \myitem{} General Parametric Family for temporal, marked and spatial PP.
 
     \vskip1em
-    {\bf Preliminary Studies:} \fakecite{ICLR 2022; ICML 2023}
+    {\bf Preliminary Study:} \fakecite{Staerman, Allain, Gramfort \& {\bf Moreau} ICML 2023}
 
 }
 
@@ -397,30 +489,31 @@
                 }}
             };
         \end{tikzpicture}
+        \vskip.5em
+        {\centering \myitem{} More interpretable\\}
         % \begin{itemize}
         %     \item Based on Convolutional Dictionary Learning and PP,
         %     \item Use bilevel optimization.
         % \end{itemize}
         \column{.5\textwidth}
         {\centering
-        \highlight{Deep Learning models}\\[.5em]}
-
+            \highlight{Deep Learning models}\\[.5em]
+        }
         \begin{tikzpicture}
             \node (unroll) {\includegraphics[width=.9\textwidth]{unrolled}};
         \end{tikzpicture}
-        % \begin{itemize}
-        %     \item Architecture based on parametric models unrolling,
-        %     \item Fully differentiable.
-        % \end{itemize}
+        \vskip1.3em
+        {\centering \myitem{} More expressive\\}
+
     \end{columns}
 
     % \vskip2em
     % {\bf Expected Results:}\\[.5em]
     % \myitem{} Methods to build joint representations for signal and events.\hfill
 
-    \vskip1em
-    \definecolor{lightgreen}{RGB}{82,192,99}
-    {\bf Preliminary Studies:} \fakecite{NeurIPS 2022; \textcolor{lightgreen}{ICLR 2022a}}
+    % \vskip1em
+    % \definecolor{lightgreen}{RGB}{82,192,99}
+    % {\bf Preliminary Studies:} \fakecite{NeurIPS 2022; \textcolor{lightgreen}{ICLR 2022a}}
 }
 
 %------------------------------------------------------------------------------
@@ -429,7 +522,7 @@
     \frametitle{WP3: Validating representations with practical tasks}
 
     \begin{block}{\bf Challenge 3}
-        Can we develop methods based on event processing to impact GA?
+        Can we develop event-based methods for machine learning on signals?
     \end{block}
 
     \vskip1em
