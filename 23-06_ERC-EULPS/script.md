@@ -57,15 +57,57 @@ Another constraint is that the provided summary needs to be interpretable, unlik
 
 #### S5
 
-Looking back at the general anesthesia example, the key observation for my project is that the considered signals are often mostly driven by physical events: either physiological such as the heartbeat in the ECG or external such as drug injection.
-Physiological events produce local patterns in the signal, which constitute the building block for the overall signal's structure.
-Finding these patterns and considering their apparition as revealing events allows to decompose the signal into a stream of events.
-<!-- The duality between patterns and events allows to turn the continuous signal into a stream of events -->
+Looking back at the general anesthesia, a key observation is that the signals are often mostly driven by physical phenomenon:
+    - either physiological events that underly the signal such as an heartbeat for the ECG or
+    - external events that impact the signal such as drug injection that will modify the patient state.
+Physical events are present both in and around the recorded signals.
+But physiological events are not directly observed.
+They produce characteristic patterns, which often constitute the building block for the overall signal's structure.
+Finding these recurring patterns and considering their apparition as specific physiological events yields punctual representations of the signal, as a stream of events.
+<!-- The duality between the recurring patterns and the events allow to transform the continuous signal into a stream of events. -->
 
-The notion of events is thus a natural candidate to tokenize the signal.
+The notion of events can thus is thus a natural candidate to tokenize signals.
 
 
 #### S6
+
+And this observation can apply to other domains.
+Characteristic patterns highlight brain responses in neuroscience or the presence of stars and galaxy in astronomical images.
+They can also be turned into punctual events by considering the time or place they occur instead of the full extent of the pattern.
+Moreover, the events can be interpreted by practitioners, as they have physical meaning.
+
+These stream of events, joined with known external events recorded with the signal, produce informative signal representations.
+
+
+#### S7
+
+The goal of the E.U.LPS project is to propose new unsupervised methods to process jointly physiological signals and their associated external events.
+
+My approach is to turn them into events' streams and model the events' distribution, similarly to the stream of tokens processed for language models.
+The core hypothesis is that the distribution of the events in time and space is much simpler than the original signals' distribution.
+
+One difficulty of this approach compared to existing works is that the physiological events from the signals are not known a priori.
+The project will aim at developping methods that can identify the recurring patterns as well as model their distribution and the distribution of external events jointly.
+
+---
+
+To tackle this goal, I will focus on three tasks:
+- first, considering that I have access to all events, I will develop models able to describe physiological events' distribution.
+- then, building on these models, I will propose methods that are able to simultaneously extract events from the signal and model their distribution jointly  with external events.
+<!-- propose some fine-tuning methods to leverage these novel signal representation to tackle tasks in practice -->
+- Finally, I will propose some fine-tuning methods to leverage these novel signal description to tackle practical tasks.
+
+#### S8
+
+
+
+
+
+#### S11
+
+To summarize, my project aims at providing a new way to summarize complex physical signals.
+It will allow to answer questions about the signal's structure and to solve tasks in practice.
+It will also help to develop new indicators for the anesthetist, to better monitor the patient during surgery.
 
 
 
