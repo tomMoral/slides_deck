@@ -486,7 +486,7 @@
     \begin{columns}[T]
         \column{.5\textwidth}
         {\centering
-        \highlight{Parametric models}\\[.5em]}
+        \highlight{Dictionary-based approach}\\[.5em]}
         \hskip-3ex\begin{tikzpicture}
             \node (AM) {\includegraphics[width=.9\textwidth]{parametric_model}};
 
@@ -495,9 +495,9 @@
                     \tiny \centering Conv. Dictionary Learning
                 }}
             };
-            \node[anchor=south west, xshift=-4ex, yshift=-1ex] at (AM.south west) {
+            \node[anchor=south west, xshift=-4ex, yshift=0ex] at (AM.south west) {
                 \highlight[shadow=false]{\parbox{.28\textwidth}{
-                    \tiny \centering Change Points Detection
+                    \tiny \centering Tokenization
                 }}
             };
             \node[anchor=north east, xshift=1ex, yshift=.5ex] at (AM.north east) {
@@ -507,20 +507,20 @@
             };
         \end{tikzpicture}
         \vskip.5em
-        {\centering \myitem{} More interpretable\\}
+        {\centering \myitem{} Interpretable\\}
         % \begin{itemize}
         %     \item Based on Convolutional Dictionary Learning and PP,
         %     \item Use bilevel optimization.
         % \end{itemize}
         \column{.5\textwidth}
         {\centering
-            \highlight{Deep Learning models}\\[.5em]
+            \highlight{Deep Learning approach}\\[.5em]
         }
         \begin{tikzpicture}
             \node (unroll) {\includegraphics[width=.9\textwidth]{unrolled}};
         \end{tikzpicture}
         \vskip1.3em
-        {\centering \myitem{} More expressive\\}
+        {\centering \myitem{} Easy to fine-tune.\\}
 
     \end{columns}
 

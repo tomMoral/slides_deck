@@ -18,7 +18,7 @@ Yet, they are an instantaneous snapshot of the patient's condition at time T,the
 
 #### S3
 
-Summarizing long multivariate signals in predictive ways is a critical step in many pipelines.
+Summarizing lage scale multivariate signals in predictive ways is a critical step in many pipelines.
 In Neuroscience, it is used to understand the brain responses to a stimuli or in Physical simulations, to stir large physical systems like a tokamak.
 
 
@@ -34,7 +34,7 @@ When looking at recent breakthrough in AI for complex inputs, in particular the 
 ---
 
 - First, these models don't process their input directly.
-  They first transform it as a stream of tokens, which correspond to parts of words for language models or small patches for images. 
+  They transform it as a stream of tokens, which correspond to parts of words for language models or small patches for images. 
   These streams are then processed using transformer architectures, which compute interactions between the tokens.
 
 - The second ingredient is the use of self-supervised pretraining.
@@ -46,7 +46,7 @@ These models are then fine-tuned, to specialize for specific tasks, document sum
 ---
 
 In order to apply similar approaches to multivariate signals, various challenges need to be overcome.
-First, the notion of tokens for the signals is not well-defined, unlike in language and image application.
+First, the notion of tokens for the signals is not well-defined, unlike in language and image applications.
 Also, for critical decision making, we need these model to be interpretable, unlike current black-box models.
 
 
@@ -58,7 +58,7 @@ They are represented by a precise time T and the nature of the event.
 
 I consider two types of events:
   - First, observed events such as drug injection. They modify the dynamic of the signal. Their precise time and nature are known.
-  - Then, the underlying events. Their time is unknown but can be inferred by locating characteristic patterns. For example, the beginning of a heartbeat pattern can be considered as the time associated to this heartbeat event.
+  - Then, the underlying events. Their time is unknown but can be inferred by locating characteristic patterns they produce in the signal. For example, the beginning of a heartbeat pattern can be considered as the time associated to this heartbeat event.
   Finding these characteristic patterns and considering their apparition as specific underlying events yields punctual representations of the signal, as a stream of events.
 <!-- The duality between the recurring patterns and the events allow to transform the continuous signal into a stream of events. -->
 
@@ -79,6 +79,7 @@ An advantage of these events over random patches is that they can be interpreted
 The goal of the E.U.LPS project is to propose new unsupervised methods to summarize physiological signals jointly with observed events.
 
 My approach is to turn them into events' streams and model the events' distribution, similarly to the stream of tokens processed for language models.
+
 The core hypothesis is that the distribution of the events in time and space is much simpler to model than the original signals' distribution.
 
 A challenge in this approach is that unlike existing works, the tokens are not known a priori and need to be identified.
@@ -88,7 +89,7 @@ A challenge in this approach is that unlike existing works, the tokens are not k
 To tackle this goal, I will focus on three tasks:
 - First, considering that we have identified the events, I will develop models able to describe physiological events' distribution.
 - Then, building on these models, I will propose methods that can simultaneously extract events from the signal and model their distribution.
-- Finally, I will propose some fine-tuning methods to leverage these novel signal descriptions to tackle specific tasks.
+- Finally, I will propose some fine-tuning methods to leverage these novel signal descriptions and tackle specific tasks.
 
 #### S8
 
@@ -100,32 +101,32 @@ I propose to rely on the framework of point processes, which is a classical fram
 Most existing parametric models in this framework are restricted to Markovian kernels, which favor short latencies between events while we would like to capture the longer range interactions of physiological events.
 
 Based on preliminary work published this year in IMCL, we propose a novel inference framework that unlocks more general models for point processes.
-It opens the way to model more complex interactions between events, such as pseudo-periodicity or thresholding effects, but also spatial dependencies with uncertainty.
+It opens the way to develop more complex interaction models between events, such as pseudo-periodicity or thresholding effects, but also spatial dependencies with uncertainty.
 
 
 #### S9
 
 Then, I will propose joint methods to identify and model events from signals.
 
-In order to keep a limited parametrization space and improve interpretability, I will take an approach that goes from low parametrization models to deep models.
+To trade off interpretability and expressivity, I will take an approach that goes from dictionary based representations to deep models.
 
-<!-- TODO: change parametric name -->
-First, I will consider parametric models based on event detection algorithms, such as convolutional dictionary learning or change point detection, and extend them to take into account the distribution of the detected events.
-The models will be fitted to the data using alternate minimization or bilevel optimization algorithms, which I have been working on in the last five years.
+First, I will consider statistical models based on event detection algorithms, such as convolutional dictionary learning or change point detection, and extend them to take into account the distribution of the detected events, leveraging event models from WP1.
+The models will be fitted to the data using alternate minimization or bilevel optimization, which I am an expert of.
 
-Then, I will consider more expressive models based on deep learning and traditional approaches in self supervised learning. These models are often considered more powerful as they can easily be adapted to the task considered, as they are fully differentiable.
-Yet, they tend to suffer from a lack of interpretability due to their massive parametrization. In order to keep benefit of a low parametrization models, the considered architectures will be based on the unrolling of the smaller models, which tend to limit the parameter explosion.
+Then, I will consider the unrolled version of these algorithms to create more expressive deep models that can be trained through self-supervised learning. 
+These models are interesting because they remain partially interpretable thanks to the unrolled architecture.
+And compared to dictionary based approach, they have the advantage of being more powerful as they can be fine-tuned easily for specific tasks.
 
 #### S10
 
-Finally, to validate the proposed representations, we will develop methods that can leverage them to answer machine learning questions about physiological signals.
+Finally, to validate the proposed representations, I will develop methods that can leverage them to answer machine learning questions about physiological signals.
 
 Let me give you an example.
 In general anesthesia, avoiding long alpha suppression phases in the brain allows to reduce the risk of post-operative cognitive impairments.
 So we plan to detect such adverse events in real time using the developed representations.
 We will also focus on anomaly detection as well as causal analysis to understand response of the brain to stimuli.
 
-The core idea is to leverage either the likelihood for small parametric models and the differentiable architectures for deep network.
+These developments will leverage either the fine-tuning of deep network, or the likelihood for dictionary-based models.
 
 
 
@@ -136,4 +137,6 @@ To summarize, my project aims at providing new signal processing tools based on 
 This project will benefit from my expertise in core machine learning and signals processing.
 It aims to have impact in various domains, in particular the one of GA. It is important to mention that Paris hospital already granted me access to a database of 46 thousands GA recordings which is huge in the domain.
 
-Finally, the tools developed during this project will be disseminated as open source softwares, relying on my experience in the domain. I am currently maintainer of packages downloaded millions of times a month and creator of softwares currently gaining traction with more than a thousand download a month.
+Finally, the tools developed during this project will be disseminated as open source software, relying on my experience in the domain. I am currently maintainer of packages downloaded millions of times a month and creator of software currently gaining traction with more than a thousand download a month.
+
+Thank you very much for your attention, and I am happy to take any question.
