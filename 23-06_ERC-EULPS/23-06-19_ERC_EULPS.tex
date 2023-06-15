@@ -270,7 +270,7 @@
         \node[anchor=west, yshift=7em] at (current page.west)
             (patterns) {\highlight[shadow=false]{
                 % Signal's patterns
-                Physiological events
+                Underlying events
             }};
 
         \node[anchor=west, yshift=-2.5em] at (patterns.west) (ECG) {\highlight[shadow=false]{\color{black}\normalfont Heartbeat}};
@@ -285,7 +285,7 @@
         \node[anchor=south, xshift=.2ex, yshift=-.8em] at (box_ecg.west) (ecg_base) {};
         \draw[-{Square[]}, ultra thick, green] (ecg_base) -- (ecg_tip) ;
 
-        \node[anchor=west, yshift=-5em] at (patterns.west) (Pleth) {\highlight[shadow=false]{\color{black}\normalfont  Dicrote}};
+        \node[anchor=west, yshift=-5em] at (patterns.west) (Pleth) {\highlight[shadow=false]{\color{black}\normalfont  Dichrote wave}};
         \node[anchor=center, lightblue!70, xshift=-9ex, yshift=-10.5em] at (current page.north) (Pleth_head) {};
         \draw[->, very thick, lightblue!70] (Pleth.east) -- (Pleth_head);
 
@@ -297,7 +297,7 @@
         \node[anchor=south, xshift=.1ex, yshift=-1em] at (box_pleth.west) (pleth_base) {};
         \draw[-{Circle[]}, ultra thick, blue] (pleth_base) -- (pleth_tip) ;
 
-        \node[anchor=west, yshift=-7.5em] at (patterns.west) (Resp) {\highlight[shadow=false]{\color{black}\normalfont  Cycle}};
+        \node[anchor=west, yshift=-7.5em] at (patterns.west) (Resp) {\highlight[shadow=false]{\color{black}\normalfont  Breath Cycle}};
         \node[anchor=center, lightblue!70, xshift=-8ex, yshift=-15em] at (current page.north) (Resp_head) {};
         \draw[->, very thick, lightblue!70] (Resp.east) -- (Resp_head);
 
@@ -326,7 +326,7 @@
 
         \node[anchor=east, xshift=-3em, yshift=7em] at (current page.east)
             (events) {\highlight[shadow=false, col=events,c=white]{
-                External events
+                Observed events
             }};
         \node[anchor=east, yshift=-3.5em] at (events.east)
             {\highlight[shadow=false,col=events,c=black]{
