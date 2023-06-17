@@ -86,10 +86,10 @@ A challenge in this approach is that unlike existing works, the tokens are not k
 
 ---
 
-To tackle this goal, I will focus on three tasks:
+To reach this goal, I will focus on three tasks:
 - First, considering that we have identified the events, I will develop models able to describe physiological events' distribution.
 - Then, building on these models, I will propose methods that can simultaneously extract events from the signal and model their distribution.
-- Finally, I will propose some fine-tuning methods to leverage these novel signal descriptions and tackle specific tasks.
+- Finally, I will propose some fine-tuning methods to leverage these novel signal descriptions and solve specific tasks.
 
 #### S8
 
