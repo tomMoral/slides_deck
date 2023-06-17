@@ -100,8 +100,8 @@ I propose to rely on the framework of point processes, which is a classical fram
 
 Most existing parametric models in this framework are restricted to Markovian kernels, which favor short latencies between events while we would like to capture the longer range interactions of physiological events.
 
-Based on preliminary work published this year in IMCL, we propose a novel inference framework that unlocks more general models for point processes.
-It opens the way to develop more complex interaction models between events, such as pseudo-periodicity or thresholding effects, but also spatial dependencies with uncertainty.
+Based on preliminary work that I led, published this year in IMCL, we propose a novel inference framework that unlocks general models for point processes.
+It opens the way to capture more complex interactions between events, such as pseudo-periodicity or thresholding effects, but also spatial dependencies with uncertainty.
 
 
 #### S9
