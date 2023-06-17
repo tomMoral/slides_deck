@@ -19,7 +19,7 @@ Yet, they are an instantaneous snapshot of the patient's condition at time T,the
 #### S3
 
 Summarizing lage scale multivariate signals in predictive ways is a critical step in many pipelines.
-In Neuroscience, it is used to understand the brain responses to a stimuli or in Physical simulations, to stir large physical systems like a tokamak.
+In Neuroscience, it is used to understand the brain responses to a stimuli or with physical simulations, to stir large systems like a tokamak.
 
 
 ---
@@ -47,7 +47,7 @@ These models are then fine-tuned, to specialize for specific tasks, document sum
 
 In order to apply similar approaches to multivariate signals, various challenges need to be overcome.
 First, the notion of tokens for the signals is not well-defined, unlike in language and image applications.
-Also, for critical decision making, we need these model to be interpretable, unlike current black-box models.
+Also, for critical decision making, we need these model to be interpretable, which is not the case with current black-box models.
 
 
 
