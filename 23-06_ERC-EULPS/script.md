@@ -2,29 +2,29 @@
 ## EULPS - E.U.LPS.
 
 Hello everyone, it is my pleasure to present my project proposal E.U.LPS.
+<!-- Maybe  -->
 
 #### S2
 
 Imagine you enter an Operating Room for a surgery under General Anesthesia.
 
 The anesthetist won't just put you to sleep. He will monitor your status to ensure that your condition remains stable: your heart, your brain and others.
-These signals are complex and hard to interpret.
+As you can see with this picture from my collaborators in Paris hospital Lariboisiere, these multivariate signals are complex and hard to interpret.
 That is why many indicators have been developed to support decisions.
 
-Yet, they are an instantaneous snapshot of the patient's condition at time T,they don't allow to anticipate what is going to happen, but only react to status changes.
-
-<!-- In order to propose personalized and predictive indicators to summarize the signal, AI is a powerful approach. -->
+Yet, they are an instantaneous snapshot of the patient's condition at time T.
+They don't allow to anticipate what is going to happen, but only react to status changes.
 
 
 #### S3
 
-Summarizing lage scale multivariate signals in predictive ways is a critical step in many pipelines.
-In Neuroscience, it is used to understand the brain responses to a stimuli or with physical simulations, to stir large systems like a tokamak.
+Summarizing large scale multivariate signals in predictive ways is a critical step in many scientific fields.
+In Neuroscience, it is used to understand the brain responses to a stimuli or in Physical Simulations, to stir large systems like a tokamak.
 
 
 ---
 
-The overarching goal of my project is to provide an automated way to summarize complex physical signals using AI, to be able to easily answer questions about the system that produced them.
+The overarching goal of my project is to provide an automated way to process complex physical signals using AI, to be able to easily answer questions about the system that produced them.
 
 
 #### S4
@@ -53,30 +53,31 @@ Also, for critical decision making, we need these model to be interpretable, whi
 
 #### S5
 
-In my project, I propose to view the signals as streams of events: the tokens are events. But what are these events exactly?
-They are represented by a precise time T and the nature of the event.
+In my project, I propose to view the signals as streams of events: the tokens of the signals are events. But what are events exactly?
+They are characterized by their nature and associated with a precise time T.
 
 I consider two types of events:
-  - First, observed events such as drug injection. They modify the dynamic of the signal. Their precise time and nature are known.
-  - Then, the underlying events. Their time is unknown but can be inferred by locating characteristic patterns they produce in the signal. For example, the beginning of a heartbeat pattern can be considered as the time associated to this heartbeat event.
-  Finding these characteristic patterns and considering their apparition as specific underlying events yields punctual representations of the signal, as a stream of events.
+  - First, observed events, which are recorded with the signal, such as drug injection. Their precise time and nature are known, and they modify the dynamic of the signal. 
+  - Then, the latent events. Their time is unknown but can be inferred by locating characteristic patterns they produce in the signal. For example, the beginning of a heartbeat pattern, here framed in white, can be considered as the time associated with a heartbeat event.
+  Finding these characteristic patterns and considering their apparition as specific latent events yields punctual representations of the signal, as a stream of events.
 <!-- The duality between the recurring patterns and the events allow to transform the continuous signal into a stream of events. -->
 
 
 #### S6
 
-And this tokenization based on events applies to many other domains.
+And this tokenization based on events applies to various other domains.
 Characteristic patterns stem from brain responses in neuroscience or the presence of stars and galaxies in astronomical images.
 <!-- check astro image? -->
 They can also be turned into punctual events by considering the time or place they occur instead of the full extent of the pattern.
 
 
-An advantage of these events over random patches is that they can be interpreted by practitioners, as they have physical meaning.
+An advantage of this tokenization over random patches is that the tokens 
+are more compact, as they are selected part of the signal, and they can be interpreted by practitioners, as they have physical meaning.
 
 
 #### S7
 
-The goal of the E.U.LPS project is to propose new unsupervised methods to summarize physiological signals jointly with observed events.
+The goal of the E.U.LPS project is to propose new unsupervised methods to characterize physiological signals jointly with observed events.
 
 My approach is to turn them into events' streams and model the events' distribution, similarly to the stream of tokens processed for language models.
 
@@ -86,7 +87,7 @@ A challenge in this approach is that unlike existing works, the tokens are not k
 
 ---
 
-To reach this goal, I will focus on three tasks:
+To address this goal, I will focus on three tasks:
 - First, considering that we have identified the events, I will develop models able to describe physiological events' distribution.
 - Then, building on these models, I will propose methods that can simultaneously extract events from the signal and model their distribution.
 - Finally, I will propose some fine-tuning methods to leverage these novel signal descriptions and solve specific tasks.
@@ -100,7 +101,8 @@ I propose to rely on the framework of point processes, which is a classical fram
 
 Most existing parametric models in this framework are restricted to Markovian kernels, which favor short latencies between events while we would like to capture the longer range interactions of physiological events.
 
-Based on preliminary work that I led, published this year in IMCL, we propose a novel inference framework that unlocks general models for point processes.
+
+Based on preliminary work published this year in IMCL, I propose a novel inference framework that unlocks general models for point processes.
 It opens the way to capture more complex interactions between events, such as pseudo-periodicity or thresholding effects, but also spatial dependencies with uncertainty.
 
 
@@ -123,7 +125,7 @@ Finally, to validate the proposed representations, I will develop methods that c
 
 Let me give you an example.
 In general anesthesia, avoiding long alpha suppression phases in the brain allows to reduce the risk of post-operative cognitive impairments.
-So we plan to detect such adverse events in real time using the developed representations.
+So we plan to predict such adverse events in real time using the developed representations, to allow the anesthetist to anticipate them.
 We will also focus on anomaly detection as well as causal analysis to understand response of the brain to stimuli.
 
 These developments will leverage either the fine-tuning of deep network, or the likelihood for dictionary-based models.

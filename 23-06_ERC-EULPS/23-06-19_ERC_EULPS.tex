@@ -8,7 +8,7 @@
     \def\biblio{}
 }
 
-\institute{INRIA Saclay}
+\institute{Inria Saclay}
 \author{Thomas Moreau}
 \title{
     EULPS: Event-based Unsupervised Learning for Physiological Signals
@@ -21,12 +21,12 @@
 \setlength\SizeLogoPage{8em}
 \def\LOGOS{
 % \includeLogos[1em]{logo_mind_big,logo_EULPS,logo_inria}\\[.5em]
-    \vskip-1em
+    \vskip-3em
     \raisebox{-1.5em}{\includegraphics[height=3em]{logo_inria}}
     \hskip2em
     \raisebox{-4em}{\includegraphics[height=8em]{logo_EULPS}}
     \hskip2em
-    \raisebox{-1.5em}{\includegraphics[height=3em]{logo_mind_big}}\\[.5em]
+    \raisebox{-1.5em}{\includegraphics[height=3em]{logo_cea}}\\[.5em]
 }
 \collaborators[]{Audition ERC StG 2023 -- PE6}
 
@@ -49,7 +49,7 @@
     \end{picture}
 }
 \frame{
-    \frametitle{General Anesthesia recordings}
+    \frametitle{General Anesthesia Monitoring}
 
 
     \begin{tikzpicture}[overlay, remember picture]
@@ -207,15 +207,15 @@
 
 %------------------------------------------------------------------------------
 \frame[t]{
-    \frametitle[t]{Recent successes in AI: Foundation Models}
+    \frametitle[t]{Recent breakthrough in AI: Foundation Models}
 
     \begin{columns}[T]
         \column{.2\textwidth}\centering
         \includegraphics[height=4em]{logo_chatGPT}\\
         \textbf{ChatGPT}
-        \column{.2\textwidth}\centering
-        \includegraphics[height=4em]{logo_copilot}\\
-        \textbf{Copilot}
+        % \column{.2\textwidth}\centering
+        % \includegraphics[height=4em]{logo_copilot}\\
+        % \textbf{Copilot}
         \column{.2\textwidth}\centering
         \includegraphics[height=4em]{logo_midjourney}\\
         \textbf{Midjourney}
@@ -228,7 +228,7 @@
     \vskip1em
     \begin{columns}[T]
         \techterm{Tokens}
-        \techterm{Self-supervised Pretraining}
+        \techterm{Self-supervised pretraining}
     \end{columns}
     \vskip1em
     {\centering Capture the input distribution $\mathbb P(X)$ with interaction between tokens.\\}
@@ -261,62 +261,61 @@
     \end{picture}
 }
 \frame{
-    \frametitle{Signals' tokens: Events}
+    \frametitle{Signals' Tokens: Events}
 
 
     \setbeamercolor{events}{bg=darkred!50}
     \begin{tikzpicture}[overlay, remember picture]
 
-        \node[anchor=west, yshift=7em] at (current page.west)
+        \node[anchor=east, yshift=7em, xshift=-3em] at (current page.east)
             (patterns) {\highlight[shadow=false]{
                 % Signal's patterns
-                Underlying events
+                % Underlying events
+                Latent events
             }};
 
-        \node[anchor=west, yshift=-2.5em] at (patterns.west) (ECG) {\highlight[shadow=false]{\color{black}\normalfont Heartbeat}};
-        \node[anchor=center, lightblue!70, xshift=-13ex, yshift=-7.5em] at (current page.north) (ECG_head) {};
-        \draw[->, very thick, lightblue!70] (ECG.east) -- (ECG_head);
+        \node[anchor=east, yshift=-2.5em] at (patterns.east) (ECG) {\highlight[shadow=false]{\color{black}\normalfont Heartbeat}};
 
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
             minimum width=5ex,
-            minimum height=2em, xshift=-8.7ex, yshift=-7.8em]
+            minimum height=2em, xshift=5.5ex, yshift=-7.8em]
                 at (current page.north) (box_ecg) {};
+        \draw[->, ultra thick, lightblue!70] ($(ECG.west)+(3ex, 0)$) -- (box_ecg.east);
         \node[anchor=south, xshift=.2ex, yshift=1em] at (box_ecg.west) (ecg_tip) {};
         \node[anchor=south, xshift=.2ex, yshift=-.8em] at (box_ecg.west) (ecg_base) {};
         \draw[-{Square[]}, ultra thick, green] (ecg_base) -- (ecg_tip) ;
 
-        \node[anchor=west, yshift=-5em] at (patterns.west) (Pleth) {\highlight[shadow=false]{\color{black}\normalfont  Dichrote wave}};
-        \node[anchor=center, lightblue!70, xshift=-9ex, yshift=-10.5em] at (current page.north) (Pleth_head) {};
-        \draw[->, very thick, lightblue!70] (Pleth.east) -- (Pleth_head);
+
+
+        \node[anchor=east, yshift=-5em] at (patterns.east) (Pleth) {\highlight[shadow=false]{\color{black}\normalfont  Dichrote wave}};
 
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
             minimum width=4ex,
-            minimum height=2em, xshift=-7ex, yshift=-10.8em]
+            minimum height=2em, xshift=.2ex, yshift=-10.8em]
                 at (current page.north) (box_pleth) {};
+        \draw[->, ultra thick, lightblue!70] ($(Pleth.west)+(3ex, 0)$) -- (box_pleth.east);
         \node[anchor=south, xshift=.1ex, yshift=1.5em] at (box_pleth.west) (pleth_tip) {};
         \node[anchor=south, xshift=.1ex, yshift=-1em] at (box_pleth.west) (pleth_base) {};
         \draw[-{Circle[]}, ultra thick, blue] (pleth_base) -- (pleth_tip) ;
 
-        \node[anchor=west, yshift=-7.5em] at (patterns.west) (Resp) {\highlight[shadow=false]{\color{black}\normalfont  Breath Cycle}};
-        \node[anchor=center, lightblue!70, xshift=-8ex, yshift=-15em] at (current page.north) (Resp_head) {};
-        \draw[->, very thick, lightblue!70] (Resp.east) -- (Resp_head);
+        \node[anchor=east, yshift=-7.5em] at (patterns.east) (Resp) {\highlight[shadow=false]{\color{black}\normalfont  Breath Cycle}};
 
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
-            minimum width=4ex,
-            minimum height=2em, xshift=-6ex, yshift=-15.5em]
-                at (current page.north) (resp_box) {};
+        minimum width=4ex,
+        minimum height=2em, xshift=-2ex, yshift=-15.5em]
+        at (current page.north) (resp_box) {};
+        \draw[->, ultra thick, lightblue!70] ($(Resp.west)+(3ex, 0)$) -- (resp_box.east);
         \node[anchor=south, xshift=.2ex, yshift=1.5em] at (resp_box.west) (resp_tip) {};
         \node[anchor=south, xshift=.2ex, yshift=-1em] at (resp_box.west) (resp_base) {};
         \draw[-{Triangle[]}, ultra thick, yellow] (resp_base) -- (resp_tip) ;
 
-        \node[anchor=west, yshift=-10em] at (patterns.west) (EEG) {\highlight[shadow=false]{\color{black}\normalfont  Brain waves}};
-        \node[anchor=center, lightblue!70, xshift=-5ex, yshift=-17.5em] at (current page.north) (EEG_head) {};
-        \draw[->, very thick, lightblue!70] (EEG.east) -- (EEG_head);
+        \node[anchor=east, yshift=-10em] at (patterns.east) (EEG) {\highlight[shadow=false]{\color{black}\normalfont  Brain waves}};
 
         \node[rectangle, lightblue!70, draw=lightblue!70, very thick,
-            minimum width=6ex,
-            minimum height=1.3em, xshift=-2ex, yshift=-17.8em]
-                at (current page.north) (eeg_box) {};
+        minimum width=6ex,
+        minimum height=1.3em, xshift=-2ex, yshift=-17.8em]
+        at (current page.north) (eeg_box) {};
+        \draw[->, ultra thick, lightblue!70] ($(EEG.west)+(3ex, 0)$) -- (eeg_box.east);
         \node[anchor=south, xshift=.2ex, yshift=1.5em] at (eeg_box.west) (eeg_tip) {};
         \node[anchor=south, xshift=.2ex, yshift=-.6em] at (eeg_box.west) (eeg_box) {};
         \draw[-{Turned Square[]}, ultra thick, orange] (eeg_box) -- (eeg_tip) ;
@@ -324,19 +323,19 @@
 
 
 
-        \node[anchor=east, xshift=-3em, yshift=7em] at (current page.east)
+        \node[anchor=west, xshift=0em, yshift=7em] at (current page.west)
             (events) {\highlight[shadow=false, col=events,c=white]{
                 Observed events
             }};
-        \node[anchor=east, yshift=-3.5em] at (events.east)
+        \node[anchor=west, yshift=-3.5em] at (events.west)
             {\highlight[shadow=false,col=events,c=black]{
                 \normalfont Drug injection
             }};
-        \node[anchor=east, yshift=-7em] at (events.east)
+        \node[anchor=west, yshift=-7em] at (events.west)
             {\highlight[shadow=false,col=events,c=black]{
                 \normalfont Surgery acts
             }};
-        \node[anchor=east, yshift=-10.5em] at (events.east)
+        \node[anchor=west, yshift=-10.5em] at (events.west)
             {\highlight[shadow=false,col=events,c=black]{
                 \normalfont Adverse outcomes
             }};
@@ -355,7 +354,7 @@
 
 %------------------------------------------------------------------------------
 
-\begin{frame}[t]{Signals' tokens: Physical Events}
+\begin{frame}[t]{Signals' Tokens: Events}
 
     \vskip-1em
     \begin{columns}[T]
@@ -401,10 +400,10 @@
     % \visible<2>
     {\vskip-14em
     \centering
-    \highlight{\parbox{.4\textwidth}{
+    \highlight{\parbox{.35\textwidth}{
         \centering
-        Physical Events\\
-        are often characterized by
+        Latent Events\\
+        are characterized by
         Recurring Patterns
     }}\\
     }
@@ -414,7 +413,8 @@
 %------------------------------------------------------------------------------
 
 \frame{
-    \frametitle{EULPS: Event-based unsupervised learning for Physiological Signals}
+    \frametitle{EULPS: Event-based Unsupervised Learning for Physiological Signals}
+
 
     \begin{block}{\bf EULPS Goal}
         Model the Distribution of Events for Physiological Signals.
@@ -424,7 +424,7 @@
 
     {\bf Hyp.:} Events' time distribution $\mathbb P(\{t_k\}_k)$ is much simpler than $\mathbb P(X)$.\\[1em]
 
-    {\bf Challenge:} Need to find transform signals into events and model their distribution jointly.\\[1em]
+    {\bf Challenge:} Need to transform signals into events and model their distribution jointly.\\[1em]
 
     {\centering\includegraphics[width=.8\textwidth]{finding_events}\\[1em]}
 
@@ -459,10 +459,13 @@
     {\bf Idea:} use Point Processes to model the events' distribution $\mathbb P(\{t_k\}_k)$\\[1em]
 
     \begin{columns}
-        \column{.6\textwidth}
-        \includegraphics[width=\textwidth]{csc_and_pp}\\
+        \column{.5\textwidth}
+        \centering
+        % \includegraphics[width=\textwidth]{csc_and_pp}\\
+        \includegraphics[width=\textwidth]{novel_pp}\\
         \column{.4\textwidth}
-        \includegraphics[width=\textwidth]{connectivity_default_mode}
+        \centering
+        \includegraphics[width=\textwidth]{connectivity_default_mode}\\
     \end{columns}
 
     \vskip1em
@@ -477,10 +480,10 @@
 %------------------------------------------------------------------------------
 
 \frame{
-    \frametitle{WP2: Event-based unsupervised waveform learning\\for physiological signals}
+    \frametitle{WP2: Joint Event Detection and Modelisation}
 
     \begin{block}{\bf Challenge 2}
-        Can we jointly discover the Events and model them?
+        Can we jointly discover the Events and capture their distribution?
     \end{block}
 
     \begin{columns}[T]
@@ -536,7 +539,7 @@
 %------------------------------------------------------------------------------
 
 \frame{
-    \frametitle{WP3: Validating representations with practical tasks}
+    \frametitle{WP3: Validating Representations with Practical Tasks}
 
     \begin{block}{\bf Challenge 3}
         How to use event-based representations for machine learning on signals?
@@ -550,22 +553,23 @@
         \vfill
         \includegraphics[width=\textwidth]{forecasting}
         \column{.3\textwidth}
-        \centering Characterize abnormal records\vfill
+        \centering Characterize atypical records\vfill
         \includegraphics[width=1\textwidth]{anomaly_detection}
         \column{.3\textwidth}
-        \centering Find causal relationship in Neuroscience.
+        \centering Link stimuli and\\brain responses in Neuroscience.
         \vfill
         \includegraphics[width=\textwidth]{images/causality.png}
     \end{columns}
     % \vskip1em
     \begin{columns}[T]
+        \hskip-2em
         \techterm{Event Prediction}
         \techterm{Anomaly Detection}
         \techterm{Causality}
     \end{columns}
 
     \vskip1em
-    {\bf Idea:} Leverage model likelihood and   differentiable architectures.
+    {\bf Idea:} Leverage differentiable architectures and model likelihood.
 
 }
 
@@ -583,18 +587,9 @@
 %------------------------------------------------------------------------------
 
 \frame[t]{
-    \frametitle{EULPS: Event-based Unsupervised Learning for Physio. Data}
+    \frametitle{EULPS: Event-based Unsupervised Learning for Physiological Signals}
 
-    % {\bf Carrier Path:}\\[.5em]
-    % \highlightbox{\parbox{.9\textwidth}{
-    %     \begin{tabular}{c p{2ex} l p{2ex} c}
-    %         {\bf\color{black} 2014-2017}&&PhD && ENS Cachan\\
-    %         {\bf\color{black} 2018-2019}&&Postdoc && Inria\\
-    %         {\bf\color{black} 2019-Present}&&Research faculty&& Inria\\
-
-    %     \end{tabular}
-
-    % }}
+    \vskip-.5em
     \highlight{
         \centering Goal: \normalfont\normalcolor
          Propose a new Signal Processing methodology based on Events.
@@ -607,7 +602,7 @@
     \setbeamercolor{dl}{fg=white,bg=darkred!50}
     \begin{tikzpicture}[overlay, remember picture]
 
-        \node[anchor=south, yshift=4em, xshift=-1ex] at (current page.south) (cloud_soft) {\includegraphics[width=15ex]{cloud}};
+        \node[anchor=south, yshift=3em, xshift=-3ex] at (current page.south) (cloud_soft) {\includegraphics[width=15ex]{cloud}};
         \node[anchor=north, yshift=1.2em] at (cloud_soft) (Soft) {\parbox{.16\textwidth}{\centering Open\\ Source}};
         \node[anchor=south, yshift=2em] at (Soft.north) {\parbox{.15\textwidth}{\centering \bf \color{darkred} Thomas Moreau}};
         \node[anchor=south, xshift=-12ex, yshift=4em] at (Soft.north) (cloud_ML) {\includegraphics[width=15ex]{cloud}};
@@ -622,17 +617,17 @@
         \draw[-latex] (cloud_soft) to[bend right=5] node[above,rotate=60] {} (cloud_ML);
         \draw[-latex] (cloud_ML) to[bend right=5] node[above,rotate=60] {} (cloud_soft);
 
-        \node[anchor=east, xshift=-20ex, yshift=-8ex] at (cloud_soft.west) {\includegraphics[height=1.5em]{logo_python}};
-        \node[anchor=east, xshift=-12ex, yshift=-8ex] at (cloud_soft.west) (sklearn){\includegraphics[height=1.5em]{logo_sklearn}};
+        \node[anchor=east, xshift=-18ex, yshift=-6ex] at (cloud_soft.west) {\includegraphics[height=1.5em]{logo_python}};
+        \node[anchor=east, xshift=-10ex, yshift=-6ex] at (cloud_soft.west) (sklearn){\includegraphics[height=1.5em]{logo_sklearn}};
         \node[anchor=south, xshift=-3ex, yshift=-1ex] at (sklearn.north) (contrib) {\footnotesize Contributor};
-        \node[anchor=east, xshift=-1ex, yshift=0ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_joblib}};
-        \node[anchor=east, xshift=-1ex, yshift=-7ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_loky}};
-        \node[anchor=west, xshift=-1ex, yshift=1ex] at (cloud_soft.east) (benchopt) {\includegraphics[height=3em]{logo_benchopt}};
-        \node[anchor=west, xshift=0ex, yshift=-6ex] at (cloud_soft.east) (alpha) {\includegraphics[height=3em]{brain_and_signals}};
+        \node[anchor=east, xshift=1ex, yshift=2ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_joblib}};
+        \node[anchor=east, xshift=1ex, yshift=-5ex] at (cloud_soft.west) {\includegraphics[height=3em]{logo_loky}};
+        \node[anchor=west, xshift=-1ex, yshift=3ex] at (cloud_soft.east) (benchopt) {\includegraphics[height=3em]{logo_benchopt}};
+        \node[anchor=west, xshift=0ex, yshift=-4ex] at (cloud_soft.east) (alpha) {\includegraphics[height=3em]{brain_and_signals}};
         \node[anchor=north, yshift=1ex] at (alpha.south) {\footnotesize\texttt{{\color{orange}$\pmb\alpha$}csc}};
 
 
-        \node[anchor=east, yshift=2em] at (cloud_ML.west) {
+        \node[anchor=east, yshift=3.5em, xshift=2ex] at (cloud_ML.west) {
             \highlight{\parbox[c]{.18\textwidth}{
                 2018-2023\\
                 \normalfont\color{black} 17 papers in top ML conf.
@@ -650,12 +645,12 @@
             }}
         };
         \node[anchor=west, yshift=-.5em, xshift=-3ex] at (cloud_app.east) {
-            \highlight{\parbox[c]{.22\textwidth}{
-                Many Domains\\
+            \highlight{\parbox[c]{.25\textwidth}{
+                Several Domains\\
                 \normalfont \color{black}
-                Neurosciences\\
-                Exascale simu.\\
-                Sensor networks
+                Neuroscience\\
+                Physics Simulation\\
+                Astrophysic
             }}
         };
 
