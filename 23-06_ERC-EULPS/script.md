@@ -77,20 +77,22 @@ are more compact, as they are selected part of the signal, and they can be inter
 
 #### S7
 
-The goal of the E.U.LPS project is to propose new unsupervised methods to characterize physiological signals jointly with observed events.
+The goal of the E.U.LPS project is to propose new unsupervised methods to characterize physiological signals jointly with observed events, by turning them into stream of events as you understood.
 
-My approach is to turn them into events' streams and model the events' distribution, similarly to the stream of tokens processed for language models.
+<!-- My approach is to turn them into events' streams and model the events' distribution, similarly to the stream of tokens processed for language models. -->
 
-The core hypothesis is that the distribution of the events in time and space is much simpler to model than the original signals' distribution.
+<!-- The core hypothesis is that the distribution of the events in time and space is much simpler to model than the original signals' distribution. -->
 
-A challenge in this approach is that unlike existing works, the tokens are not known a priori and need to be identified.
+The main challenge, is that unlike language models, the event tokens are not known a priori and need to be identified
+
+<!-- A challenge in this approach is that unlike existing works, the tokens are not known a priori and need to be identified. -->
 
 ---
 
 To address this goal, I will focus on three tasks:
 - First, considering that we have identified the events, I will develop models able to describe physiological events' distribution.
 - Then, building on these models, I will propose methods that can simultaneously extract events from the signal and model their distribution.
-- Finally, I will propose some fine-tuning methods to leverage these novel signal descriptions and solve specific tasks.
+- Finally, I will validate these novel signal representations by fine-tuning them to solve specific tasks.
 
 #### S8
 
@@ -102,7 +104,7 @@ I propose to rely on the framework of point processes, which is a classical fram
 Most existing parametric models in this framework are restricted to Markovian kernels, which favor short latencies between events while we would like to capture the longer range interactions of physiological events.
 
 
-Based on preliminary work published this year in IMCL, I propose a novel inference framework that unlocks general models for point processes.
+Based on preliminary work published this year in IMCL, I propose a novel inference method that unlocks general models for point processes.
 It opens the way to capture more complex interactions between events, such as pseudo-periodicity or thresholding effects, but also spatial dependencies with uncertainty.
 
 
@@ -117,7 +119,7 @@ The models will be fitted to the data using alternate minimization or bilevel op
 
 Then, I will consider the unrolled version of these algorithms to create more expressive deep models that can be trained through self-supervised learning. 
 These models are interesting because they remain partially interpretable thanks to the unrolled architecture.
-And compared to dictionary based approach, they have the advantage of being more powerful as they can be fine-tuned easily for specific tasks.
+And compared to dictionary based approach, they have the advantage of being more powerful as they can be fine-tuned easily to answer specific questions about the signals.
 
 #### S10
 

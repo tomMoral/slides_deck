@@ -21,12 +21,12 @@
 \setlength\SizeLogoPage{8em}
 \def\LOGOS{
 % \includeLogos[1em]{logo_mind_big,logo_EULPS,logo_inria}\\[.5em]
-    \vskip-3em
+    \hskip-1em
     \raisebox{-1.5em}{\includegraphics[height=3em]{logo_inria}}
     \hskip2em
     \raisebox{-4em}{\includegraphics[height=8em]{logo_EULPS}}
     \hskip2em
-    \raisebox{-1.5em}{\includegraphics[height=3em]{logo_cea}}\\[.5em]
+    \raisebox{-2.5em}{\includegraphics[height=5em]{logo_cea}}\\[.5em]
 }
 \collaborators[]{Audition ERC StG 2023 -- PE6}
 
@@ -102,108 +102,10 @@
     \centering
     \highlight{\parbox{.4\textwidth}{
         \centering
-        How to summarize large multivariate signals with AI?
+        Find predictive embeddings of multivariate signals\\using AI.
     }}\\
     }
 \end{frame}
-
-% \frame{
-%     \frametitle{AI-powered General Anesthesia}
-
-%     \begin{columns}
-%         \column{.4\textwidth}
-%         \centering
-%         \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
-%         \highlight{\parbox{.7\textwidth}{
-%             APHP Database\\
-%             \normalfont \normalcolor
-%             46k records; 25me{
-%     \frametitle{AI-powered General Anesthesia}
-
-%     \begin{columns}
-%         \column{.4\textwidth}
-%         \centering
-%         \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
-%         \highlight{\parbox{.7\textwidth}{
-%             APHP Database\\
-%             \normalfont \normalcolor
-%             46k records; 25Tb\\
-%             All procedure types
-%         }}
-%         \vskip1em
-%         \includegraphics[height=2em]{logo_APHP}
-%         \column{.6\textwidth}
-%         Anesthetists make {\bf decisions} based on these
-%         indicators.\\[1em]
-
-%         \begin{itemize}\itemsep.5em
-%             \color{black}\normalfont
-%             \item Instantaneous snapshot,
-%             \item Reading needs expertise,
-%             \item Not personalized.
-%         \end{itemize}
-%         \vskip1em
-%         The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
-%         \vskip2em
-%         \strongpoint{Can we leverage AI to better drive GA?}
-%     \end{columns}
-
-
-% }Tb\\
-%             All procedure types
-%         }}
-%         \vskip1emme{
-%     \frametitle{AI-powered General Anesthesia}
-
-%     \begin{columns}
-%         \column{.4\textwidth}
-%         \centering
-%         \includegraphics[width=.7\textwidth]{seringe1}\\[1em]
-%         \highlight{\parbox{.7\textwidth}{
-%             APHP Database\\
-%             \normalfont \normalcolor
-%             46k records; 25Tb\\
-%             All procedure types
-%         }}
-%         \vskip1em
-%         \includegraphics[height=2em]{logo_APHP}
-%         \column{.6\textwidth}
-%         Anesthetists make {\bf decisions} based on these
-%         indicators.\\[1em]
-
-%         \begin{itemize}\itemsep.5em
-%             \color{black}\normalfont
-%             \item Instantaneous snapshot,
-%             \item Reading needs expertise,
-%             \item Not personalized.
-%         \end{itemize}
-%         \vskip1em
-%         The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
-%         \vskip2em
-%         \strongpoint{Can we leverage AI to better drive GA?}
-%     \end{columns}
-
-
-% }
-%         \includegraphics[height=2em]{logo_APHP}
-%         \column{.6\textwidth}
-%         Anesthetists make {\bf decisions} based on these
-%         indicators.\\[1em]
-
-%         \begin{itemize}\itemsep.5em
-%             \color{black}\normalfont
-%             \item Instantaneous snapshot,
-%             \item Reading needs expertise,
-%             \item Not personalized.
-%         \end{itemize}
-%         \vskip1em
-%         The MASCOT team (F. Vallée) from APHP (Paris hospital) have been collecting GA recordings for 5 years.
-%         \vskip2em
-%         \strongpoint{Can we leverage AI to better drive GA?}
-%     \end{columns}
-
-
-% }
 
 %------------------------------------------------------------------------------
 \frame[t]{
@@ -340,13 +242,6 @@
                 \normalfont Adverse outcomes
             }};
 
-        % \only<2>{
-        %     \node[anchor=west, yshift=-8em] at (current page.west)
-        %     {\highlight[shadow=false,col=events,c=white]{
-        %         Physiological events
-        %     }};
-        % }
-
     \end{tikzpicture}
 }
 }
@@ -442,7 +337,7 @@
         }}%
         \column{.3\textwidth}
         \highlight{\parbox{\textwidth}{%
-            \centering Task driven Model Fine-tuning
+            \centering Task-specific Fine-tuning Algo.
         }}%
     \end{columns}
 }
@@ -458,18 +353,20 @@
 
     {\bf Idea:} use Point Processes to model the events' distribution $\mathbb P(\{t_k\}_k)$\\[1em]
 
-    \begin{columns}
+    \begin{columns}[T]
         \column{.5\textwidth}
         \centering
         % \includegraphics[width=\textwidth]{csc_and_pp}\\
         \includegraphics[width=\textwidth]{novel_pp}\\
         \column{.4\textwidth}
+        \vskip-.5em
         \centering
-        \includegraphics[width=\textwidth]{connectivity_default_mode}\\
+        \includegraphics[width=\textwidth]{connectivity_default_mode}\\[-1em]
+        \small Spatial events interactions\\in the brain
     \end{columns}
 
     \vskip1em
-    {\bf Development:} Models beyond Markovian kernels to model uncertainty in space and time and complex events' dependencies.
+    {\bf Development:} Parametric models beyond Markovian kernels to capture  complex events' dependencies and uncertainty in space and time.
     % \myitem{} General Parametric Family for temporal, marked and spatial PP.
 
     \vskip1em
@@ -509,7 +406,7 @@
                 }}
             };
         \end{tikzpicture}
-        \vskip.5em
+        \vskip1em
         {\centering \myitem{} Interpretable\\}
         % \begin{itemize}
         %     \item Based on Convolutional Dictionary Learning and PP,
@@ -527,13 +424,6 @@
 
     \end{columns}
 
-    % \vskip2em
-    % {\bf Expected Results:}\\[.5em]
-    % \myitem{} Methods to build joint representations for signal and events.\hfill
-
-    % \vskip1em
-    % \definecolor{lightgreen}{RGB}{82,192,99}
-    % {\bf Preliminary Studies:} \fakecite{NeurIPS 2022; \textcolor{lightgreen}{ICLR 2022a}}
 }
 
 %------------------------------------------------------------------------------
@@ -572,17 +462,6 @@
     {\bf Idea:} Leverage differentiable architectures and model likelihood.
 
 }
-
-%------------------------------------------------------------------------------
-
-% \frame{
-%     \frametitle{WP4: Reproducible and Reusable Research}
-
-%     \begin{block}{\bf Challenge 4}
-%         Disseminate these techniques.
-%     \end{block}
-
-% }
 
 %------------------------------------------------------------------------------
 
@@ -634,14 +513,11 @@
             }}
         };
 
-        % \node[anchor=south, xshift=-3ex, yshift=-1ex] at (cloud_app.north) {
-        %     \includegraphics[height=2em]{logo_APHP}
-        % };
         \node[anchor=south, yshift=0em, xshift=0ex] at (cloud_app.north) {
-            \highlight{\parbox[c]{.25\textwidth}{
+            \highlight{\parbox[c]{.28\textwidth}{
                 GA Database\\
                 \normalfont\color{black}
-                46k records; 25Tb
+                46k recordings; 25Tb
             }}
         };
         \node[anchor=west, yshift=-.5em, xshift=-3ex] at (cloud_app.east) {
@@ -650,7 +526,7 @@
                 \normalfont \color{black}
                 Neuroscience\\
                 Physics Simulation\\
-                Astrophysic
+                Astrophysics
             }}
         };
 
@@ -720,11 +596,5 @@
 
 }
 
-
-% %------------------------------------------------------------------------------
-
-% \frame{
-%     \bibliography{library}
-% }
 
 \end{document}
