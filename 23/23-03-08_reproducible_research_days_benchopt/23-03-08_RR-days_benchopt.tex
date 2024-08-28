@@ -1,0 +1,296 @@
+\documentclass[unknownkeysallowed]{beamer}
+\usepackage[french,english]{babel}
+\usepackage{sty/beamer_js}
+\usepackage{sty/shortcuts_js}
+
+\usepackage{graphicx}
+\usepackage{dirtree}
+\newcommand{\Benchopt}{\texttt{Benchopt}}
+
+\graphicspath{{/home/temp/Pictures/Logos/}}
+
+\definecolor{tomcolor}{rgb}{0.,.3,.6}
+\lstset{basicstyle=\color{tomcolor}\scriptsize\ttfamily}
+\addbibresource{../biblio/biblio.bib}
+\captionsetup[subfigure]{labelformat=empty}
+\begin{document}
+\setbeamercovered{invisible}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%             Headers               %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\bigskip
+\bigskip
+\begin{center}{
+\LARGE\color{marron}
+\textbf{\texttt{Benchopt}:\\
+Reproducible, efficient and collaborative optimization benchmarks}
+\textbf{ }\\
+}
+
+\color{marron}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\textbf{Journées "Recherche Reproductible"} \\
+\vspace{0.1cm}
+Thomas Moreau\\
+\end{center}
+
+\centering
+\includegraphics[width=0.43\textwidth]{sharedimages/benchopt_logo.pdf}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Reproducible research}
+
+    Different goals:\\[.5em]
+    \alt<2->{
+        \begin{itemize}\itemsep.5em
+            \item Reproduce the exact same results?
+            \item {\bf Run with new parameters with robust results?}
+            \item {\bf Run with new data?}
+            \item {\bf Extend the results with a new method?}
+            \item Provide tools for others to use?
+        \end{itemize}
+    }{
+        \begin{itemize}\itemsep.5em
+            \item Reproduce the exact same results?
+            \item Run with new parameters with robust results?
+            \item Run with new data?
+            \item Extend the results with a new method?
+            \item Provide tools for others to use?
+        \end{itemize}
+    }
+    \vskip2em
+    {\centering \large Does not require the same set of tools!\\[2em]}
+    % \end{minipage}
+    \pause
+    {\centering \large Here is my take.\\}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Extending the results?}
+
+    \vskip2em
+    Current process in ML to extend results:\\[.2em]
+    \begin{itemize}
+        \item Hard to extend existing code.
+        \item Re-code methods and tools to integrate a new method.
+        \item Competitors' methods do not work out of the box.
+    \end{itemize}
+    \vskip1em
+    All of this started from scratch by every new method!
+    \vskip1em
+    Also very cumbersome to add a new dataset, or metric.
+
+    \vskip2em
+    \pause
+    {\centering\Large
+        $\Rightarrow$ We need to come up with tools to make it easy!\\
+    }
+    \vskip2em
+
+    \pause
+    \Benchopt{} produces \textbf{open}, \textbf{reproducible}, \textbf{extendable} benchmarks
+
+    \end{frame}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{How does \Benchopt{} do it?}
+
+\Benchopt{} is a framework to organize and run benchmarks:
+\begin{itemize}
+    \item one repository per benchmark
+    \item one base open source \texttt{Python} CLI to run them
+\end{itemize}
+
+\vskip1em
+
+\centering
+\textbf{3 components}: Objective, Dataset, Solver
+
+\vskip1em
+\includegraphics[width=\linewidth]{sharedimages/benchopt_schema.pdf}
+\vskip1em
+Start yours with \url{https://github.com/benchopt/template_benchmark}!
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Structure of a benchmark}
+
+    \begin{minipage}{0.45\linewidth}
+        \dirtree{%
+        .1 benchmark/.
+        .2 objective.py.
+        .2 datasets/.
+        .3 dataset1.py.
+        .3 dataset2.py.
+        .2 solvers/.
+        .3 solver1.py.
+        .3 solver2.py.
+    }
+    \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+
+    \textbf{Modular \& extendable}
+    \vspace*{5mm}
+
+    New solver? add a file
+
+    New dataset? add a file
+
+    New metric? modify objective
+    \end{minipage}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Components of a benchmark}
+    \includegraphics[width=\linewidth]{sharedimages/benchopt_schema_dependency.pdf}
+
+    \vskip2em
+    \centering
+    Flexible API so that each component is standalone.\\
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\Benchopt{} makes your life easy}
+
+    \begin{itemize}
+        \item build on previous benchmarks
+        \item use solvers in Python, R, Julia, binaries...
+        \item monitor any metric you want altogether (test/train loss, ...)
+        \item add parameters to solvers
+        \item share and publish HTML results
+        \item run all benchmarks in parallel
+        \item cache results
+        \item and much more!
+    \end{itemize}
+    \vskip1em
+    \centering
+    \includegraphics[width=0.8\linewidth]{sharedimages/tweet_rahimi.png}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Interactive results exploration}
+    \centering
+    \includegraphics[width=0.8\linewidth]{sharedimages/benchopt_convnet.png}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example: Resnet benchmark}
+
+    { \small
+    \begin{itemize}
+        \item image classification with resnet18
+        \item various optimization strategies
+        \item compare \texttt{pytorch} and \texttt{tensorflow}
+        \item publish reproducible SOTA for baselines
+    \end{itemize}
+    }
+
+    \vskip1em
+    \centering
+    \includegraphics[width=\linewidth]{sharedimages/resnet18_sgd_torch_legend.pdf}
+    \includegraphics[width=\linewidth]{sharedimages/resnet18_sgd_torch.pdf}
+
+    \url{https://github.com/benchopt/benchmark_resnet_classif/}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{
+    \frametitle{Other examples}
+
+\vskip.5em
+\begin{minipage}{0.45\linewidth}
+    \begin{itemize}\itemsep1em
+        \item Resnet18
+        \item Lasso
+        \item ICA
+        \item Logistic regression
+        \item Federated Learning
+    \end{itemize}
+\end{minipage}
+\begin{minipage}{0.52\linewidth}
+    \begin{itemize}\itemsep1em
+        \item Total Variation
+        \item Ordinary Least Squares
+        \item Non convex sparse regression
+        \item linear SVM
+        \item Bi-level optimization
+    \end{itemize}
+\end{minipage}
+
+    \vskip2em
+    {\centering \url{https://benchopt.github.io/results/}\\}
+    \vskip2em
+    \pause
+    {\centering \Large You can easily add yours! :)\\}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conclusion}
+
+    Reproducible research needs more than just releasing code:\\[2em]
+
+    \begin{itemize}
+        \item Clean and Documented.
+        \item Reusable.
+        \item Extendable.
+    \end{itemize}
+
+    \vskip2em
+    Use proper tools to make it possible!
+    \vskip2em
+    Research is also collaborative: don't hesitate to report your issues and give feedback :)
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Contributors from...}
+    \centering
+    \includegraphics[width=100px]{sharedimages/logo_inria_horiz.pdf} \hspace{1mm}
+    \includegraphics[height=45px]{sharedimages/um_logo.pdf} \hspace{1mm}
+    \includegraphics[height=35px]{sharedimages/logo_berkeley.png} \hspace{1mm}
+    \\[7mm]
+    \includegraphics[height=50px]{sharedimages/logo_cnrs.pdf} \hspace{5mm}
+    \includegraphics[height=50px]{sharedimages/logo_lund} \hspace{5mm}
+    \includegraphics[height=50px]{sharedimages/logo_telecom.pdf} \hspace{5mm}
+    \includegraphics[height=50px]{sharedimages/logo_univ_luxembourg.pdf} \\[4mm]
+    \includegraphics[height=40px]{sharedimages/logo_ens.png}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}

@@ -1,0 +1,32 @@
+
+
+\usepackage[beamer]{shortcuts_tom}
+\bibliographystyle{apalike}
+\mode<presentation> {
+	\usetheme{PrezCMLA}
+	\usecolortheme{PrezCMLA}
+	\setbeamertemplate{navigation symbols}{} % Remove the navigation symbols
+}
+
+\makeatletter
+\def\beamer@newblock{%
+	\usebeamercolor[fg]{bibliography entry author}%
+	\usebeamerfont{bibliography entry author}%
+	\usebeamertemplate{bibliography entry author}%
+	\def\newblock{%
+		\usebeamercolor[fg]{bibliography entry title}%
+		\usebeamerfont{bibliography entry title}%
+		\usebeamertemplate{bibliography entry title}%
+		\def\newblock{%
+			\usebeamercolor[fg]{bibliography entry location}%
+			\usebeamerfont{bibliography entry location}%
+			\usebeamertemplate{bibliography entry location}%
+			\def\newblock{%
+				\usebeamercolor[fg]{bibliography entry note}%
+				\usebeamerfont{bibliography entry note}%
+				\usebeamertemplate{bibliography entry note}}}}%
+	\leavevmode\setbox\beamer@tempbox=\hbox{}\ht\beamer@tempbox=0em\box\beamer@tempbox}
+\setbeamertemplate{bibliography entry title}{}{}
+\setbeamertemplate{bibliography entry location}{}{}
+
+\makeatother

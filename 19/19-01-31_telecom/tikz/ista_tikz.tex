@@ -1,0 +1,75 @@
+\documentclass[main_tikz.tex]{subfiles}
+
+\begin{document}
+\begin{tikzpicture}[scale=\tkzscl]
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    varstyle/.style={
+           rectangle,
+           fill=white,
+           rounded corners,
+           draw=black, very thick,
+           text width=2em,
+           minimum height=2em,
+           text centered},
+    %Define style for operators
+    op/.style={
+           circle,
+           draw=black, very thick,
+           fill=white,
+           text width=1em,
+           minimum height=1em,
+           text centered},
+    %Define style for st
+    st/.style={
+           draw,
+           thick,
+           rectangle, 
+           fill=white,
+           text width=2em, 
+           minimum height=2.5em,},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           %shorten <=2pt,
+           %shorten >=2pt,}
+    }
+};
+
+%nodes
+\node[varstyle] (linear) {$W_e$};
+\node[op, inner sep=4pt, right=1em of linear] (add) {};
+\node[left=1em of linear] (X) {$X$} edge[pil] (linear.west);
+\path (linear.east) edge[pil] (add.west);
+
+% Draw a centered plus sign
+
+% Draw plus sign
+\draw ($ (add.north) - (0, .15)$) -- ($ (add.south) + (0, .15)$);
+\draw ($ (add.east) - (.15, 0)$) -- ($ (add.west) + (.15, 0)$);
+
+
+%Draw soft-thresholding
+\node[st, right=1em of add] (h) {};
+\node[above=1em of h.center] (up) {};
+\node[below=1em of h.center] (down) {};
+\node[right=1em of h.center] (right) {};
+\node[left=1em of h.center] (left) {};
+\draw (h.center) -- (up) -- (down) -- (h.center) -- (right) -- (left);
+\draw ($ (h.center) - (.2em,0em)  $) -- ($ (h.center) - (.8em,.7em)  $);
+\draw ($ (h.center) + (.2em,0em)  $) -- ($ (h.center) + (.8em,.7em)  $);
+\node[right=2em of h] (Z) {$Z^*$};
+\path (add.east)
+edge[pil] (h.west);
+\path (h.east)
+edge[pil] (Z);
+\node[inner sep=0,minimum size=0,right=1em of h] (branch) {};
+\node[varstyle,below=.5em of h] (S) {$W_g$};
+\draw[pil] (branch) |- (S.east);
+\draw[pil] (S.west) -| (add);
+\end{tikzpicture}
+\end{document}

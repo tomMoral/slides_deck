@@ -12,6 +12,7 @@
 *.synctex.gz
 **/.build/
 **/build/
+*.mp4
 
 # IDE specific folders
 .vscode

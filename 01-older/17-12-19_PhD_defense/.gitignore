@@ -1,0 +1,13 @@
+/phd-defense_scaman
+*.pdf
+*.swp
+
+*.bbl
+*.log
+*.aux
+*.out
+*.blg
+*.synctex.gz
+*.snm
+*.nav
+*.toc

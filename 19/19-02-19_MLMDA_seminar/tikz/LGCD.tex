@@ -1,0 +1,111 @@
+\documentclass[main_tikz.tex]{subfiles}
+%\usetikzlibrary{...}
+
+
+%\usepackage{beamerarticle}
+\begin{document}
+
+\begin{tikzpicture}
+
+
+\pgfmathsetmacro{\iO}{4}
+\pgfmathsetmacro{\ig}{17}
+\pgfmathsetmacro{\W}{3}
+\pgfmathsetmacro{\width}{15}
+\pgfmathsetmacro{\height}{2}
+\pgfmathsetmacro{\wspace}{1}
+\pgfmathsetmacro{\K}{5}
+\pgfmathsetmacro{\L}{7}
+\pgfmathtruncatemacro{\k}{\K-1}
+\pgfmathtruncatemacro{\w}{\L-1}
+\pgfmathtruncatemacro{\ww}{\L-2}
+\pgfmathsetmacro{\Lm}{27}
+
+\node[] (Cm) {};
+    
+\only<1-2>{
+    \fill[gray!20] (Cm.center)
+    -- ++(\width, 0)
+    -- ++(0, -\height)
+    -- ++(-\width, 0) node[midway, below] {coordinates of $Z$}
+    -- cycle;
+
+    \fill[blue!50] ($ (Cm.center) + (\ig*\width /\Lm, -3*\height /\K)$)
+    -- ++(0, -\height/\K)
+    -- ++(\width/\Lm, 0)
+    -- ++(0, \height/\K)
+    -- cycle;
+}
+
+\visible<1>{
+    \draw[<->, dashed] ($ (Cm.center) + (0, -1.2 * \height)$)
+        -- ++(\width, 0) node[midway, below] {$\widetilde{T}$};
+    \draw[<->, dashed] ($ (Cm.center) + (\width + \width /\Lm/2, 0)$)
+        -- ++(0, -\height) node[midway, right] {$K$};
+}
+
+\only<2>{
+     \fill[red!20] ($ (Cm.center) + (\ig*\width /\Lm - \w/2*\width /\Lm, 0)$)
+        -- ++(0, -\height)
+        -- ++(\L*\width/\Lm, 0)
+        -- ++(0, \height)
+        -- cycle;
+     \draw[<->, dashed] ($ (Cm.center) + (\ig*\width /\Lm - \w/2*\width /\Lm, -\height/2.1)$)
+        -- ++(\L*\width/\Lm, 0) node[midway, below, above, thick] {\hskip.5em$2L-1$ };
+     \fill[blue!50] ($ (Cm.center) + (\ig*\width /\Lm, -3*\height /\K)$)
+     -- ++(0, -\height/\K)
+     -- ++(\width/\Lm, 0)
+     -- ++(0, \height/\K)
+     -- cycle;
+}
+
+
+\visible<3->{
+    \fill[green!20] (Cm.center)
+    -- ++(0, -\height)
+    -- ++(\width/\W, 0)
+    -- ++(0, \height)
+    -- cycle;
+    
+    \draw [ultra thick] (Cm.center) 
+    -- ++(0, -\height);
+    \foreach \i in {1,...,\W}{
+        \draw [ultra thick] ($ (Cm.center) + (\i*\width/\W, 0)$)
+        -- ++(0, -\height);
+        \draw [ultra thick] ($ (Cm.center) + (\i*\width/\W, 0)$)
+        -- ++(-\width/\W, 0) node[midway, above] {$\mathcal C_{\i}$};
+        \draw [ultra thick] ($ (Cm.center) + (\i*\width/\W, -\height)$)
+        -- ++(-\width/\W, 0);
+    }
+}
+\only<3>{
+    \draw[<->, dashed] ($ (Cm.center) + (0, -\height/2.1)$)
+    -- ++(\width/\W, 0) node[midway, above, thick] {\hskip0.5em$\frac{\widetilde{T}}{M}$ };
+}
+
+\only<4>{
+    \fill[blue!50] ($ (Cm.center) + (\iO*\width /\Lm, -\W*\height /\K)$)
+    -- ++(0, -\height/\K)
+    -- ++(\width/\Lm, 0)
+    -- ++(0, \height/\K)
+    -- cycle;
+}
+
+\draw (Cm.center)
+-- ++(\width, 0)
+-- ++(0, -\height)
+-- ++(-\width, 0) node[midway, below] {coordinates of $Z$}
+-- cycle;
+
+\foreach \i in {1,...,\k}{
+    \draw ($ (Cm.center) - (0, \i*\height /\K)$)
+    -- ++(\width, 0);
+}
+\foreach \i in {1,...,\Lm}{
+    \draw ($ (Cm.center) + (\i*\width/\Lm, 0)$)
+    -- ++(0, -\height);
+}
+\end{tikzpicture}
+
+
+\end{document}
